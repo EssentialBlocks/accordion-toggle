@@ -51,6 +51,20 @@ function create_block_accordion_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
+	$fontpicker_theme = 'src/css/fonticonpicker.base-theme.react.css';
+	wp_enqueue_style(
+		'fontpicker-default-theme',
+		plugins_url( $fontpicker_theme, __FILE__),
+		array()
+	);
+
+	$fontawesome_css = 'src/css/font-awesome5.css';
+	wp_enqueue_style(
+		'fontawesome-frontend-css',
+		plugins_url( $fontawesome_css, __FILE__),
+		array()
+	);
+
 	$frontend_js = 'src/frontend.js';
 	wp_enqueue_script(
 		'essential-blocks-accordion-frontend',
@@ -64,6 +78,8 @@ function create_block_accordion_block_init() {
 		'editor_script' => 'create-block-accordion-block-editor',
 		'editor_style'  => 'create-block-accordion-block-editor',
 		'style'         => 'create-block-accordion-block',
+		'fontpicker_theme' => 'fontpicker-default-theme',
+		'fontawesome_css' => 'fontawesome-frontend-css',
 		'frontend_script' => 'essential-blocks-accordion-frontend'
 	) );
 }
