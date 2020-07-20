@@ -81,7 +81,7 @@ function create_block_accordion_block_init() {
 	);
 
 
-	register_block_type( 'create-block/accordion', array(
+	register_block_type( 'essential-blocks/accordion', array(
 		'editor_script' => 'create-block-accordion-block-editor',
 		'editor_style'  => 'create-block-accordion-block-editor',
 		'style'         => 'create-block-accordion-block',

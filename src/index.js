@@ -8,14 +8,12 @@ import Edit from "./edit";
 import save from "./save";
 import icon from "./icon";
 import attributes from "./attributes";
+import example from "./example";
 
-registerBlockType("create-block/accordion", {
+registerBlockType("essential-blocks/accordion", {
 	title: __("Accordion", "create-block"),
 
-	description: __(
-		"Example block written with ESNext standard and JSX support – build step required.",
-		"create-block"
-	),
+	description: __("", "essential-blocks"),
 
 	category: "widgets",
 
@@ -31,4 +29,6 @@ registerBlockType("create-block/accordion", {
 	edit: Edit,
 
 	save,
+
+	example,
 });

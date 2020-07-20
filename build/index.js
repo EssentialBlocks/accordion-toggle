@@ -7287,6 +7287,32 @@ var Edit = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/example.js":
+/*!************************!*\
+  !*** ./src/example.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var example = {
+  attributes: {
+    accordions: [{
+      title: "Accordion Tab Title 1",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }, {
+      title: "Accordion Tab Title 2",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }],
+    displayIcon: true,
+    tabIcon: "fas fa-angle-right"
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (example);
+
+/***/ }),
+
 /***/ "./src/icon.js":
 /*!*********************!*\
   !*** ./src/icon.js ***!
@@ -7381,6 +7407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon */ "./src/icon.js");
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+/* harmony import */ var _example__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./example */ "./src/example.js");
 
 
 
@@ -7388,9 +7415,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("create-block/accordion", {
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("essential-blocks/accordion", {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Accordion", "create-block"),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Example block written with ESNext standard and JSX support – build step required.", "create-block"),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("", "essential-blocks"),
   category: "widgets",
   icon: _icon__WEBPACK_IMPORTED_MODULE_5__["default"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_6__["default"],
@@ -7399,7 +7427,8 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("cre
     html: false
   },
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
+  example: _example__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
 
 /***/ }),
