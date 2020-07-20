@@ -1,14 +1,8 @@
-.wp-block-eb-accordion {
-	border: 1px dotted #f00;
-}
-
-.drag-handle {
-	flex: 1;
-	background: darkgrey;
-	border-right: 1px solid;
-	cursor: move;
-	color: #ffffff;
-	align-items: center;
-	display: flex !important;
-	justify-content: center;
+// Image upload button
+.eb-accordion-upload-button {
+  height: 100px;
+  width: 100%;
+  background: #e3e3e3;
+  color: #666666;
+  display: inline-block;
 }
