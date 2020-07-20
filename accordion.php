@@ -40,7 +40,7 @@ function create_block_accordion_block_init() {
 		'create-block-accordion-block-editor',
 		plugins_url( $editor_css, __FILE__ ),
 		array(),
-		filemtime( "$dir/$editor_css" )
+		filemtime( "$dir/$editor_css" ) //FIXME: if there is no file called index.css it will throw an warning.
 	);
 
 	$style_css = 'build/style-index.css';
@@ -80,15 +80,19 @@ function create_block_accordion_block_init() {
 		true
 	);
 
-
-	register_block_type( 'essential-blocks/accordion', array(
-		'editor_script' => 'create-block-accordion-block-editor',
-		'editor_style'  => 'create-block-accordion-block-editor',
-		'style'         => 'create-block-accordion-block',
-		'fontpicker_theme' => 'fontpicker-default-theme',
-		'fontpicker_material_theme' => 'fontpicker-material-theme',
-		'fontawesome_css' => 'fontawesome-frontend-css',
-		'frontend_script' => 'essential-blocks-accordion-frontend'
-	) );
+	if( ! class_exists('EB_Font_Loader') ) {
+		require_once __DIR__ . '/font-loader.php';
+	}
+	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
+		register_block_type( 'essential-blocks/accordion', array(
+			'editor_script' => 'create-block-accordion-block-editor',
+			'editor_style'  => 'create-block-accordion-block-editor',
+			'style'         => 'create-block-accordion-block',
+			'fontpicker_theme' => 'fontpicker-default-theme',
+			'fontpicker_material_theme' => 'fontpicker-material-theme',
+			'fontawesome_css' => 'fontawesome-frontend-css',
+			'frontend_script' => 'essential-blocks-accordion-frontend'
+		) );
+	}
 }
 add_action( 'init', 'create_block_accordion_block_init' );
