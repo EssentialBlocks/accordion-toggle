@@ -11,7 +11,7 @@ const { Button } = wp.components;
  */
 import { arrayMove } from "react-sortable-hoc";
 import AccordionIcon from "./accordion-icon";
-// import Inspector from "./inspector";
+import Inspector from "./inspector";
 import {
 	DEFAULT_TITLE_COLOR,
 	DEFAULT_TITLE_SIZE,
@@ -573,14 +573,14 @@ export default class Edit extends Component {
 		};
 
 		return [
-			// isSelected && (
-			// 	<Inspector
-			// 		{...this.props}
-			// 		onDeleteAccordion={this.onDeleteAccordion}
-			// 		onSortEnd={this.onSortEnd}
-			// 		onLevelChange={this.onLevelChange}
-			// 	/>
-			// ),
+			isSelected && (
+				<Inspector
+					{...this.props}
+					onDeleteAccordion={this.onDeleteAccordion}
+					onSortEnd={this.onSortEnd}
+					onLevelChange={this.onLevelChange}
+				/>
+			),
 			<div className="eb-accordion-container" style={containerStyle}>
 				{accordions.map((accordion, index) => (
 					<div className="eb-accordion-wrapper" key={index}>
