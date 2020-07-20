@@ -1,10 +1,15 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-.wp-block-create-block-accordion {
+.wp-block-eb-accordion {
   border: 1px dotted #f00; }
+
+.drag-handle {
+  flex: 1;
+  background: darkgrey;
+  border-right: 1px solid;
+  cursor: move;
+  color: #ffffff;
+  align-items: center;
+  display: flex !important;
+  justify-content: center; }
 
 
 /*# sourceMappingURL=index.css.map*/
