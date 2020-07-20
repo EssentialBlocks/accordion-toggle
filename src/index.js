@@ -7,6 +7,7 @@ import "./style.scss";
 import Edit from "./edit";
 import save from "./save";
 import icon from "./icon";
+import attributes from "./attributes";
 
 registerBlockType("create-block/accordion", {
 	title: __("Accordion", "create-block"),
@@ -19,6 +20,8 @@ registerBlockType("create-block/accordion", {
 	category: "widgets",
 
 	icon,
+
+	attributes,
 
 	supports: {
 		// Removes support for an HTML mode.
