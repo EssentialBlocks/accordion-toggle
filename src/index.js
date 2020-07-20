@@ -11,7 +11,7 @@ import attributes from "./attributes";
 import example from "./example";
 
 registerBlockType("essential-blocks/accordion", {
-	title: __("Accordion", "create-block"),
+	title: __("Accordion", "essential-blocks"),
 
 	description: __("", "essential-blocks"),
 
@@ -21,10 +21,11 @@ registerBlockType("essential-blocks/accordion", {
 
 	attributes,
 
-	supports: {
-		// Removes support for an HTML mode.
-		html: false,
-	},
+	keywords: [
+		__("accordion", "essential-blocks"),
+		__("toggle", "essential-blocks"),
+		__("essential", "essential-blocks"),
+	],
 
 	edit: Edit,
 

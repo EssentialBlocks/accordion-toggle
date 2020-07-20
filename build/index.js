@@ -7407,7 +7407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon */ "./src/icon.js");
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
-/* harmony import */ var _example__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./example */ "./src/example.js");
+/* harmony import */ var _example__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./example */ "./src/example.js");
 
 
 
@@ -7417,18 +7417,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("essential-blocks/accordion", {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Accordion", "create-block"),
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Accordion", "essential-blocks"),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("", "essential-blocks"),
   category: "widgets",
   icon: _icon__WEBPACK_IMPORTED_MODULE_5__["default"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_6__["default"],
-  supports: {
-    // Removes support for an HTML mode.
-    html: false
-  },
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("accordion", "essential-blocks"), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("toggle", "essential-blocks"), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("essential", "essential-blocks")],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
-  example: _example__WEBPACK_IMPORTED_MODULE_8__["default"]
+  example: _example__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 
 /***/ }),
