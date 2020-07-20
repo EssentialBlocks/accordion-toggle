@@ -51,10 +51,20 @@ function create_block_accordion_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
+	$frontend_js = 'src/frontend.js';
+	wp_enqueue_script(
+		'essential-blocks-accordion-frontend',
+		plugins_url( $frontend_js, __FILE__),
+		array( "jquery","wp-editor"),
+		true
+	);
+
+
 	register_block_type( 'create-block/accordion', array(
 		'editor_script' => 'create-block-accordion-block-editor',
 		'editor_style'  => 'create-block-accordion-block-editor',
 		'style'         => 'create-block-accordion-block',
+		'frontend_script' => 'essential-blocks-accordion-frontend'
 	) );
 }
 add_action( 'init', 'create_block_accordion_block_init' );
