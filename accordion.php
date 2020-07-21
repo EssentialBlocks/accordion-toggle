@@ -17,6 +17,14 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
+
+if( ! class_exists('EB_Font_Loader') ) {
+	require_once __DIR__ . '/includes/font-loader.php';
+}
+if( ! class_exists('EB_Post_Meta') ) {
+	require_once __DIR__ . '/includes/post-meta.php';
+}
+
 function create_block_accordion_block_init() {
 	$dir = dirname( __FILE__ );
 
@@ -80,9 +88,6 @@ function create_block_accordion_block_init() {
 		true
 	);
 
-	if( ! class_exists('EB_Font_Loader') ) {
-		require_once __DIR__ . '/font-loader.php';
-	}
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
 		register_block_type( 'essential-blocks/accordion', array(
 			'editor_script' => 'create-block-accordion-block-editor',
