@@ -43,13 +43,6 @@ function create_block_accordion_block_init() {
 		$script_asset['version']
 	);
 
-	$editor_css = 'build/index.css';
-	wp_register_style(
-		'create-block-accordion-block-editor',
-		plugins_url( $editor_css, __FILE__ ),
-		array(),
-		filemtime( "$dir/$editor_css" ) //FIXME: if there is no file called index.css it will throw an warning.
-	);
 
 	$style_css = 'build/style-index.css';
 	wp_register_style(

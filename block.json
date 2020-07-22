@@ -1,10 +1,9 @@
 {
-	"name": "essential-blocks/accordion",
+	"name": "block/accordion",
 	"title": "Accordion",
 	"category": "widgets",
-	"icon": "smiley",
 	"description": "Accordion-toggle essential blocks",
-	"textdomain": "essential-blocks",
+	"textdomain": "accordion",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"
