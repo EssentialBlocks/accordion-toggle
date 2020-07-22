@@ -82,7 +82,7 @@ function create_block_accordion_block_init() {
 	);
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
-		register_block_type( 'essential-blocks/accordion', array(
+		register_block_type( 'block/accordion', array(
 			'editor_script' => 'create-block-accordion-block-editor',
 			'editor_style'  => 'create-block-accordion-block-editor',
 			'style'         => 'create-block-accordion-block',
