@@ -34,6 +34,7 @@ function create_block_accordion_block_init() {
 			'You need to run `npm start` or `npm run build` for the "create-block/accordion" block first.'
 		);
 	}
+
 	$index_js     = 'build/index.js';
 	$script_asset = require( $script_asset_path );
 	wp_register_script(
