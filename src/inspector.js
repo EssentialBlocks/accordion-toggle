@@ -888,23 +888,25 @@ const Inspector = (props) => {
 					</ButtonGroup>
 				</BaseControl>
 
-				<BaseControl label={__("Title Align ")} id="eb-accoridon-title-align">
-					<ButtonGroup>
-						{TITLE_ALIGNMENT.map((item) => (
-							<Button
-								isSecondary={titleAlignment !== item.value}
-								isPrimary={titleAlignment === item.value}
-								onClick={() =>
-									setAttributes({
-										titleAlignment: item.value,
-									})
-								}
-							>
-								{item.label}
-							</Button>
-						))}
-					</ButtonGroup>
-				</BaseControl>
+				{iconPosition === "left" && (
+					<BaseControl label={__("Title Align ")} id="eb-accoridon-title-align">
+						<ButtonGroup>
+							{TITLE_ALIGNMENT.map((item) => (
+								<Button
+									isSecondary={titleAlignment !== item.value}
+									isPrimary={titleAlignment === item.value}
+									onClick={() =>
+										setAttributes({
+											titleAlignment: item.value,
+										})
+									}
+								>
+									{item.label}
+								</Button>
+							))}
+						</ButtonGroup>
+					</BaseControl>
+				)}
 
 				<BaseControl
 					label={__("Title Background Type")}
