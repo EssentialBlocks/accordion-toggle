@@ -779,6 +779,39 @@ function _unsupportedIterableToArray(o, minLen) {
 
 /***/ }),
 
+/***/ "./node_modules/array-move/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/array-move/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const arrayMoveMutate = (array, from, to) => {
+	const startIndex = from < 0 ? array.length + from : from;
+
+	if (startIndex >= 0 && startIndex < array.length) {
+		const endIndex = to < 0 ? array.length + to : to;
+
+		const [item] = array.splice(from, 1);
+		array.splice(endIndex, 0, item);
+	}
+};
+
+const arrayMove = (array, from, to) => {
+	array = [...array];
+	arrayMoveMutate(array, from, to);
+	return array;
+};
+
+module.exports = arrayMove;
+module.exports.mutate = arrayMoveMutate;
+
+
+/***/ }),
+
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -6599,7 +6632,8 @@ var TEXT_DECORATION = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
-/* harmony import */ var react_sortable_hoc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-sortable-hoc */ "./node_modules/react-sortable-hoc/dist/react-sortable-hoc.esm.js");
+/* harmony import */ var array_move__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! array-move */ "./node_modules/array-move/index.js");
+/* harmony import */ var array_move__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(array_move__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _accordion_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./accordion-icon */ "./src/accordion-icon.js");
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./src/constants.js");
@@ -6717,7 +6751,7 @@ var Edit = /*#__PURE__*/function (_Component) {
           attributes = _this$props3.attributes,
           setAttributes = _this$props3.setAttributes;
       setAttributes({
-        accordions: Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_0__["arrayMove"])(attributes.accordions, oldIndex, newIndex)
+        accordions: array_move__WEBPACK_IMPORTED_MODULE_0___default()(attributes.accordions, oldIndex, newIndex)
       });
     });
 

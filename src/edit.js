@@ -9,7 +9,7 @@ const { Button } = wp.components;
 /**
  * Internal dependencies
  */
-import { arrayMove } from "react-sortable-hoc";
+import arrayMove from "array-move";
 import AccordionIcon from "./accordion-icon";
 import Inspector from "./inspector";
 import {
