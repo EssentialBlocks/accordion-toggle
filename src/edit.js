@@ -27,13 +27,38 @@ import uuid from "../util/uuid";
 import switchFontSizes from "../util/helper";
 
 export default class Edit extends Component {
+	constructor(props) {
+		super(props);
+		this.addAccordion = this.addAccordion.bind(this);
+		this.onDeleteAccordion = this.onDeleteAccordion.bind(this);
+		this.onSortEnd = this.onSortEnd.bind(this);
+		this.isExpanded = this.isExpanded.bind(this);
+		this.getContainerBackground = this.getContainerBackground.bind(this);
+		this.getContainerBackgroundImage = this.getContainerBackgroundImage.bind(
+			this
+		);
+		this.setHoverColor = this.setHoverColor.bind(this);
+		this.setToggleActiveColor = this.setToggleActiveColor.bind(this);
+		this.setAccordionActiveColor = this.setAccordionActiveColor.bind(this);
+		this.getTitleBackground = this.getTitleBackground.bind(this);
+		this.getTitleColor = this.getTitleColor.bind(this);
+		this.getTabIcon = this.getTabIcon.bind(this);
+		this.setToggleType = this.setToggleType.bind(this);
+		this.setToggleTitleColor = this.setToggleTitleColor.bind(this);
+		this.setAccordionType = this.setAccordionType.bind(this);
+		this.setAccordionTitleColor = this.setAccordionTitleColor.bind(this);
+		this.onTitleClick = this.onTitleClick.bind(this);
+		this.onChange = this.onChange.bind(this);
+		this.getIconColor = this.getIconColor.bind(this);
+		this.onLevelChange = this.onLevelChange.bind(this);
+	}
 	componentDidMount() {
 		// Generate unique id
 		let id = uuid().substr(0, 5);
 		this.props.setAttributes({ id });
 	}
 
-	addAccordion = () => {
+	addAccordion() {
 		const { attributes, setAttributes } = this.props;
 		let counter = attributes.accordions.length + 1;
 		let accordions = [
@@ -45,26 +70,26 @@ export default class Edit extends Component {
 		];
 
 		setAttributes({ accordions });
-	};
+	}
 
-	onDeleteAccordion = (position) => {
+	onDeleteAccordion(position) {
 		// Callback function for deleting accordion
 		const { attributes, setAttributes } = this.props;
 		let accordions = [...attributes.accordions];
 		accordions.splice(position, 1);
 
 		setAttributes({ accordions });
-	};
+	}
 
-	onSortEnd = ({ oldIndex, newIndex }) => {
+	onSortEnd(oldIndex, newIndex) {
 		// Callback function for sorting accordion
 		const { attributes, setAttributes } = this.props;
 		setAttributes({
 			accordions: arrayMove(attributes.accordions, oldIndex, newIndex),
 		});
-	};
+	}
 
-	isExpanded = (index) => {
+	isExpanded(index) {
 		// Return true if tab is expanded
 		const { accordionType, selectedTab, expandedTabs } = this.props.attributes;
 
@@ -75,9 +100,9 @@ export default class Edit extends Component {
 		if (accordionType === "toggle") {
 			return expandedTabs.includes(index);
 		}
-	};
+	}
 
-	getContainerBackground = () => {
+	getContainerBackground() {
 		const {
 			backgroundType,
 			containerBackground,
@@ -93,9 +118,9 @@ export default class Edit extends Component {
 			case "image":
 				return `url('${containerImageURL}')`;
 		}
-	};
+	}
 
-	getContainerBackgroundImage = () => {
+	getContainerBackgroundImage() {
 		const {
 			backgroundType,
 			containerGradient,
@@ -107,33 +132,33 @@ export default class Edit extends Component {
 			: backgroundType === "image" && containerImageURL
 			? `url('${containerImageURL}')`
 			: "none";
-	};
+	}
 
-	setHoverColor = (index) => {
+	setHoverColor(index) {
 		const { hoverIndex, hoverColor } = this.props.attributes;
 
 		if (hoverIndex === index && hoverColor) {
 			return hoverColor;
 		}
-	};
+	}
 
-	setToggleActiveColor = (index) => {
+	setToggleActiveColor(index) {
 		const { expandedTabs, activeColor } = this.props.attributes;
 
 		if (expandedTabs.includes(index)) {
 			return activeColor || DEFAULT_TITLE_COLOR;
 		}
-	};
+	}
 
-	setAccordionActiveColor = (index) => {
+	setAccordionActiveColor(index) {
 		const { selectedTab, activeColor } = this.props.attributes;
 
 		if (selectedTab === index) {
 			return activeColor || DEFAULT_TITLE_COLOR;
 		}
-	};
+	}
 
-	getTitleBackground = (index) => {
+	getTitleBackground(index) {
 		const {
 			titleBackgroundType,
 			accordionType,
@@ -163,25 +188,25 @@ export default class Edit extends Component {
 		}
 
 		return "transparent";
-	};
+	}
 
-	setToggleTitleColor = (index) => {
+	setToggleTitleColor(index) {
 		const { expandedTabs, activeTitleColor } = this.props.attributes;
 
 		if (expandedTabs.includes(index)) {
 			return activeTitleColor || DEFAULT_TITLE_COLOR;
 		}
-	};
+	}
 
-	setAccordionTitleColor = (index) => {
+	setAccordionTitleColor(index) {
 		const { selectedTab, activeTitleColor } = this.props.attributes;
 
 		if (selectedTab === index) {
 			return activeTitleColor || DEFAULT_TITLE_COLOR;
 		}
-	};
+	}
 
-	getTitleColor = (index) => {
+	getTitleColor(index) {
 		const { accordionType, titleColor } = this.props.attributes;
 
 		let activeTitleColor;
@@ -196,15 +221,15 @@ export default class Edit extends Component {
 
 		// Show active or default title color
 		return activeTitleColor || titleColor || DEFAULT_TITLE_COLOR;
-	};
+	}
 
-	getTabIcon = (index) => {
+	getTabIcon(index) {
 		// Return icon based on tab hidden/expanded state
 		const { expandedIcon, tabIcon } = this.props.attributes;
 		return this.isExpanded(index) ? expandedIcon : tabIcon;
-	};
+	}
 
-	setToggleType = (index) => {
+	setToggleType(index) {
 		// If tab is already expanded, close it, otherwise open it
 		const { attributes, setAttributes } = this.props;
 		let expandedTabs = [...attributes.expandedTabs];
@@ -214,33 +239,33 @@ export default class Edit extends Component {
 			: [...expandedTabs, index];
 
 		setAttributes({ expandedTabs });
-	};
+	}
 
-	setAccordionType = (index) => {
+	setAccordionType(index) {
 		// Save expanded tab name, remove when tab is hidden
 		const { attributes, setAttributes } = this.props;
 		let selectedTab = attributes.selectedTab === index ? undefined : index;
 		setAttributes({ selectedTab });
-	};
+	}
 
-	onTitleClick = (index) => {
+	onTitleClick(index) {
 		// Expand / Hide title
 		const { accordionType } = this.props.attributes;
 
 		accordionType === "accordion" && this.setAccordionType(index);
 		accordionType === "toggle" && this.setToggleType(index);
-	};
+	}
 
-	onChange = (newValue, index, key) => {
+	onChange(newValue, index, key) {
 		// onChange callback function for title and content
 		const { attributes, setAttributes } = this.props;
 		let accordions = [...attributes.accordions];
 		accordions[index][key] = newValue;
 
 		setAttributes({ accordions });
-	};
+	}
 
-	getIconColor = (index) => {
+	getIconColor(index) {
 		const {
 			accordionType,
 			iconColor,
@@ -262,14 +287,14 @@ export default class Edit extends Component {
 		}
 
 		return activeIconColor || iconColor || titleColor || DEFAULT_TITLE_COLOR;
-	};
+	}
 
-	onLevelChange = (header, titleSizeUnit) => {
+	onLevelChange(header, titleSizeUnit) {
 		const titleLevel = header.value;
 		const titleFontSize = switchFontSizes(titleSizeUnit, titleLevel);
 
 		this.props.setAttributes({ titleFontSize, titleLevel });
-	};
+	}
 
 	render() {
 		const { isSelected, attributes, setAttributes } = this.props;

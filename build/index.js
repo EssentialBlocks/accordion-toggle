@@ -6645,6 +6645,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -6679,8 +6681,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /**
  * WordPress dependencies
  */
@@ -6704,19 +6704,48 @@ var Edit = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Edit);
 
-  function Edit() {
+  function Edit(props) {
     var _this;
 
     _classCallCheck(this, Edit);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    _this = _super.call(this, props);
+    _this.addAccordion = _this.addAccordion.bind(_assertThisInitialized(_this));
+    _this.onDeleteAccordion = _this.onDeleteAccordion.bind(_assertThisInitialized(_this));
+    _this.onSortEnd = _this.onSortEnd.bind(_assertThisInitialized(_this));
+    _this.isExpanded = _this.isExpanded.bind(_assertThisInitialized(_this));
+    _this.getContainerBackground = _this.getContainerBackground.bind(_assertThisInitialized(_this));
+    _this.getContainerBackgroundImage = _this.getContainerBackgroundImage.bind(_assertThisInitialized(_this));
+    _this.setHoverColor = _this.setHoverColor.bind(_assertThisInitialized(_this));
+    _this.setToggleActiveColor = _this.setToggleActiveColor.bind(_assertThisInitialized(_this));
+    _this.setAccordionActiveColor = _this.setAccordionActiveColor.bind(_assertThisInitialized(_this));
+    _this.getTitleBackground = _this.getTitleBackground.bind(_assertThisInitialized(_this));
+    _this.getTitleColor = _this.getTitleColor.bind(_assertThisInitialized(_this));
+    _this.getTabIcon = _this.getTabIcon.bind(_assertThisInitialized(_this));
+    _this.setToggleType = _this.setToggleType.bind(_assertThisInitialized(_this));
+    _this.setToggleTitleColor = _this.setToggleTitleColor.bind(_assertThisInitialized(_this));
+    _this.setAccordionType = _this.setAccordionType.bind(_assertThisInitialized(_this));
+    _this.setAccordionTitleColor = _this.setAccordionTitleColor.bind(_assertThisInitialized(_this));
+    _this.onTitleClick = _this.onTitleClick.bind(_assertThisInitialized(_this));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.getIconColor = _this.getIconColor.bind(_assertThisInitialized(_this));
+    _this.onLevelChange = _this.onLevelChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Edit, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // Generate unique id
+      var id = Object(_util_uuid__WEBPACK_IMPORTED_MODULE_4__["default"])().substr(0, 5);
+      this.props.setAttributes({
+        id: id
+      });
     }
-
-    _this = _super.call.apply(_super, [this].concat(args));
-
-    _defineProperty(_assertThisInitialized(_this), "addAccordion", function () {
-      var _this$props = _this.props,
+  }, {
+    key: "addAccordion",
+    value: function addAccordion() {
+      var _this$props = this.props,
           attributes = _this$props.attributes,
           setAttributes = _this$props.setAttributes;
       var counter = attributes.accordions.length + 1;
@@ -6727,11 +6756,12 @@ var Edit = /*#__PURE__*/function (_Component) {
       setAttributes({
         accordions: accordions
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onDeleteAccordion", function (position) {
+    }
+  }, {
+    key: "onDeleteAccordion",
+    value: function onDeleteAccordion(position) {
       // Callback function for deleting accordion
-      var _this$props2 = _this.props,
+      var _this$props2 = this.props,
           attributes = _this$props2.attributes,
           setAttributes = _this$props2.setAttributes;
 
@@ -6741,23 +6771,23 @@ var Edit = /*#__PURE__*/function (_Component) {
       setAttributes({
         accordions: accordions
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onSortEnd", function (_ref) {
-      var oldIndex = _ref.oldIndex,
-          newIndex = _ref.newIndex;
+    }
+  }, {
+    key: "onSortEnd",
+    value: function onSortEnd(oldIndex, newIndex) {
       // Callback function for sorting accordion
-      var _this$props3 = _this.props,
+      var _this$props3 = this.props,
           attributes = _this$props3.attributes,
           setAttributes = _this$props3.setAttributes;
       setAttributes({
         accordions: array_move__WEBPACK_IMPORTED_MODULE_0___default()(attributes.accordions, oldIndex, newIndex)
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "isExpanded", function (index) {
+    }
+  }, {
+    key: "isExpanded",
+    value: function isExpanded(index) {
       // Return true if tab is expanded
-      var _this$props$attribute = _this.props.attributes,
+      var _this$props$attribute = this.props.attributes,
           accordionType = _this$props$attribute.accordionType,
           selectedTab = _this$props$attribute.selectedTab,
           expandedTabs = _this$props$attribute.expandedTabs;
@@ -6769,10 +6799,11 @@ var Edit = /*#__PURE__*/function (_Component) {
       if (accordionType === "toggle") {
         return expandedTabs.includes(index);
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getContainerBackground", function () {
-      var _this$props$attribute2 = _this.props.attributes,
+    }
+  }, {
+    key: "getContainerBackground",
+    value: function getContainerBackground() {
+      var _this$props$attribute2 = this.props.attributes,
           backgroundType = _this$props$attribute2.backgroundType,
           containerBackground = _this$props$attribute2.containerBackground,
           containerGradient = _this$props$attribute2.containerGradient,
@@ -6788,48 +6819,53 @@ var Edit = /*#__PURE__*/function (_Component) {
         case "image":
           return "url('".concat(containerImageURL, "')");
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getContainerBackgroundImage", function () {
-      var _this$props$attribute3 = _this.props.attributes,
+    }
+  }, {
+    key: "getContainerBackgroundImage",
+    value: function getContainerBackgroundImage() {
+      var _this$props$attribute3 = this.props.attributes,
           backgroundType = _this$props$attribute3.backgroundType,
           containerGradient = _this$props$attribute3.containerGradient,
           containerImageURL = _this$props$attribute3.containerImageURL;
       return backgroundType === "gradient" ? containerGradient : backgroundType === "image" && containerImageURL ? "url('".concat(containerImageURL, "')") : "none";
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setHoverColor", function (index) {
-      var _this$props$attribute4 = _this.props.attributes,
+    }
+  }, {
+    key: "setHoverColor",
+    value: function setHoverColor(index) {
+      var _this$props$attribute4 = this.props.attributes,
           hoverIndex = _this$props$attribute4.hoverIndex,
           hoverColor = _this$props$attribute4.hoverColor;
 
       if (hoverIndex === index && hoverColor) {
         return hoverColor;
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setToggleActiveColor", function (index) {
-      var _this$props$attribute5 = _this.props.attributes,
+    }
+  }, {
+    key: "setToggleActiveColor",
+    value: function setToggleActiveColor(index) {
+      var _this$props$attribute5 = this.props.attributes,
           expandedTabs = _this$props$attribute5.expandedTabs,
           activeColor = _this$props$attribute5.activeColor;
 
       if (expandedTabs.includes(index)) {
         return activeColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setAccordionActiveColor", function (index) {
-      var _this$props$attribute6 = _this.props.attributes,
+    }
+  }, {
+    key: "setAccordionActiveColor",
+    value: function setAccordionActiveColor(index) {
+      var _this$props$attribute6 = this.props.attributes,
           selectedTab = _this$props$attribute6.selectedTab,
           activeColor = _this$props$attribute6.activeColor;
 
       if (selectedTab === index) {
         return activeColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getTitleBackground", function (index) {
-      var _this$props$attribute7 = _this.props.attributes,
+    }
+  }, {
+    key: "getTitleBackground",
+    value: function getTitleBackground(index) {
+      var _this$props$attribute7 = this.props.attributes,
           titleBackgroundType = _this$props$attribute7.titleBackgroundType,
           accordionType = _this$props$attribute7.accordionType,
           titleBackgroundColor = _this$props$attribute7.titleBackgroundColor;
@@ -6837,71 +6873,75 @@ var Edit = /*#__PURE__*/function (_Component) {
 
       if (titleBackgroundType === "fill") {
         if (accordionType === "accordion") {
-          activeColor = _this.setAccordionActiveColor(index);
+          activeColor = this.setAccordionActiveColor(index);
         }
 
         if (accordionType === "toggle") {
-          activeColor = _this.setToggleActiveColor(index);
+          activeColor = this.setToggleActiveColor(index);
         }
 
-        var hoverColor = _this.setHoverColor(index); // Show hover, active or default background color
-
+        var hoverColor = this.setHoverColor(index); // Show hover, active or default background color
 
         return hoverColor || activeColor || titleBackgroundColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_BACKGROUND"];
       }
 
       return "transparent";
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setToggleTitleColor", function (index) {
-      var _this$props$attribute8 = _this.props.attributes,
+    }
+  }, {
+    key: "setToggleTitleColor",
+    value: function setToggleTitleColor(index) {
+      var _this$props$attribute8 = this.props.attributes,
           expandedTabs = _this$props$attribute8.expandedTabs,
           activeTitleColor = _this$props$attribute8.activeTitleColor;
 
       if (expandedTabs.includes(index)) {
         return activeTitleColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setAccordionTitleColor", function (index) {
-      var _this$props$attribute9 = _this.props.attributes,
+    }
+  }, {
+    key: "setAccordionTitleColor",
+    value: function setAccordionTitleColor(index) {
+      var _this$props$attribute9 = this.props.attributes,
           selectedTab = _this$props$attribute9.selectedTab,
           activeTitleColor = _this$props$attribute9.activeTitleColor;
 
       if (selectedTab === index) {
         return activeTitleColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getTitleColor", function (index) {
-      var _this$props$attribute10 = _this.props.attributes,
+    }
+  }, {
+    key: "getTitleColor",
+    value: function getTitleColor(index) {
+      var _this$props$attribute10 = this.props.attributes,
           accordionType = _this$props$attribute10.accordionType,
           titleColor = _this$props$attribute10.titleColor;
       var activeTitleColor;
 
       if (accordionType === "accordion") {
-        activeTitleColor = _this.setAccordionTitleColor(index);
+        activeTitleColor = this.setAccordionTitleColor(index);
       }
 
       if (accordionType === "toggle") {
-        activeTitleColor = _this.setToggleTitleColor(index);
+        activeTitleColor = this.setToggleTitleColor(index);
       } // Show active or default title color
 
 
       return activeTitleColor || titleColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getTabIcon", function (index) {
+    }
+  }, {
+    key: "getTabIcon",
+    value: function getTabIcon(index) {
       // Return icon based on tab hidden/expanded state
-      var _this$props$attribute11 = _this.props.attributes,
+      var _this$props$attribute11 = this.props.attributes,
           expandedIcon = _this$props$attribute11.expandedIcon,
           tabIcon = _this$props$attribute11.tabIcon;
-      return _this.isExpanded(index) ? expandedIcon : tabIcon;
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setToggleType", function (index) {
+      return this.isExpanded(index) ? expandedIcon : tabIcon;
+    }
+  }, {
+    key: "setToggleType",
+    value: function setToggleType(index) {
       // If tab is already expanded, close it, otherwise open it
-      var _this$props4 = _this.props,
+      var _this$props4 = this.props,
           attributes = _this$props4.attributes,
           setAttributes = _this$props4.setAttributes;
 
@@ -6913,29 +6953,32 @@ var Edit = /*#__PURE__*/function (_Component) {
       setAttributes({
         expandedTabs: expandedTabs
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setAccordionType", function (index) {
+    }
+  }, {
+    key: "setAccordionType",
+    value: function setAccordionType(index) {
       // Save expanded tab name, remove when tab is hidden
-      var _this$props5 = _this.props,
+      var _this$props5 = this.props,
           attributes = _this$props5.attributes,
           setAttributes = _this$props5.setAttributes;
       var selectedTab = attributes.selectedTab === index ? undefined : index;
       setAttributes({
         selectedTab: selectedTab
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onTitleClick", function (index) {
+    }
+  }, {
+    key: "onTitleClick",
+    value: function onTitleClick(index) {
       // Expand / Hide title
-      var accordionType = _this.props.attributes.accordionType;
-      accordionType === "accordion" && _this.setAccordionType(index);
-      accordionType === "toggle" && _this.setToggleType(index);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onChange", function (newValue, index, key) {
+      var accordionType = this.props.attributes.accordionType;
+      accordionType === "accordion" && this.setAccordionType(index);
+      accordionType === "toggle" && this.setToggleType(index);
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(newValue, index, key) {
       // onChange callback function for title and content
-      var _this$props6 = _this.props,
+      var _this$props6 = this.props,
           attributes = _this$props6.attributes,
           setAttributes = _this$props6.setAttributes;
 
@@ -6945,10 +6988,11 @@ var Edit = /*#__PURE__*/function (_Component) {
       setAttributes({
         accordions: accordions
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getIconColor", function (index) {
-      var _this$props$attribute12 = _this.props.attributes,
+    }
+  }, {
+    key: "getIconColor",
+    value: function getIconColor(index) {
+      var _this$props$attribute12 = this.props.attributes,
           accordionType = _this$props$attribute12.accordionType,
           iconColor = _this$props$attribute12.iconColor,
           titleColor = _this$props$attribute12.titleColor,
@@ -6968,28 +7012,15 @@ var Edit = /*#__PURE__*/function (_Component) {
       }
 
       return activeIconColor || iconColor || titleColor || _constants__WEBPACK_IMPORTED_MODULE_3__["DEFAULT_TITLE_COLOR"];
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onLevelChange", function (header, titleSizeUnit) {
+    }
+  }, {
+    key: "onLevelChange",
+    value: function onLevelChange(header, titleSizeUnit) {
       var titleLevel = header.value;
       var titleFontSize = Object(_util_helper__WEBPACK_IMPORTED_MODULE_5__["default"])(titleSizeUnit, titleLevel);
-
-      _this.props.setAttributes({
+      this.props.setAttributes({
         titleFontSize: titleFontSize,
         titleLevel: titleLevel
-      });
-    });
-
-    return _this;
-  }
-
-  _createClass(Edit, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // Generate unique id
-      var id = Object(_util_uuid__WEBPACK_IMPORTED_MODULE_4__["default"])().substr(0, 5);
-      this.props.setAttributes({
-        id: id
       });
     }
   }, {
