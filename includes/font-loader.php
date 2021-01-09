@@ -63,7 +63,7 @@ class Accordion_Font_Loader
 
                 $gfonts = '';
 
-                $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+                $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap';
 
                 foreach ($fonts as $font) {
                     if (!in_array($font, $system, true) && !empty($font)) {
