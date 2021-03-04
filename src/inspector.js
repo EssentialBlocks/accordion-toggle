@@ -327,8 +327,7 @@ const Inspector = (props) => {
 				{backgroundType === "gradient" && (
 					<PanelBody title={__("Gradient Colors")} initialOpen={false}>
 						<GradientColorControl
-							colorOne="#c9d6ff"
-							colorTwo="#e2e2e2"
+							gradientColor={containerGradient}
 							onChange={(newValue) =>
 								setAttributes({ containerGradient: newValue })
 							}
@@ -943,9 +942,7 @@ const Inspector = (props) => {
 				{titleBackgroundType === "gradient" && (
 					<PanelBody title={__("Gradient Colors")} initialOpen={false}>
 						<GradientColorControl
-							colorOne="#141e30"
-							colorTwo="#243b55"
-							angle={45}
+							gradientColor={titleBackgroundGradient}
 							onChange={(newGradient) =>
 								setAttributes({
 									titleBackgroundGradient: newGradient,
@@ -1045,9 +1042,7 @@ const Inspector = (props) => {
 					{tabBorderColorType === "gradient" && (
 						<PanelBody title={__("Border Gradient")} initialOpen={false}>
 							<GradientColorControl
-								colorOne="#ff512f"
-								colorTwo="#dd2476"
-								angle={45}
+								gradientColor={tabBorderGradient}
 								onChange={(newValue) =>
 									setAttributes({
 										tabBorderGradient: newValue,
@@ -1232,9 +1227,7 @@ const Inspector = (props) => {
 				{contentBackgroundType === "gradient" && (
 					<PanelBody title={__("Gradient Colors")} initialOpen={false}>
 						<GradientColorControl
-							colorOne="#ece9e6"
-							colorTwo="#ffffff"
-							angle={45}
+							gradientColor={contentGradient}
 							onChange={(newValue) =>
 								setAttributes({ contentGradient: newValue })
 							}
@@ -1455,9 +1448,7 @@ const Inspector = (props) => {
 					{iconBackgroundType === "gradient" && (
 						<PanelBody title={__("Icon Gradient Colors")} initialOpen={false}>
 							<GradientColorControl
-								colorOne="#8e9eab"
-								colorTwo="#eef2f3"
-								angle={45}
+								gradientColor={iconGradient}
 								onChange={(newGradient) =>
 									setAttributes({ iconGradient: newGradient })
 								}
