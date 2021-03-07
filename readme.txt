@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ Display Your FAQs & Improve User Experience with Accordion/Toggle block.
 **Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
 
-## 🚀 BACKED BY A TRUSTED TEAM ## 
+## 🚀 BACKED BY A TRUSTED TEAM ##
 
 This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 700,000 happy users from 180+ countries).
 
@@ -62,7 +62,7 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 = Modern Way: =
 1. Go to the WordPress Block/Gutenberg Editor
-2. Search For "Accordion Toggle". 
+2. Search For "Accordion Toggle".
 3. Install in 1-click
 
 = Old Way: =
@@ -81,6 +81,9 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+= 1.0.5 - 07/03/2021 =
+* Fixed : unwanted .github folder removed
+
 = 1.0.4 - 07/03/2021 =
 * Improved : Updated gradient color controller
 
