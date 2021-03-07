@@ -6,6 +6,7 @@
 .eslintignore       export-ignore
 .eslintrc       export-ignore
 .git        export-ignore
+.github        export-ignore
 .gitignore      export-ignore
 .gitlab-ci.yml      export-ignore
 .travis.yml     export-ignore
