@@ -22,6 +22,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Git Submodule Cloning
         run: git submodule update --init --recursive
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: Running NPM Install & Build
         run: |
           npm install
