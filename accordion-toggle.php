@@ -22,6 +22,7 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/util/style-saver/meta-style.php';
 
 function create_block_accordion_block_init() {
 	$dir = dirname( __FILE__ );
