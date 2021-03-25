@@ -81,6 +81,9 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+= 1.0.6 - 25/03/2021 =
+* Fixed : typography panel width 
+
 = 1.0.5 - 07/03/2021 =
 * Fixed : unwanted .github folder removed
 
