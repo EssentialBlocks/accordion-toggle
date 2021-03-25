@@ -647,7 +647,10 @@ const Inspector = (props) => {
 							></Button>
 						)}
 						renderContent={() => (
-							<div style={{ padding: "1rem" }}>
+							<div
+								className="eb-panel-control eb-typography-component-panel"
+								style={{ padding: "1rem" }}
+							>
 								<FontPicker
 									label={__("Font Family")}
 									value={titleFontFamily}
@@ -764,7 +767,10 @@ const Inspector = (props) => {
 							></Button>
 						)}
 						renderContent={() => (
-							<div style={{ padding: "1rem" }}>
+							<div
+								className="eb-panel-control eb-typography-component-panel"
+								style={{ padding: "1rem" }}
+							>
 								<FontPicker
 									label={__("Font Family")}
 									value={contentFontFamily}
