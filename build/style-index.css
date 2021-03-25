@@ -97,6 +97,9 @@ summary::-webkit-details-marker {
   display: flex;
   justify-content: space-between; }
 
+.eb-typography-component-panel {
+  min-width: 220px; }
+
 .eb-color-base div {
 	display: flex;
 	justify-content: space-between;
