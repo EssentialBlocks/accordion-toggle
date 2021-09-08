@@ -11,6 +11,7 @@ const { Button } = wp.components;
  */
 import arrayMove from "array-move";
 import AccordionIcon from "./accordion-icon";
+import "./editor.scss";
 import Inspector from "./inspector";
 import {
 	DEFAULT_TITLE_COLOR,
@@ -22,9 +23,9 @@ import {
 	DEFAULT_CONTENT_BORDER_COLOR,
 	DEFAULT_ICON_COLOR,
 	MAX_HEIGHT,
-} from "./constants";
+} from "./constants/constants";
 import uuid from "../util/uuid";
-import switchFontSizes from "../util/helper";
+// import switchFontSizes from "../util/helper";
 
 export default class Edit extends Component {
 	constructor(props) {
@@ -290,10 +291,10 @@ export default class Edit extends Component {
 	}
 
 	onLevelChange(header, titleSizeUnit) {
-		const titleLevel = header.value;
-		const titleFontSize = switchFontSizes(titleSizeUnit, titleLevel);
+		// const titleLevel = header.value;
+		// const titleFontSize = switchFontSizes(titleSizeUnit, titleLevel);
 
-		this.props.setAttributes({ titleFontSize, titleLevel });
+		// this.props.setAttributes({ titleFontSize, titleLevel });
 	}
 
 	render() {

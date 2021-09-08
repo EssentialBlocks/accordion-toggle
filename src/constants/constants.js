@@ -1,10 +1,22 @@
 const { __ } = wp.i18n;
 
+// the consts defined here should be unique from one another
+export const WRAPPER_BG = "wrprBg";
+export const WRAPPER_MARGIN = "wrpMargin";
+export const WRAPPER_PADDING = "wrpPadding";
+export const WRAPPER_BORDER_SHADOW = "wrpBorderShadow";
+export const TITLE_BG = "titleBG";
+export const TITLE_PADDING = "titlePadding";
+export const CONTENT_BG = "contentBG";
+export const CONTENT_PADDING = "contentPadding";
+export const TITLE_BORDER = "titleBorder";
+export const CONTENT_BORDER = "contentBorder";
+
 // Default colors
 const DARK_GRAY = "#4a5059";
 const LIGHT_GRAY = "#edf1f7";
 
-export const DEFAULT_TITLE_COLOR = DARK_GRAY;
+export const DEFAULT_TITLE_COLOR = DARK_GRAY; 
 export const DEFAULT_TITLE_SIZE = "16";
 export const DEFAULT_TITLE_BACKGROUND = LIGHT_GRAY;
 export const DEFAULT_TITLE_ACTIVE_COLOR = "#ffffff";
@@ -144,4 +156,19 @@ export const TEXT_DECORATION = [
 	{ label: __("Line Through"), value: "line-through" },
 	{ label: __("Underline"), value: "underline" },
 	{ label: __("Underline Oveline"), value: "underline overline" },
+];
+
+export const COLORS = [
+    { name: 'Black', color: '#000000' },
+    { name: 'Cyan bluish gray', color: '#abb8c3' },
+    { name: 'White', color: '#ffffff' },
+    { name: 'Pale pink', color: '#ffc0cb' },
+    { name: 'Vivid red', color: '#cf2e2e' },
+    { name: 'Luminous vivid orange', color: '#ff6900' },
+    { name: 'Luminous vivid amber', color: '#fcb900' },
+    { name: 'Light green cyan', color: '#7bdcb5' },
+    { name: 'Vivid green cyan', color: '#00d084' },
+    { name: 'Pale cyan blue', color: '#8ed1fc' },
+    { name: 'Vivid cyan blue', color: '#3593e3' },
+    { name: 'Vivid purple', color: '#9b51e0' },
 ];

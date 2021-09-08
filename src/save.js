@@ -15,7 +15,7 @@ import {
 	DEFAULT_CONTENT_BACKGROUND,
 	DEFAULT_CONTENT_COLOR,
 	DEFAULT_ICON_COLOR,
-} from "./constants";
+} from "./constants/constants";
 
 const Save = ({ attributes }) => {
 	const {

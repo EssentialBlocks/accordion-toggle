@@ -1,5 +1,5 @@
-import { registerBlockType } from "@wordpress/blocks";
-import { __ } from "@wordpress/i18n";
+const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
 import "./style.scss";
 
@@ -9,7 +9,7 @@ import icon from "./icon";
 import attributes from "./attributes";
 import example from "./example";
 
-registerBlockType("block/accordion", {
+registerBlockType("accordion-toggle/accordion", {
 	title: __("Accordion", "block"),
 	description: __("", "block"),
 	category: "widgets",

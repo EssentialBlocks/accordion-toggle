@@ -1,5 +1,133 @@
+import {
+	WRAPPER_BG,
+	WRAPPER_MARGIN,
+	WRAPPER_PADDING,
+	WRAPPER_BORDER_SHADOW,
+	TITLE_BG,
+	TITLE_BORDER,
+	TITLE_PADDING,
+	CONTENT_BORDER,
+	CONTENT_PADDING,
+	CONTENT_BG,
+} from "./constants/constants";
+import * as TYPOGRAPHY from "./constants/typography-constant";
+
+import {
+	generateDimensionsAttributes,
+	generateTypographyAttributes,
+	generateBackgroundAttributes,
+	generateBorderShadowAttributes,
+	generateResponsiveRangeAttributes,
+} from "../util/helpers";
+
 const attributes = {
-	id: { type: "string" },
+
+
+	// typography attributes ⬇
+	...generateTypographyAttributes(Object.values(TYPOGRAPHY)),
+
+	// margin padding attributes ⬇
+	...generateDimensionsAttributes(WRAPPER_MARGIN),
+	...generateDimensionsAttributes(WRAPPER_PADDING, {
+		top: 0,
+		bottom: 30,
+		right: 0,
+		left: 0,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(TITLE_PADDING, {
+		top: 10,
+		bottom: 10,
+		right: 20,
+		left: 20,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(CONTENT_PADDING, {
+		top: 15,
+		bottom: 15,
+		right: 20,
+		left: 20,
+		isLinked: false,
+	}),
+
+	// border shadow attributes for Wrapper ⬇
+	...generateBorderShadowAttributes(WRAPPER_BORDER_SHADOW, {
+		bdrDefaults: {
+			top: 0,
+			bottom: 0,
+			right: 0,
+			left: 0,
+		},
+		// noShadow: true,
+		// noBorder: true,
+	}),
+
+	// border shadow attributes for Button ⬇
+	...generateBorderShadowAttributes(TITLE_BORDER, {
+		bdrDefaults: {
+			top: 1,
+			bottom: 1,
+			right: 1,
+			left: 1,
+		},
+		noShadow: true,
+		// noBorder: true,
+	}),
+
+	// border shadow attributes for Button ⬇
+	...generateBorderShadowAttributes(CONTENT_BORDER, {
+		bdrDefaults: {
+			top: 1,
+			bottom: 1,
+			right: 1,
+			left: 1,
+		},
+		noShadow: true,
+		// noBorder: true,
+	}),
+
+	// background attributes for Wrapper ⬇
+	...generateBackgroundAttributes(WRAPPER_BG, {
+		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
+		noOverlay: true,
+	}),
+
+	// background attributes for Wrapper ⬇
+	...generateBackgroundAttributes(TITLE_BG, {
+		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
+		noOverlay: true,
+	}),
+
+	// background attributes for Wrapper ⬇
+	...generateBackgroundAttributes(CONTENT_BG, {
+		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
+		noOverlay: true,
+	}),
+
+	// range controller Slide to Show
+	// ...generateResponsiveRangeAttributes(SLIDE_TO_SHOW, {
+	// 	defaultRange: 1,
+	// }),
+
+	resOption: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// blockId attribute for making unique className and other uniqueness
+	blockId: {
+		type: "string",
+	},
+	blockRoot: {
+		type: "string",
+		default: "essential_block",
+	},
+	blockMeta: {
+		type: "object",
+	},
+	id: { 
+		type: "string" 
+	},
 	accordionType: {
 		type: "string",
 		source: "attribute",
