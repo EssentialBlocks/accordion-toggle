@@ -5865,58 +5865,9 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     type: "string",
     "default": "custom"
   },
-  backgroundType: {
-    type: "string",
-    "default": "fill"
-  },
-  containerBackground: {
-    type: "string"
-  },
-  containerBorderType: {
-    type: "string",
-    "default": "solid"
-  },
-  containerBorderSize: {
-    type: "number"
-  },
-  containerBorderColor: {
-    type: "string"
-  },
   containerGradient: {
     type: "string",
     "default": "linear-gradient(45deg, #c9d6ff, #e2e2e2)"
-  },
-  containerMarginTop: {
-    type: "number",
-    "default": 0
-  },
-  containerMarginRight: {
-    type: "number",
-    "default": 0
-  },
-  containerMarginBottom: {
-    type: "number",
-    "default": 0
-  },
-  containerMarginLeft: {
-    type: "number",
-    "default": 0
-  },
-  containerPaddingTop: {
-    type: "number",
-    "default": 0
-  },
-  containerPaddingRight: {
-    type: "number",
-    "default": 0
-  },
-  containerPaddingBottom: {
-    type: "number",
-    "default": 0
-  },
-  containerPaddingLeft: {
-    type: "number",
-    "default": 0
   },
   containerHOffset: {
     type: "number"
@@ -5937,13 +5888,6 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     type: "string",
     "default": "h5"
   },
-  titleFontSize: {
-    type: "number"
-  },
-  titleSizeUnit: {
-    type: "string",
-    "default": "px"
-  },
   titleColor: {
     type: "string"
   },
@@ -5958,17 +5902,6 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     type: "string",
     "default": "linear-gradient(45deg, #141e30, #243b55)"
   },
-  tabBorderStyle: {
-    type: "string",
-    "default": "solid"
-  },
-  tabBorderColor: {
-    type: "string",
-    "default": "transparent"
-  },
-  tabBorderRadius: {
-    type: "number"
-  },
   contentAlign: {
     type: "string",
     "default": "left"
@@ -5978,38 +5911,6 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   },
   contentFontSize: {
     type: "number"
-  },
-  contentMarginTop: {
-    type: "number",
-    "default": 10
-  },
-  contentMarginRight: {
-    type: "number",
-    "default": 10
-  },
-  contentMarginBottom: {
-    type: "number",
-    "default": 10
-  },
-  contentMarginLeft: {
-    type: "number",
-    "default": 10
-  },
-  contentPaddingTop: {
-    type: "number",
-    "default": 0
-  },
-  contentPaddingRight: {
-    type: "number",
-    "default": 0
-  },
-  contentPaddingBottom: {
-    type: "number",
-    "default": 0
-  },
-  contentPaddingLeft: {
-    type: "number",
-    "default": 0
   },
   contentBackgroundType: {
     type: "string",
@@ -6025,29 +5926,6 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   displayContentBorder: {
     type: "boolean",
     "default": false
-  },
-  contentBorderTop: {
-    type: "number",
-    "default": 1
-  },
-  contentBorderRight: {
-    type: "number",
-    "default": 1
-  },
-  contentBorderBottom: {
-    type: "number",
-    "default": 1
-  },
-  contentBorderLeft: {
-    type: "number",
-    "default": 1
-  },
-  contentBorderStyle: {
-    type: "string",
-    "default": "solid"
-  },
-  contentBorderColor: {
-    type: "string"
   },
   contentHOffset: {
     type: "number"
@@ -6069,38 +5947,6 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   },
   iconSize: {
     type: "number"
-  },
-  iconPaddingTop: {
-    type: "number",
-    "default": 0
-  },
-  iconPaddingRight: {
-    type: "number",
-    "default": 0
-  },
-  iconPaddingBottom: {
-    type: "number",
-    "default": 0
-  },
-  iconPaddingLeft: {
-    type: "number",
-    "default": 0
-  },
-  iconMarginTop: {
-    type: "number",
-    "default": 0
-  },
-  iconMarginRight: {
-    type: "number",
-    "default": 0
-  },
-  iconMarginBottom: {
-    type: "number",
-    "default": 0
-  },
-  iconMarginLeft: {
-    type: "number",
-    "default": 0
   },
   iconBackgroundType: {
     type: "string",
@@ -6417,7 +6263,7 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
 /*!************************************!*\
   !*** ./src/constants/constants.js ***!
   \************************************/
-/*! exports provided: WRAPPER_BG, WRAPPER_MARGIN, WRAPPER_PADDING, WRAPPER_BORDER_SHADOW, TITLE_BG, TITLE_PADDING, CONTENT_BG, CONTENT_PADDING, TITLE_BORDER, CONTENT_BORDER, DEFAULT_TITLE_COLOR, DEFAULT_TITLE_SIZE, DEFAULT_TITLE_BACKGROUND, DEFAULT_TITLE_ACTIVE_COLOR, DEFAULT_CONTENT_COLOR, DEFAULT_CONTENT_BACKGROUND, DEFAULT_CONTENT_BORDER_COLOR, DEFAULT_ICON_COLOR, MAX_HEIGHT, ACCORDION_TYPES, ACCORDION_STYLES, BACKGROUND_TYPE, TITLE_BACKGROUND_TYPE, BACKGROUND_CLIP, BUTTON_STYLES, BACKGROUND_SIZE, BACKGROUND_REPEAT, BACKGROUND_ATTACHMENT, BORDER_STYLES, HEADERS, ICON_POSITIONS, TRANSITION_TYPES, TITLE_ALIGNMENT, CONTENT_ALIGN, COLOR_TYPES, TEXT_TRANSFORM, FONT_WEIGHTS, TEXT_DECORATION, COLORS */
+/*! exports provided: WRAPPER_BG, WRAPPER_MARGIN, WRAPPER_PADDING, WRAPPER_BORDER_SHADOW, TITLE_BG, TITLE_PADDING, CONTENT_BG, CONTENT_PADDING, TITLE_BORDER, CONTENT_BORDER, ACCORDION_TYPES, ACCORDION_STYLES, HEADERS, ICON_POSITIONS, TRANSITION_TYPES, TITLE_ALIGNMENT, CONTENT_ALIGN, COLORS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6432,34 +6278,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONTENT_PADDING", function() { return CONTENT_PADDING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TITLE_BORDER", function() { return TITLE_BORDER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONTENT_BORDER", function() { return CONTENT_BORDER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_TITLE_COLOR", function() { return DEFAULT_TITLE_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_TITLE_SIZE", function() { return DEFAULT_TITLE_SIZE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_TITLE_BACKGROUND", function() { return DEFAULT_TITLE_BACKGROUND; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_TITLE_ACTIVE_COLOR", function() { return DEFAULT_TITLE_ACTIVE_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_CONTENT_COLOR", function() { return DEFAULT_CONTENT_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_CONTENT_BACKGROUND", function() { return DEFAULT_CONTENT_BACKGROUND; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_CONTENT_BORDER_COLOR", function() { return DEFAULT_CONTENT_BORDER_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_ICON_COLOR", function() { return DEFAULT_ICON_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MAX_HEIGHT", function() { return MAX_HEIGHT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCORDION_TYPES", function() { return ACCORDION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCORDION_STYLES", function() { return ACCORDION_STYLES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BACKGROUND_TYPE", function() { return BACKGROUND_TYPE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TITLE_BACKGROUND_TYPE", function() { return TITLE_BACKGROUND_TYPE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BACKGROUND_CLIP", function() { return BACKGROUND_CLIP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BUTTON_STYLES", function() { return BUTTON_STYLES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BACKGROUND_SIZE", function() { return BACKGROUND_SIZE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BACKGROUND_REPEAT", function() { return BACKGROUND_REPEAT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BACKGROUND_ATTACHMENT", function() { return BACKGROUND_ATTACHMENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BORDER_STYLES", function() { return BORDER_STYLES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADERS", function() { return HEADERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ICON_POSITIONS", function() { return ICON_POSITIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TRANSITION_TYPES", function() { return TRANSITION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TITLE_ALIGNMENT", function() { return TITLE_ALIGNMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONTENT_ALIGN", function() { return CONTENT_ALIGN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COLOR_TYPES", function() { return COLOR_TYPES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEXT_TRANSFORM", function() { return TEXT_TRANSFORM; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FONT_WEIGHTS", function() { return FONT_WEIGHTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEXT_DECORATION", function() { return TEXT_DECORATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COLORS", function() { return COLORS; });
 var __ = wp.i18n.__; // the consts defined here should be unique from one another
 
@@ -6472,19 +6297,7 @@ var TITLE_PADDING = "titlePadding";
 var CONTENT_BG = "contentBG";
 var CONTENT_PADDING = "contentPadding";
 var TITLE_BORDER = "titleBorder";
-var CONTENT_BORDER = "contentBorder"; // Default colors
-
-var DARK_GRAY = "#4a5059";
-var LIGHT_GRAY = "#edf1f7";
-var DEFAULT_TITLE_COLOR = DARK_GRAY;
-var DEFAULT_TITLE_SIZE = "16";
-var DEFAULT_TITLE_BACKGROUND = LIGHT_GRAY;
-var DEFAULT_TITLE_ACTIVE_COLOR = "#ffffff";
-var DEFAULT_CONTENT_COLOR = DARK_GRAY;
-var DEFAULT_CONTENT_BACKGROUND = "transparent";
-var DEFAULT_CONTENT_BORDER_COLOR = DARK_GRAY;
-var DEFAULT_ICON_COLOR = DARK_GRAY;
-var MAX_HEIGHT = 2000;
+var CONTENT_BORDER = "contentBorder";
 var ACCORDION_TYPES = [{
   label: __("Accordion"),
   value: "accordion"
@@ -6507,116 +6320,6 @@ var ACCORDION_STYLES = [{
 }, {
   label: __("Custom"),
   value: "custom"
-}];
-var BACKGROUND_TYPE = [{
-  label: __("Fill"),
-  value: "fill"
-}, {
-  label: __("Gradient"),
-  value: "gradient"
-}, {
-  label: __("Image"),
-  value: "image"
-}];
-var TITLE_BACKGROUND_TYPE = [{
-  label: __("Fill"),
-  value: "fill"
-}, {
-  label: __("Gradient"),
-  value: "gradient"
-}];
-var BACKGROUND_CLIP = [{
-  label: __("Border Box"),
-  value: "border-box"
-}, {
-  label: __("Padding Box"),
-  value: "padding-box"
-}, {
-  label: __("Content Box"),
-  value: "content-box"
-}];
-var BUTTON_STYLES = [{
-  label: __("Material"),
-  value: "material"
-}, {
-  label: __("Ghost"),
-  value: "ghost"
-}, {
-  label: __("Rounded"),
-  value: "rounded"
-}, {
-  label: __("Custom"),
-  value: "custom"
-}];
-var BACKGROUND_SIZE = [{
-  label: __("Auto"),
-  value: "auto"
-}, {
-  label: __("Cover"),
-  value: "cover"
-}, {
-  label: __("Container"),
-  value: "container"
-}];
-var BACKGROUND_REPEAT = [{
-  label: __("Initial"),
-  value: "initial"
-}, {
-  label: __("No Repeat"),
-  value: "no-repeat"
-}, {
-  label: __("Repeat"),
-  value: "repeat"
-}, {
-  label: __("Repeat X"),
-  value: "repeat-x"
-}, {
-  label: __("Repeat Y"),
-  value: "repeat-y"
-}, {
-  label: __("Space"),
-  value: "space"
-}, {
-  label: __("Round"),
-  value: "round"
-}];
-var BACKGROUND_ATTACHMENT = [{
-  label: __("Initial"),
-  value: "initial"
-}, {
-  label: __("Scroll"),
-  value: "scroll"
-}, {
-  label: __("Fixed"),
-  value: "fixed"
-}, {
-  label: __("Local"),
-  value: "local"
-}];
-var BORDER_STYLES = [{
-  label: __("Dashed"),
-  value: "dashed"
-}, {
-  label: __("Solid"),
-  value: "solid"
-}, {
-  label: __("Dotted"),
-  value: "dotted"
-}, {
-  label: __("Double"),
-  value: "double"
-}, {
-  label: __("Groove"),
-  value: "groove"
-}, {
-  label: __("Inset"),
-  value: "inset"
-}, {
-  label: __("Outset"),
-  value: "outset"
-}, {
-  label: __("Ridge"),
-  value: "ridge"
 }];
 var HEADERS = [{
   label: __("H1"),
@@ -6679,55 +6382,6 @@ var CONTENT_ALIGN = [{
 }, {
   label: __("Right"),
   value: "right"
-}];
-var COLOR_TYPES = [{
-  label: __("Fill"),
-  value: "fill"
-}, {
-  label: __("Gradient"),
-  value: "gradient"
-}];
-var TEXT_TRANSFORM = [{
-  label: __("None"),
-  value: "none"
-}, {
-  label: __("Lowercase"),
-  value: "lowercase"
-}, {
-  label: __("Capitalize"),
-  value: "capitalize"
-}, {
-  label: __("Uppercase"),
-  value: "uppercase"
-}];
-var FONT_WEIGHTS = [{
-  label: __("Lighter"),
-  value: "lighter"
-}, {
-  label: __("Normal"),
-  value: "normal"
-}, {
-  label: __("Bold"),
-  value: "bold"
-}, {
-  label: __("Bolder"),
-  value: "bolder"
-}];
-var TEXT_DECORATION = [{
-  label: __("Initial"),
-  value: "initial"
-}, {
-  label: __("Overline"),
-  value: "overline"
-}, {
-  label: __("Line Through"),
-  value: "line-through"
-}, {
-  label: __("Underline"),
-  value: "underline"
-}, {
-  label: __("Underline Oveline"),
-  value: "underline overline"
 }];
 var COLORS = [{
   name: 'Black',
@@ -6802,17 +6456,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
 /* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/constants */ "./src/constants/constants.js");
-/* harmony import */ var _util_uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/uuid */ "./util/uuid.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+/* harmony import */ var _constants_typography_constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants/typography-constant */ "./src/constants/typography-constant.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
+/* harmony import */ var _util_uuid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/uuid */ "./util/uuid.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6825,33 +6471,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 /**
  * WordPress dependencies
  */
 var __ = wp.i18n.__;
-var Component = wp.element.Component;
-var RichText = wp.blockEditor.RichText;
-var Button = wp.components.Button;
+var _wp$element = wp.element,
+    Component = _wp$element.Component,
+    useEffect = _wp$element.useEffect,
+    createRef = _wp$element.createRef;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    BlockControls = _wp$blockEditor.BlockControls,
+    useBlockProps = _wp$blockEditor.useBlockProps;
+var _wp$components = wp.components,
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    ToolbarItem = _wp$components.ToolbarItem,
+    ToolbarButton = _wp$components.ToolbarButton,
+    Button = _wp$components.Button;
+var select = wp.data.select;
 /**
  * Internal dependencies
  */
@@ -6861,650 +6498,716 @@ var Button = wp.components.Button;
 
 
 
+
+
  // import switchFontSizes from "../util/helper";
 
-var Edit = /*#__PURE__*/function (_Component) {
-  _inherits(Edit, _Component);
+function Edit(props) {
+  var isSelected = props.isSelected,
+      attributes = props.attributes,
+      setAttributes = props.setAttributes,
+      clientId = props.clientId;
+  var resOption = attributes.resOption,
+      blockId = attributes.blockId,
+      blockMeta = attributes.blockMeta,
+      accordionType = attributes.accordionType,
+      displayIcon = attributes.displayIcon,
+      transitionDuration = attributes.transitionDuration,
+      accordionStyle = attributes.accordionStyle,
+      backgroundType = attributes.backgroundType,
+      containerBackground = attributes.containerBackground,
+      containerGradient = attributes.containerGradient,
+      containerBorderSize = attributes.containerBorderSize,
+      containerBorderType = attributes.containerBorderType,
+      containerBorderColor = attributes.containerBorderColor,
+      containerMarginTop = attributes.containerMarginTop,
+      containerMarginRight = attributes.containerMarginRight,
+      containerMarginBottom = attributes.containerMarginBottom,
+      containerMarginLeft = attributes.containerMarginLeft,
+      containerPaddingTop = attributes.containerPaddingTop,
+      containerPaddingRight = attributes.containerPaddingRight,
+      containerPaddingBottom = attributes.containerPaddingBottom,
+      containerPaddingLeft = attributes.containerPaddingLeft,
+      accordions = attributes.accordions,
+      expandedTabs = attributes.expandedTabs,
+      selectedTab = attributes.selectedTab,
+      tabIcon = attributes.tabIcon,
+      expandedIcon = attributes.expandedIcon,
+      containerHOffset = attributes.containerHOffset,
+      containerVOffset = attributes.containerVOffset,
+      containerShadowSpread = attributes.containerShadowSpread,
+      containerShadowBlur = attributes.containerShadowBlur,
+      containerShadowColor = attributes.containerShadowColor,
+      titleLevel = attributes.titleLevel,
+      titleColor = attributes.titleColor,
+      titleBackgroundType = attributes.titleBackgroundType,
+      titleBackgroundColor = attributes.titleBackgroundColor,
+      titleBackgroundGradient = attributes.titleBackgroundGradient,
+      tabBorderStyle = attributes.tabBorderStyle,
+      tabBorderColor = attributes.tabBorderColor,
+      tabBorderRadius = attributes.tabBorderRadius,
+      contentAlign = attributes.contentAlign,
+      contentColor = attributes.contentColor,
+      contentFontSize = attributes.contentFontSize,
+      contentMarginTop = attributes.contentMarginTop,
+      contentMarginRight = attributes.contentMarginRight,
+      contentMarginBottom = attributes.contentMarginBottom,
+      contentMarginLeft = attributes.contentMarginLeft,
+      contentPaddingTop = attributes.contentPaddingTop,
+      contentPaddingRight = attributes.contentPaddingRight,
+      contentPaddingBottom = attributes.contentPaddingBottom,
+      contentPaddingLeft = attributes.contentPaddingLeft,
+      contentBackgroundType = attributes.contentBackgroundType,
+      contentBackgroundColor = attributes.contentBackgroundColor,
+      contentGradient = attributes.contentGradient,
+      contentBorderStyle = attributes.contentBorderStyle,
+      contentBorderColor = attributes.contentBorderColor,
+      contentHOffset = attributes.contentHOffset,
+      contentVOffset = attributes.contentVOffset,
+      contentShadowColor = attributes.contentShadowColor,
+      contentShadowBlur = attributes.contentShadowBlur,
+      contentShadowSpread = attributes.contentShadowSpread,
+      iconColor = attributes.iconColor,
+      iconSize = attributes.iconSize,
+      iconMarginTop = attributes.iconMarginTop,
+      iconMarginRight = attributes.iconMarginRight,
+      iconMarginBottom = attributes.iconMarginBottom,
+      iconMarginLeft = attributes.iconMarginLeft,
+      iconPaddingTop = attributes.iconPaddingTop,
+      iconPaddingRight = attributes.iconPaddingRight,
+      iconPaddingBottom = attributes.iconPaddingBottom,
+      iconPaddingLeft = attributes.iconPaddingLeft,
+      iconBackgroundType = attributes.iconBackgroundType,
+      iconBackgroundColor = attributes.iconBackgroundColor,
+      iconGradient = attributes.iconGradient,
+      iconSpace = attributes.iconSpace,
+      iconBorderRadius = attributes.iconBorderRadius,
+      iconPosition = attributes.iconPosition,
+      iconHOffset = attributes.iconHOffset,
+      iconVOffset = attributes.iconVOffset,
+      iconShadowBlur = attributes.iconShadowBlur,
+      iconShadowSpread = attributes.iconShadowSpread,
+      iconShadowColor = attributes.iconShadowColor,
+      transitionFunction = attributes.transitionFunction,
+      tabHOffset = attributes.tabHOffset,
+      tabVOffset = attributes.tabVOffset,
+      tabShadowBlur = attributes.tabShadowBlur,
+      tabShadowSpread = attributes.tabShadowSpread,
+      tabShadowColor = attributes.tabShadowColor,
+      titleAlignment = attributes.titleAlignment,
+      tabBorderColorType = attributes.tabBorderColorType,
+      tabBorderGradient = attributes.tabBorderGradient,
+      tabBorderImageSlice = attributes.tabBorderImageSlice,
+      tabBorderWidth = attributes.tabBorderWidth,
+      isHover = attributes.isHover,
+      hoverColor = attributes.hoverColor,
+      hoverIndex = attributes.hoverIndex,
+      activeColor = attributes.activeColor,
+      activeTitleColor = attributes.activeTitleColor,
+      containerImageID = attributes.containerImageID,
+      containerImageURL = attributes.containerImageURL,
+      containerBackgroundSize = attributes.containerBackgroundSize,
+      containerBackgroundClip = attributes.containerBackgroundClip,
+      containerBackgroundRepeat = attributes.containerBackgroundRepeat,
+      containerBackgroundPositionX = attributes.containerBackgroundPositionX,
+      containerBackgroundPositionY = attributes.containerBackgroundPositionY,
+      containerBackgoundAttachment = attributes.containerBackgoundAttachment,
+      tabMarginTop = attributes.tabMarginTop,
+      tabMarginRight = attributes.tabMarginRight,
+      tabMarginBottom = attributes.tabMarginBottom,
+      tabMarginLeft = attributes.tabMarginLeft,
+      tabPaddingTop = attributes.tabPaddingTop,
+      tabPaddingRight = attributes.tabPaddingRight,
+      tabPaddingBottom = attributes.tabPaddingBottom,
+      tabPaddingLeft = attributes.tabPaddingLeft,
+      contentBorderTop = attributes.contentBorderTop,
+      contentBorderRight = attributes.contentBorderRight,
+      contentBorderBottom = attributes.contentBorderBottom,
+      contentBorderLeft = attributes.contentBorderLeft,
+      containerBorderRadius = attributes.containerBorderRadius,
+      containerMarginUnit = attributes.containerMarginUnit,
+      containerPaddingUnit = attributes.containerPaddingUnit,
+      containerBorderUnit = attributes.containerBorderUnit,
+      containerRadiusUnit = attributes.containerRadiusUnit,
+      tabMarginUnit = attributes.tabMarginUnit,
+      tabPaddingUnit = attributes.tabPaddingUnit,
+      tabBorderUnit = attributes.tabBorderUnit,
+      tabRadiusUnit = attributes.tabRadiusUnit,
+      contentMarginUnit = attributes.contentMarginUnit,
+      contentPaddingUnit = attributes.contentPaddingUnit,
+      iconSizeUnit = attributes.iconSizeUnit,
+      iconMarginUnit = attributes.iconMarginUnit,
+      iconPaddingUnit = attributes.iconPaddingUnit,
+      contentSizeUnit = attributes.contentSizeUnit,
+      titleFontSize = attributes.titleFontSize,
+      titleSizeUnit = attributes.titleSizeUnit,
+      titleFontFamily = attributes.titleFontFamily,
+      titleFontWeight = attributes.titleFontWeight,
+      titleTextTransform = attributes.titleTextTransform,
+      titleTextDecoration = attributes.titleTextDecoration,
+      titleLetterSpacing = attributes.titleLetterSpacing,
+      titleLetterSpacingUnit = attributes.titleLetterSpacingUnit,
+      titleLineHeight = attributes.titleLineHeight,
+      titleLineHeightUnit = attributes.titleLineHeightUnit,
+      contentFontFamily = attributes.contentFontFamily,
+      contentFontWeight = attributes.contentFontWeight,
+      contentTextTransform = attributes.contentTextTransform,
+      contentTextDecoration = attributes.contentTextDecoration,
+      contentLetterSpacing = attributes.contentLetterSpacing,
+      contentLetterSpacingUnit = attributes.contentLetterSpacingUnit,
+      contentLineHeight = attributes.contentLineHeight,
+      contentLineHeightUnit = attributes.contentLineHeightUnit; // this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 
-  var _super = _createSuper(Edit);
+  useEffect(function () {
+    setAttributes({
+      resOption: select("core/edit-post").__experimentalGetPreviewDeviceType()
+    });
+  }, []); // this useEffect is for creating a unique id for each block's unique className by a random unique number
 
-  function Edit(props) {
-    var _this;
+  useEffect(function () {
+    var BLOCK_PREFIX = "eb-accordion";
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["duplicateBlockIdFix"])({
+      BLOCK_PREFIX: BLOCK_PREFIX,
+      blockId: blockId,
+      setAttributes: setAttributes,
+      select: select,
+      clientId: clientId
+    });
+  }, []); // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
 
-    _classCallCheck(this, Edit);
+  useEffect(function () {
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["mimmikCssForPreviewBtnClick"])({
+      domObj: document,
+      select: select
+    });
+  }, []);
+  var blockProps = useBlockProps({
+    className: "eb-guten-block-main-parent-wrapper"
+  }); //Add Accordion
 
-    _this = _super.call(this, props);
-    _this.addAccordion = _this.addAccordion.bind(_assertThisInitialized(_this));
-    _this.onDeleteAccordion = _this.onDeleteAccordion.bind(_assertThisInitialized(_this));
-    _this.onSortEnd = _this.onSortEnd.bind(_assertThisInitialized(_this));
-    _this.isExpanded = _this.isExpanded.bind(_assertThisInitialized(_this));
-    _this.getContainerBackground = _this.getContainerBackground.bind(_assertThisInitialized(_this));
-    _this.getContainerBackgroundImage = _this.getContainerBackgroundImage.bind(_assertThisInitialized(_this));
-    _this.setHoverColor = _this.setHoverColor.bind(_assertThisInitialized(_this));
-    _this.setToggleActiveColor = _this.setToggleActiveColor.bind(_assertThisInitialized(_this));
-    _this.setAccordionActiveColor = _this.setAccordionActiveColor.bind(_assertThisInitialized(_this));
-    _this.getTitleBackground = _this.getTitleBackground.bind(_assertThisInitialized(_this));
-    _this.getTitleColor = _this.getTitleColor.bind(_assertThisInitialized(_this));
-    _this.getTabIcon = _this.getTabIcon.bind(_assertThisInitialized(_this));
-    _this.setToggleType = _this.setToggleType.bind(_assertThisInitialized(_this));
-    _this.setToggleTitleColor = _this.setToggleTitleColor.bind(_assertThisInitialized(_this));
-    _this.setAccordionType = _this.setAccordionType.bind(_assertThisInitialized(_this));
-    _this.setAccordionTitleColor = _this.setAccordionTitleColor.bind(_assertThisInitialized(_this));
-    _this.onTitleClick = _this.onTitleClick.bind(_assertThisInitialized(_this));
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
-    _this.getIconColor = _this.getIconColor.bind(_assertThisInitialized(_this));
-    _this.onLevelChange = _this.onLevelChange.bind(_assertThisInitialized(_this));
-    return _this;
-  }
+  var addAccordion = function addAccordion() {
+    var counter = accordions.length + 1;
+    var accordions = [].concat(accordions, [{
+      title: "Add Accordion Title ".concat(counter),
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }]);
+    setAttributes({
+      accordions: accordions
+    });
+  };
 
-  _createClass(Edit, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // Generate unique id
-      var id = Object(_util_uuid__WEBPACK_IMPORTED_MODULE_5__["default"])().substr(0, 5);
-      this.props.setAttributes({
-        id: id
-      });
+  var onDeleteAccordion = function onDeleteAccordion(position) {
+    // Callback function for deleting accordion
+    var accordions = [].concat(accordions);
+    accordions.splice(position, 1);
+    setAttributes({
+      accordions: accordions
+    });
+  };
+
+  var onSortEnd = function onSortEnd(oldIndex, newIndex) {
+    // Callback function for sorting accordion
+    setAttributes({
+      accordions: array_move__WEBPACK_IMPORTED_MODULE_0___default()(accordions, oldIndex, newIndex)
+    });
+  };
+
+  var isExpanded = function isExpanded(index) {
+    // Return true if tab is expanded
+    if (accordionType === "accordion") {
+      return selectedTab === index;
     }
-  }, {
-    key: "addAccordion",
-    value: function addAccordion() {
-      var _this$props = this.props,
-          attributes = _this$props.attributes,
-          setAttributes = _this$props.setAttributes;
-      var counter = attributes.accordions.length + 1;
-      var accordions = [].concat(_toConsumableArray(attributes.accordions), [{
-        title: "Add Accordion Title ".concat(counter),
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      }]);
+
+    if (accordionType === "toggle") {
+      return expandedTabs.includes(index);
+    }
+  };
+
+  var getContainerBackground = function getContainerBackground() {
+    switch (backgroundType) {
+      case "fill":
+        return containerBackground;
+
+      case "gradient":
+        return containerGradient;
+
+      case "image":
+        return "url('".concat(containerImageURL, "')");
+    }
+  };
+
+  var getContainerBackgroundImage = function getContainerBackgroundImage() {
+    return backgroundType === "gradient" ? containerGradient : backgroundType === "image" && containerImageURL ? "url('".concat(containerImageURL, "')") : "none";
+  };
+
+  var setHoverColor = function setHoverColor(index) {
+    if (hoverIndex === index && hoverColor) {
+      return hoverColor;
+    }
+  }; // setToggleActiveColor(index) {
+  // 	const { expandedTabs, activeColor } = attributes;
+  // 	if (expandedTabs.includes(index)) {
+  // 		return activeColor || DEFAULT_TITLE_COLOR;
+  // 	}
+  // }
+  // setAccordionActiveColor(index) {
+  // 	const { selectedTab, activeColor } = attributes;
+  // 	if (selectedTab === index) {
+  // 		return activeColor || DEFAULT_TITLE_COLOR;
+  // 	}
+  // }
+  // getTitleBackground(index) {
+  // 	const {
+  // 		titleBackgroundType,
+  // 		accordionType,
+  // 		titleBackgroundColor,
+  // 	} = attributes;
+  // 	let activeColor;
+  // 	if (titleBackgroundType === "fill") {
+  // 		if (accordionType === "accordion") {
+  // 			activeColor = setAccordionActiveColor(index);
+  // 		}
+  // 		if (accordionType === "toggle") {
+  // 			activeColor = setToggleActiveColor(index);
+  // 		}
+  // 		let hoverColor = setHoverColor(index);
+  // 		// Show hover, active or default background color
+  // 		return (
+  // 			hoverColor ||
+  // 			activeColor ||
+  // 			titleBackgroundColor ||
+  // 			DEFAULT_TITLE_BACKGROUND
+  // 		);
+  // 	}
+  // 	return "transparent";
+  // }
+  // setToggleTitleColor(index) {
+  // 	const { expandedTabs, activeTitleColor } = attributes;
+  // 	if (expandedTabs.includes(index)) {
+  // 		return activeTitleColor || DEFAULT_TITLE_COLOR;
+  // 	}
+  // }
+  // setAccordionTitleColor(index) {
+  // 	const { selectedTab, activeTitleColor } = attributes;
+  // 	if (selectedTab === index) {
+  // 		return activeTitleColor || DEFAULT_TITLE_COLOR;
+  // 	}
+  // }
+  // getTitleColor(index) {
+  // 	const { accordionType, titleColor } = attributes;
+  // 	let activeTitleColor;
+  // 	if (accordionType === "accordion") {
+  // 		activeTitleColor = setAccordionTitleColor(index);
+  // 	}
+  // 	if (accordionType === "toggle") {
+  // 		activeTitleColor = setToggleTitleColor(index);
+  // 	}
+  // 	// Show active or default title color
+  // 	return activeTitleColor || titleColor || DEFAULT_TITLE_COLOR;
+  // }
+
+
+  var setToggleType = function setToggleType(index) {
+    // If tab is already expanded, close it, otherwise open it
+    var expandedTabs = _toConsumableArray(expandedTabs);
+
+    expandedTabs = expandedTabs.includes(index) ? expandedTabs.filter(function (titleIndex) {
+      return titleIndex !== index;
+    }) : [].concat(_toConsumableArray(expandedTabs), [index]);
+    setAttributes({
+      expandedTabs: expandedTabs
+    });
+  };
+
+  var setAccordionType = function setAccordionType(index) {
+    // Save expanded tab name, remove when tab is hidden
+    var selectedTab = selectedTab === index ? undefined : index;
+    setAttributes({
+      selectedTab: selectedTab
+    });
+  };
+
+  var onTitleClick = function onTitleClick(index) {
+    // Expand / Hide title
+    accordionType === "accordion" && setAccordionType(index);
+    accordionType === "toggle" && setToggleType(index);
+  };
+
+  var _onChange = function onChange(newValue, index, key) {
+    // onChange callback function for title and content
+    var accordions = [].concat(accordions);
+    accordions[index][key] = newValue;
+    setAttributes({
+      accordions: accordions
+    });
+  }; // getIconColor(index) {
+  // 	const {
+  // 		accordionType,
+  // 		iconColor,
+  // 		titleColor,
+  // 		selectedTab,
+  // 		expandedTabs,
+  // 		activeTitleColor,
+  // 	} = attributes;
+  // 	let activeIconColor;
+  // 	if (accordionType === "accordion") {
+  // 		if (selectedTab === index) {
+  // 			activeIconColor = activeTitleColor || DEFAULT_TITLE_COLOR;
+  // 		}
+  // 	} else {
+  // 		if (expandedTabs.includes(index)) {
+  // 			activeIconColor = activeTitleColor || DEFAULT_TITLE_COLOR;
+  // 		}
+  // 	}
+  // 	return activeIconColor || iconColor || titleColor || DEFAULT_TITLE_COLOR;
+  // }
+
+
+  var onLevelChange = function onLevelChange(header, titleSizeUnit) {// const titleLevel = header.value;
+    // const titleFontSize = switchFontSizes(titleSizeUnit, titleLevel);
+    // setAttributes({ titleFontSize, titleLevel });
+  }; // const containerStyle = {
+  // 	background: getContainerBackground(),
+  // 	backgroundImage: getContainerBackgroundImage(),
+  // 	backgroundRepeat: containerImageURL
+  // 		? containerBackgroundRepeat
+  // 		: undefined,
+  // 	backgroundClip:
+  // 		backgroundType === "image" ? containerBackgroundClip : undefined,
+  // 	backgroundSize:
+  // 		backgroundType === "image" ? containerBackgroundSize : undefined,
+  // 	backgroundPosition: containerImageURL
+  // 		? `${containerBackgroundPositionX}% ${containerBackgroundPositionY}%`
+  // 		: undefined,
+  // 	backgroundAttachment: containerImageURL
+  // 		? containerBackgoundAttachment
+  // 		: undefined,
+  // 	margin: `${containerMarginTop}${containerMarginUnit} ${containerMarginRight}${containerMarginUnit} ${containerMarginBottom}${containerMarginUnit} ${containerMarginLeft}${containerMarginUnit}`,
+  // 	padding: `${containerPaddingTop}${containerPaddingUnit} ${containerPaddingRight}${containerPaddingUnit} ${containerPaddingBottom}${containerPaddingUnit} ${containerPaddingLeft}${containerPaddingUnit}`,
+  // 	border: `${
+  // 		containerBorderSize || 0
+  // 	}${containerBorderUnit} ${containerBorderType} ${
+  // 		containerBorderColor || "#000000"
+  // 	}`,
+  // 	borderRadius: `${containerBorderRadius || 0}${containerRadiusUnit}`,
+  // 	boxShadow: `${containerHOffset || 0}px ${containerVOffset || 0}px ${
+  // 		containerShadowBlur || 0
+  // 	}px ${containerShadowSpread || 0}px ${containerShadowColor || "#dedede"}`,
+  // };
+  // const iconWrapperStyles = {
+  // 	display: displayIcon ? "flex" : "none",
+  // 	margin: `${iconMarginTop}${iconMarginUnit} ${iconMarginRight}${iconMarginUnit} ${iconMarginBottom}${iconMarginUnit} ${iconMarginLeft}${iconMarginUnit}`,
+  // 	background: iconBackgroundType === "fill" && iconBackgroundColor,
+  // 	backgroundImage: iconBackgroundType === "gradient" && iconGradient,
+  // 	borderRadius: `${iconBorderRadius || 0}%`,
+  // 	boxShadow: `${iconHOffset || 0}px ${iconVOffset || 0}px ${
+  // 		iconShadowBlur || 0
+  // 	}px ${iconShadowSpread || 0}px ${iconShadowColor || "#000000"}`,
+  // };
+  // const iconStyles = {
+  // 	color: iconColor || DEFAULT_ICON_COLOR,
+  // 	fontSize: `${iconSize || 14}${iconSizeUnit}`,
+  // 	padding: `${iconPaddingTop}${iconPaddingUnit} ${iconPaddingRight}${iconPaddingUnit} ${iconPaddingBottom}${iconPaddingUnit} ${iconPaddingLeft}${iconPaddingUnit} `,
+  // 	display: "flex",
+  // 	flexDirection: "column",
+  // 	justifyContent: "center",
+  // };
+  // const titleStyles = {
+  // 	titleWrapper: {
+  // 		flexDirection:
+  // 			iconPosition === "right" && displayIcon ? "row-reverse" : "row",
+  // 		justifyContent:
+  // 			iconPosition === "right" ? "space-between" : titleAlignment,
+  // 		backgroundImage:
+  // 			titleBackgroundType === "gradient"
+  // 				? titleBackgroundGradient
+  // 				: titleBackgroundType === "fill"
+  // 				? undefined
+  // 				: "transparent",
+  // 		borderWidth: `${tabBorderWidth || 0}${tabBorderUnit}`,
+  // 		borderColor:
+  // 			tabBorderColorType === "fill" && tabBorderColor
+  // 				? tabBorderColor
+  // 				: "transparent",
+  // 		borderRadius: `${tabBorderRadius || 0}${tabRadiusUnit}`,
+  // 		borderStyle: tabBorderStyle || "unset",
+  // 		borderImage:
+  // 			tabBorderColorType === "gradient" && tabBorderGradient
+  // 				? `${tabBorderGradient} ${tabBorderImageSlice}% stretch`
+  // 				: "none",
+  // 		boxShadow: `${tabHOffset || 0}px ${tabVOffset || 0}px ${
+  // 			tabShadowBlur || 0
+  // 		}px ${tabShadowSpread || 0}px ${tabShadowColor || "#dbdbdb"}`,
+  // 		margin: `${tabMarginTop || 0}${tabMarginUnit} ${
+  // 			tabMarginRight || 0
+  // 		}${tabMarginUnit} ${tabMarginBottom || 0}${tabMarginUnit} ${
+  // 			tabMarginLeft || 0
+  // 		}${tabMarginUnit}`,
+  // 		padding: `${tabPaddingTop || 0}${tabPaddingUnit} ${
+  // 			tabPaddingRight || 0
+  // 		}${tabPaddingUnit || 0} ${tabPaddingBottom || 0}${tabPaddingUnit} ${
+  // 			tabPaddingLeft || 0
+  // 		}${tabPaddingUnit}`,
+  // 	},
+  // 	title: {
+  // 		color: titleColor || DEFAULT_TITLE_COLOR,
+  // 		fontSize: `${titleFontSize || DEFAULT_TITLE_SIZE}${titleSizeUnit}`,
+  // 		fontFamily: titleFontFamily,
+  // 		fontWeight: titleFontWeight,
+  // 		textTransform: titleTextTransform,
+  // 		textDecoration: titleTextDecoration,
+  // 		lineHeight: titleLineHeight
+  // 			? `${titleLineHeight}${titleLineHeightUnit}`
+  // 			: undefined,
+  // 		letterSpacing: titleLetterSpacing
+  // 			? `${titleLetterSpacing}${titleLetterSpacingUnit}`
+  // 			: undefined,
+  // 		margin: 0,
+  // 	},
+  // };
+  // const contentStyles = {
+  // 	contentWrapper: {
+  // 		textAlign: contentAlign,
+  // 		backgroundColor:
+  // 			(contentBackgroundType === "fill" && contentBackgroundColor) ||
+  // 			DEFAULT_CONTENT_BACKGROUND,
+  // 		backgroundImage:
+  // 			contentBackgroundType === "gradient" ? contentGradient : "none",
+  // 		borderStyle: `${contentBorderStyle}`,
+  // 		borderWidth: `${contentBorderTop || 0}px ${contentBorderRight || 0}px ${
+  // 			contentBorderBottom || 0
+  // 		}px ${contentBorderLeft || 0}px`,
+  // 		borderColor: contentBorderColor || DEFAULT_CONTENT_BORDER_COLOR,
+  // 		boxShadow: `${contentHOffset || 0}px ${contentVOffset || 0}px ${
+  // 			contentShadowBlur || 0
+  // 		}px  ${contentShadowSpread || 0}px ${contentShadowColor}`,
+  // 		transitionDuration: `${transitionDuration || 500}ms`,
+  // 		transitionProperty: "max-height,opacity,height",
+  // 		transitionTimingFunction: transitionFunction,
+  // 	},
+  // 	content: {
+  // 		margin: `${contentMarginTop || 0}${contentMarginUnit} ${
+  // 			contentMarginRight || 0
+  // 		}${contentMarginUnit} ${contentMarginBottom || 0}${contentMarginUnit} ${
+  // 			contentMarginLeft || 0
+  // 		}${contentMarginUnit}`,
+  // 		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
+  // 			contentPaddingRight || 0
+  // 		}${contentPaddingUnit} ${
+  // 			contentPaddingBottom || 0
+  // 		}${contentPaddingUnit} ${contentPaddingLeft || 0}${contentPaddingUnit}`,
+  // 		fontSize: `${contentFontSize || 18}${contentSizeUnit}`,
+  // 		fontFamily: contentFontFamily,
+  // 		fontWeight: contentFontWeight,
+  // 		textTransform: contentTextTransform,
+  // 		textDecoration: contentTextDecoration,
+  // 		lineHeight: contentLineHeight
+  // 			? `${contentLineHeight}${contentLineHeightUnit}`
+  // 			: undefined,
+  // 		letterSpacing: contentLetterSpacing
+  // 			? `${contentLetterSpacing}${contentLetterSpacingUnit}`
+  // 			: undefined,
+  // 		color: contentColor || DEFAULT_CONTENT_COLOR,
+  // 	},
+  // };
+
+  /**
+   * CSS/styling Codes Starts from Here
+   */
+  // Title Typography
+
+
+  var _generateTypographySt = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typography_constant__WEBPACK_IMPORTED_MODULE_5__["TITLE_TYPOGRAPHY"],
+    defaultFontSize: 20
+  }),
+      titleTypographyDesktop = _generateTypographySt.typoStylesDesktop,
+      titleTypographyTab = _generateTypographySt.typoStylesTab,
+      titleTypographyMobile = _generateTypographySt.typoStylesMobile; // Sub Title Typography
+
+
+  var _generateTypographySt2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typography_constant__WEBPACK_IMPORTED_MODULE_5__["CONTENT_TYPOGRAPHY"],
+    defaultFontSize: 16
+  }),
+      contentTypographyDesktop = _generateTypographySt2.typoStylesDesktop,
+      contentTypographyTab = _generateTypographySt2.typoStylesTab,
+      contentTypographyMobile = _generateTypographySt2.typoStylesMobile;
+  /* Wrapper Margin */
+
+
+  var _generateDimensionsCo = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["WRAPPER_MARGIN"],
+    styleFor: "margin",
+    attributes: attributes
+  }),
+      wrapperMarginDesktop = _generateDimensionsCo.dimensionStylesDesktop,
+      wrapperMarginTab = _generateDimensionsCo.dimensionStylesTab,
+      wrapperMarginMobile = _generateDimensionsCo.dimensionStylesMobile;
+  /* Wrapper Padding */
+
+
+  var _generateDimensionsCo2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["WRAPPER_PADDING"],
+    styleFor: "padding",
+    attributes: attributes
+  }),
+      wrapperPaddingDesktop = _generateDimensionsCo2.dimensionStylesDesktop,
+      wrapperPaddingTab = _generateDimensionsCo2.dimensionStylesTab,
+      wrapperPaddingMobile = _generateDimensionsCo2.dimensionStylesMobile;
+  /* Title Margin */
+
+
+  var _generateDimensionsCo3 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["TITLE_PADDING"],
+    styleFor: "padding",
+    attributes: attributes
+  }),
+      titlePadingDesktop = _generateDimensionsCo3.dimensionStylesDesktop,
+      titlePadingTab = _generateDimensionsCo3.dimensionStylesTab,
+      titlePadingMobile = _generateDimensionsCo3.dimensionStylesMobile;
+  /* Subtitle Margin */
+
+
+  var _generateDimensionsCo4 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["CONTENT_PADDING"],
+    styleFor: "padding",
+    attributes: attributes
+  }),
+      contentPaddingDesktop = _generateDimensionsCo4.dimensionStylesDesktop,
+      contentPaddingTab = _generateDimensionsCo4.dimensionStylesTab,
+      contentPaddingMobile = _generateDimensionsCo4.dimensionStylesMobile; // range controller Slider Height
+  // const {
+  // 	rangeStylesDesktop: sliderHeightDesktop,
+  // 	rangeStylesTab: sliderHeightTab,
+  // 	rangeStylesMobile: sliderHeightMobile,
+  // } = generateResponsiveRangeStyles({
+  // 	controlName: CUSTOM_HEIGHT,
+  // 	property: "height",
+  // 	attributes,
+  // });
+  //Generate Background
+
+
+  var _generateBackgroundCo = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateBackgroundControlStyles"])({
+    attributes: attributes,
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["WRAPPER_BG"],
+    noOverlay: true
+  }),
+      wrapperBackgroundStylesDesktop = _generateBackgroundCo.backgroundStylesDesktop,
+      wrapperHoverBackgroundStylesDesktop = _generateBackgroundCo.hoverBackgroundStylesDesktop,
+      wrapperBackgroundStylesTab = _generateBackgroundCo.backgroundStylesTab,
+      wrapperHoverBackgroundStylesTab = _generateBackgroundCo.hoverBackgroundStylesTab,
+      wrapperBackgroundStylesMobile = _generateBackgroundCo.backgroundStylesMobile,
+      wrapperHoverBackgroundStylesMobile = _generateBackgroundCo.hoverBackgroundStylesMobile,
+      wrapperBgTransitionStyle = _generateBackgroundCo.bgTransitionStyle; // generateBorderShadowStyles for Wrapper ⬇
+
+
+  var _generateBorderShadow = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["generateBorderShadowStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_4__["WRAPPER_BORDER_SHADOW"],
+    attributes: attributes // noShadow: true,
+    // noBorder: true,
+
+  }),
+      wrapperBDShadowDesktop = _generateBorderShadow.styesDesktop,
+      wrapperBDShadowTab = _generateBorderShadow.styesTab,
+      wrapperBDShadowMobile = _generateBorderShadow.styesMobile,
+      wrapperBDShadowHoverDesktop = _generateBorderShadow.stylesHoverDesktop,
+      wrapperBDShadowHoverTab = _generateBorderShadow.stylesHoverTab,
+      wrapperBDShadowHoverMobile = _generateBorderShadow.stylesHoverMobile,
+      wrapperBDShadowTransitionStyle = _generateBorderShadow.transitionStyle; // wrapper styles css in strings ⬇
+
+
+  var wrapperStylesDesktop = "\n\t\t.eb-accordion-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginDesktop, "\n\t\t\t").concat(wrapperPaddingDesktop, "\n\t\t\t").concat(wrapperBDShadowDesktop, "\n\t\t\t").concat(wrapperBackgroundStylesDesktop, "\n\t\t\t").concat(wrapperBgTransitionStyle, "\n\t\t}\n\t");
+  var wrapperStylesTab = "\n\t\t.eb-accordion-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginTab, "\n\t\t\t").concat(wrapperPaddingTab, "\n\t\t\t").concat(wrapperBDShadowTab, "\n\t\t\t").concat(wrapperBackgroundStylesTab, "\n\t\t}\n\t");
+  var wrapperStylesMobile = "\n\t\t.eb-accordion-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginMobile, "\n\t\t\t").concat(wrapperPaddingMobile, "\n\t\t\t").concat(wrapperBDShadowMobile, "\n\t\t\t").concat(wrapperBackgroundStylesMobile, "\n\t\t}\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
+
+  var desktopAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["isCssExists"])(wrapperStylesDesktop) ? wrapperStylesDesktop : " ", "\n\t")); // all css styles for Tab in strings ⬇
+
+  var tabAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["isCssExists"])(wrapperStylesTab) ? wrapperStylesTab : " ", "\n\t")); // all css styles for Mobile in strings ⬇
+
+  var mobileAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["isCssExists"])(wrapperStylesMobile) ? wrapperStylesMobile : " ", "\n\t")); // Set All Style in "blockMeta" Attribute
+
+  useEffect(function () {
+    var styleObject = {
+      desktop: desktopAllStyles,
+      tab: tabAllStyles,
+      mobile: mobileAllStyles
+    };
+
+    if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
       setAttributes({
-        accordions: accordions
+        blockMeta: styleObject
       });
     }
-  }, {
-    key: "onDeleteAccordion",
-    value: function onDeleteAccordion(position) {
-      // Callback function for deleting accordion
-      var _this$props2 = this.props,
-          attributes = _this$props2.attributes,
-          setAttributes = _this$props2.setAttributes;
-
-      var accordions = _toConsumableArray(attributes.accordions);
-
-      accordions.splice(position, 1);
-      setAttributes({
-        accordions: accordions
-      });
-    }
-  }, {
-    key: "onSortEnd",
-    value: function onSortEnd(oldIndex, newIndex) {
-      // Callback function for sorting accordion
-      var _this$props3 = this.props,
-          attributes = _this$props3.attributes,
-          setAttributes = _this$props3.setAttributes;
-      setAttributes({
-        accordions: array_move__WEBPACK_IMPORTED_MODULE_0___default()(attributes.accordions, oldIndex, newIndex)
-      });
-    }
-  }, {
-    key: "isExpanded",
-    value: function isExpanded(index) {
-      // Return true if tab is expanded
-      var _this$props$attribute = this.props.attributes,
-          accordionType = _this$props$attribute.accordionType,
-          selectedTab = _this$props$attribute.selectedTab,
-          expandedTabs = _this$props$attribute.expandedTabs;
-
-      if (accordionType === "accordion") {
-        return selectedTab === index;
+  }, [attributes]);
+  return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    onDeleteAccordion: onDeleteAccordion,
+    onSortEnd: onSortEnd,
+    onLevelChange: onLevelChange
+  }), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStyles, "\n\n\t\t\t\t/* mimmikcssStart */ \n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStyles : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["softMinifyCssStrings"])(tabAllStyles), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["softMinifyCssStrings"])(mobileAllStyles), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
+    className: "eb-accordion-wrapper ".concat(blockId)
+  }, accordions.map(function (accordion, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "eb-accordion-item ".concat(isExpanded(index) ? "item-open" : ""),
+      key: index
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "eb-accordion-title-wrapper",
+      onClick: function onClick() {
+        return onTitleClick(index);
+      },
+      onMouseEnter: function onMouseEnter() {
+        return setAttributes({
+          isHover: true,
+          hoverIndex: index
+        });
+      },
+      onMouseLeave: function onMouseLeave() {
+        return setAttributes({
+          isHover: false,
+          hoverIndex: null
+        });
       }
-
-      if (accordionType === "toggle") {
-        return expandedTabs.includes(index);
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "eb-accordion-icon-wrapper"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "".concat(isExpanded(index) ? expandedIcon : tabIcon, " eb-accordion-icon")
+    })), /*#__PURE__*/React.createElement(RichText, {
+      tagName: titleLevel,
+      className: "eb-accordion-title",
+      allowedFormats: [],
+      placeholder: "Add Title Here",
+      value: accordion.title,
+      onChange: function onChange(nextTitle) {
+        return _onChange(nextTitle, index, "title");
       }
-    }
-  }, {
-    key: "getContainerBackground",
-    value: function getContainerBackground() {
-      var _this$props$attribute2 = this.props.attributes,
-          backgroundType = _this$props$attribute2.backgroundType,
-          containerBackground = _this$props$attribute2.containerBackground,
-          containerGradient = _this$props$attribute2.containerGradient,
-          containerImageURL = _this$props$attribute2.containerImageURL;
-
-      switch (backgroundType) {
-        case "fill":
-          return containerBackground;
-
-        case "gradient":
-          return containerGradient;
-
-        case "image":
-          return "url('".concat(containerImageURL, "')");
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "eb-accordion-content-wrapper"
+    }, /*#__PURE__*/React.createElement(RichText, {
+      tagName: "p",
+      className: "eb-accordion-content",
+      placeholder: "Add Content Here",
+      allowedFormats: ["bold", "italic", "strikethrough"],
+      value: accordion.content,
+      onChange: function onChange(nextContent) {
+        return _onChange(nextContent, index, "content");
       }
-    }
-  }, {
-    key: "getContainerBackgroundImage",
-    value: function getContainerBackgroundImage() {
-      var _this$props$attribute3 = this.props.attributes,
-          backgroundType = _this$props$attribute3.backgroundType,
-          containerGradient = _this$props$attribute3.containerGradient,
-          containerImageURL = _this$props$attribute3.containerImageURL;
-      return backgroundType === "gradient" ? containerGradient : backgroundType === "image" && containerImageURL ? "url('".concat(containerImageURL, "')") : "none";
-    }
-  }, {
-    key: "setHoverColor",
-    value: function setHoverColor(index) {
-      var _this$props$attribute4 = this.props.attributes,
-          hoverIndex = _this$props$attribute4.hoverIndex,
-          hoverColor = _this$props$attribute4.hoverColor;
-
-      if (hoverIndex === index && hoverColor) {
-        return hoverColor;
-      }
-    }
-  }, {
-    key: "setToggleActiveColor",
-    value: function setToggleActiveColor(index) {
-      var _this$props$attribute5 = this.props.attributes,
-          expandedTabs = _this$props$attribute5.expandedTabs,
-          activeColor = _this$props$attribute5.activeColor;
-
-      if (expandedTabs.includes(index)) {
-        return activeColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-      }
-    }
-  }, {
-    key: "setAccordionActiveColor",
-    value: function setAccordionActiveColor(index) {
-      var _this$props$attribute6 = this.props.attributes,
-          selectedTab = _this$props$attribute6.selectedTab,
-          activeColor = _this$props$attribute6.activeColor;
-
-      if (selectedTab === index) {
-        return activeColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-      }
-    }
-  }, {
-    key: "getTitleBackground",
-    value: function getTitleBackground(index) {
-      var _this$props$attribute7 = this.props.attributes,
-          titleBackgroundType = _this$props$attribute7.titleBackgroundType,
-          accordionType = _this$props$attribute7.accordionType,
-          titleBackgroundColor = _this$props$attribute7.titleBackgroundColor;
-      var activeColor;
-
-      if (titleBackgroundType === "fill") {
-        if (accordionType === "accordion") {
-          activeColor = this.setAccordionActiveColor(index);
-        }
-
-        if (accordionType === "toggle") {
-          activeColor = this.setToggleActiveColor(index);
-        }
-
-        var hoverColor = this.setHoverColor(index); // Show hover, active or default background color
-
-        return hoverColor || activeColor || titleBackgroundColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_BACKGROUND"];
-      }
-
-      return "transparent";
-    }
-  }, {
-    key: "setToggleTitleColor",
-    value: function setToggleTitleColor(index) {
-      var _this$props$attribute8 = this.props.attributes,
-          expandedTabs = _this$props$attribute8.expandedTabs,
-          activeTitleColor = _this$props$attribute8.activeTitleColor;
-
-      if (expandedTabs.includes(index)) {
-        return activeTitleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-      }
-    }
-  }, {
-    key: "setAccordionTitleColor",
-    value: function setAccordionTitleColor(index) {
-      var _this$props$attribute9 = this.props.attributes,
-          selectedTab = _this$props$attribute9.selectedTab,
-          activeTitleColor = _this$props$attribute9.activeTitleColor;
-
-      if (selectedTab === index) {
-        return activeTitleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-      }
-    }
-  }, {
-    key: "getTitleColor",
-    value: function getTitleColor(index) {
-      var _this$props$attribute10 = this.props.attributes,
-          accordionType = _this$props$attribute10.accordionType,
-          titleColor = _this$props$attribute10.titleColor;
-      var activeTitleColor;
-
-      if (accordionType === "accordion") {
-        activeTitleColor = this.setAccordionTitleColor(index);
-      }
-
-      if (accordionType === "toggle") {
-        activeTitleColor = this.setToggleTitleColor(index);
-      } // Show active or default title color
-
-
-      return activeTitleColor || titleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-    }
-  }, {
-    key: "getTabIcon",
-    value: function getTabIcon(index) {
-      // Return icon based on tab hidden/expanded state
-      var _this$props$attribute11 = this.props.attributes,
-          expandedIcon = _this$props$attribute11.expandedIcon,
-          tabIcon = _this$props$attribute11.tabIcon;
-      return this.isExpanded(index) ? expandedIcon : tabIcon;
-    }
-  }, {
-    key: "setToggleType",
-    value: function setToggleType(index) {
-      // If tab is already expanded, close it, otherwise open it
-      var _this$props4 = this.props,
-          attributes = _this$props4.attributes,
-          setAttributes = _this$props4.setAttributes;
-
-      var expandedTabs = _toConsumableArray(attributes.expandedTabs);
-
-      expandedTabs = expandedTabs.includes(index) ? expandedTabs.filter(function (titleIndex) {
-        return titleIndex !== index;
-      }) : [].concat(_toConsumableArray(expandedTabs), [index]);
-      setAttributes({
-        expandedTabs: expandedTabs
-      });
-    }
-  }, {
-    key: "setAccordionType",
-    value: function setAccordionType(index) {
-      // Save expanded tab name, remove when tab is hidden
-      var _this$props5 = this.props,
-          attributes = _this$props5.attributes,
-          setAttributes = _this$props5.setAttributes;
-      var selectedTab = attributes.selectedTab === index ? undefined : index;
-      setAttributes({
-        selectedTab: selectedTab
-      });
-    }
-  }, {
-    key: "onTitleClick",
-    value: function onTitleClick(index) {
-      // Expand / Hide title
-      var accordionType = this.props.attributes.accordionType;
-      accordionType === "accordion" && this.setAccordionType(index);
-      accordionType === "toggle" && this.setToggleType(index);
-    }
-  }, {
-    key: "onChange",
-    value: function onChange(newValue, index, key) {
-      // onChange callback function for title and content
-      var _this$props6 = this.props,
-          attributes = _this$props6.attributes,
-          setAttributes = _this$props6.setAttributes;
-
-      var accordions = _toConsumableArray(attributes.accordions);
-
-      accordions[index][key] = newValue;
-      setAttributes({
-        accordions: accordions
-      });
-    }
-  }, {
-    key: "getIconColor",
-    value: function getIconColor(index) {
-      var _this$props$attribute12 = this.props.attributes,
-          accordionType = _this$props$attribute12.accordionType,
-          iconColor = _this$props$attribute12.iconColor,
-          titleColor = _this$props$attribute12.titleColor,
-          selectedTab = _this$props$attribute12.selectedTab,
-          expandedTabs = _this$props$attribute12.expandedTabs,
-          activeTitleColor = _this$props$attribute12.activeTitleColor;
-      var activeIconColor;
-
-      if (accordionType === "accordion") {
-        if (selectedTab === index) {
-          activeIconColor = activeTitleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-        }
-      } else {
-        if (expandedTabs.includes(index)) {
-          activeIconColor = activeTitleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-        }
-      }
-
-      return activeIconColor || iconColor || titleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"];
-    }
-  }, {
-    key: "onLevelChange",
-    value: function onLevelChange(header, titleSizeUnit) {// const titleLevel = header.value;
-      // const titleFontSize = switchFontSizes(titleSizeUnit, titleLevel);
-      // this.props.setAttributes({ titleFontSize, titleLevel });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props7 = this.props,
-          isSelected = _this$props7.isSelected,
-          attributes = _this$props7.attributes,
-          setAttributes = _this$props7.setAttributes;
-      var accordionType = attributes.accordionType,
-          displayIcon = attributes.displayIcon,
-          transitionDuration = attributes.transitionDuration,
-          accordionStyle = attributes.accordionStyle,
-          backgroundType = attributes.backgroundType,
-          containerBackground = attributes.containerBackground,
-          containerGradient = attributes.containerGradient,
-          containerBorderSize = attributes.containerBorderSize,
-          containerBorderType = attributes.containerBorderType,
-          containerBorderColor = attributes.containerBorderColor,
-          containerMarginTop = attributes.containerMarginTop,
-          containerMarginRight = attributes.containerMarginRight,
-          containerMarginBottom = attributes.containerMarginBottom,
-          containerMarginLeft = attributes.containerMarginLeft,
-          containerPaddingTop = attributes.containerPaddingTop,
-          containerPaddingRight = attributes.containerPaddingRight,
-          containerPaddingBottom = attributes.containerPaddingBottom,
-          containerPaddingLeft = attributes.containerPaddingLeft,
-          accordions = attributes.accordions,
-          expandedTabs = attributes.expandedTabs,
-          selectedTab = attributes.selectedTab,
-          tabIcon = attributes.tabIcon,
-          expandedIcon = attributes.expandedIcon,
-          containerHOffset = attributes.containerHOffset,
-          containerVOffset = attributes.containerVOffset,
-          containerShadowSpread = attributes.containerShadowSpread,
-          containerShadowBlur = attributes.containerShadowBlur,
-          containerShadowColor = attributes.containerShadowColor,
-          titleLevel = attributes.titleLevel,
-          titleColor = attributes.titleColor,
-          titleBackgroundType = attributes.titleBackgroundType,
-          titleBackgroundColor = attributes.titleBackgroundColor,
-          titleBackgroundGradient = attributes.titleBackgroundGradient,
-          tabBorderStyle = attributes.tabBorderStyle,
-          tabBorderColor = attributes.tabBorderColor,
-          tabBorderRadius = attributes.tabBorderRadius,
-          contentAlign = attributes.contentAlign,
-          contentColor = attributes.contentColor,
-          contentFontSize = attributes.contentFontSize,
-          contentMarginTop = attributes.contentMarginTop,
-          contentMarginRight = attributes.contentMarginRight,
-          contentMarginBottom = attributes.contentMarginBottom,
-          contentMarginLeft = attributes.contentMarginLeft,
-          contentPaddingTop = attributes.contentPaddingTop,
-          contentPaddingRight = attributes.contentPaddingRight,
-          contentPaddingBottom = attributes.contentPaddingBottom,
-          contentPaddingLeft = attributes.contentPaddingLeft,
-          contentBackgroundType = attributes.contentBackgroundType,
-          contentBackgroundColor = attributes.contentBackgroundColor,
-          contentGradient = attributes.contentGradient,
-          contentBorderStyle = attributes.contentBorderStyle,
-          contentBorderColor = attributes.contentBorderColor,
-          contentHOffset = attributes.contentHOffset,
-          contentVOffset = attributes.contentVOffset,
-          contentShadowColor = attributes.contentShadowColor,
-          contentShadowBlur = attributes.contentShadowBlur,
-          contentShadowSpread = attributes.contentShadowSpread,
-          iconColor = attributes.iconColor,
-          iconSize = attributes.iconSize,
-          iconMarginTop = attributes.iconMarginTop,
-          iconMarginRight = attributes.iconMarginRight,
-          iconMarginBottom = attributes.iconMarginBottom,
-          iconMarginLeft = attributes.iconMarginLeft,
-          iconPaddingTop = attributes.iconPaddingTop,
-          iconPaddingRight = attributes.iconPaddingRight,
-          iconPaddingBottom = attributes.iconPaddingBottom,
-          iconPaddingLeft = attributes.iconPaddingLeft,
-          iconBackgroundType = attributes.iconBackgroundType,
-          iconBackgroundColor = attributes.iconBackgroundColor,
-          iconGradient = attributes.iconGradient,
-          iconSpace = attributes.iconSpace,
-          iconBorderRadius = attributes.iconBorderRadius,
-          iconPosition = attributes.iconPosition,
-          iconHOffset = attributes.iconHOffset,
-          iconVOffset = attributes.iconVOffset,
-          iconShadowBlur = attributes.iconShadowBlur,
-          iconShadowSpread = attributes.iconShadowSpread,
-          iconShadowColor = attributes.iconShadowColor,
-          transitionFunction = attributes.transitionFunction,
-          tabHOffset = attributes.tabHOffset,
-          tabVOffset = attributes.tabVOffset,
-          tabShadowBlur = attributes.tabShadowBlur,
-          tabShadowSpread = attributes.tabShadowSpread,
-          tabShadowColor = attributes.tabShadowColor,
-          titleAlignment = attributes.titleAlignment,
-          tabBorderColorType = attributes.tabBorderColorType,
-          tabBorderGradient = attributes.tabBorderGradient,
-          tabBorderImageSlice = attributes.tabBorderImageSlice,
-          tabBorderWidth = attributes.tabBorderWidth,
-          isHover = attributes.isHover,
-          hoverColor = attributes.hoverColor,
-          hoverIndex = attributes.hoverIndex,
-          activeColor = attributes.activeColor,
-          activeTitleColor = attributes.activeTitleColor,
-          containerImageID = attributes.containerImageID,
-          containerImageURL = attributes.containerImageURL,
-          containerBackgroundSize = attributes.containerBackgroundSize,
-          containerBackgroundClip = attributes.containerBackgroundClip,
-          containerBackgroundRepeat = attributes.containerBackgroundRepeat,
-          containerBackgroundPositionX = attributes.containerBackgroundPositionX,
-          containerBackgroundPositionY = attributes.containerBackgroundPositionY,
-          containerBackgoundAttachment = attributes.containerBackgoundAttachment,
-          tabMarginTop = attributes.tabMarginTop,
-          tabMarginRight = attributes.tabMarginRight,
-          tabMarginBottom = attributes.tabMarginBottom,
-          tabMarginLeft = attributes.tabMarginLeft,
-          tabPaddingTop = attributes.tabPaddingTop,
-          tabPaddingRight = attributes.tabPaddingRight,
-          tabPaddingBottom = attributes.tabPaddingBottom,
-          tabPaddingLeft = attributes.tabPaddingLeft,
-          contentBorderTop = attributes.contentBorderTop,
-          contentBorderRight = attributes.contentBorderRight,
-          contentBorderBottom = attributes.contentBorderBottom,
-          contentBorderLeft = attributes.contentBorderLeft,
-          containerBorderRadius = attributes.containerBorderRadius,
-          containerMarginUnit = attributes.containerMarginUnit,
-          containerPaddingUnit = attributes.containerPaddingUnit,
-          containerBorderUnit = attributes.containerBorderUnit,
-          containerRadiusUnit = attributes.containerRadiusUnit,
-          tabMarginUnit = attributes.tabMarginUnit,
-          tabPaddingUnit = attributes.tabPaddingUnit,
-          tabBorderUnit = attributes.tabBorderUnit,
-          tabRadiusUnit = attributes.tabRadiusUnit,
-          contentMarginUnit = attributes.contentMarginUnit,
-          contentPaddingUnit = attributes.contentPaddingUnit,
-          iconSizeUnit = attributes.iconSizeUnit,
-          iconMarginUnit = attributes.iconMarginUnit,
-          iconPaddingUnit = attributes.iconPaddingUnit,
-          contentSizeUnit = attributes.contentSizeUnit,
-          titleFontSize = attributes.titleFontSize,
-          titleSizeUnit = attributes.titleSizeUnit,
-          titleFontFamily = attributes.titleFontFamily,
-          titleFontWeight = attributes.titleFontWeight,
-          titleTextTransform = attributes.titleTextTransform,
-          titleTextDecoration = attributes.titleTextDecoration,
-          titleLetterSpacing = attributes.titleLetterSpacing,
-          titleLetterSpacingUnit = attributes.titleLetterSpacingUnit,
-          titleLineHeight = attributes.titleLineHeight,
-          titleLineHeightUnit = attributes.titleLineHeightUnit,
-          contentFontFamily = attributes.contentFontFamily,
-          contentFontWeight = attributes.contentFontWeight,
-          contentTextTransform = attributes.contentTextTransform,
-          contentTextDecoration = attributes.contentTextDecoration,
-          contentLetterSpacing = attributes.contentLetterSpacing,
-          contentLetterSpacingUnit = attributes.contentLetterSpacingUnit,
-          contentLineHeight = attributes.contentLineHeight,
-          contentLineHeightUnit = attributes.contentLineHeightUnit;
-      var containerStyle = {
-        background: this.getContainerBackground(),
-        backgroundImage: this.getContainerBackgroundImage(),
-        backgroundRepeat: containerImageURL ? containerBackgroundRepeat : undefined,
-        backgroundClip: backgroundType === "image" ? containerBackgroundClip : undefined,
-        backgroundSize: backgroundType === "image" ? containerBackgroundSize : undefined,
-        backgroundPosition: containerImageURL ? "".concat(containerBackgroundPositionX, "% ").concat(containerBackgroundPositionY, "%") : undefined,
-        backgroundAttachment: containerImageURL ? containerBackgoundAttachment : undefined,
-        margin: "".concat(containerMarginTop).concat(containerMarginUnit, " ").concat(containerMarginRight).concat(containerMarginUnit, " ").concat(containerMarginBottom).concat(containerMarginUnit, " ").concat(containerMarginLeft).concat(containerMarginUnit),
-        padding: "".concat(containerPaddingTop).concat(containerPaddingUnit, " ").concat(containerPaddingRight).concat(containerPaddingUnit, " ").concat(containerPaddingBottom).concat(containerPaddingUnit, " ").concat(containerPaddingLeft).concat(containerPaddingUnit),
-        border: "".concat(containerBorderSize || 0).concat(containerBorderUnit, " ").concat(containerBorderType, " ").concat(containerBorderColor || "#000000"),
-        borderRadius: "".concat(containerBorderRadius || 0).concat(containerRadiusUnit),
-        boxShadow: "".concat(containerHOffset || 0, "px ").concat(containerVOffset || 0, "px ").concat(containerShadowBlur || 0, "px ").concat(containerShadowSpread || 0, "px ").concat(containerShadowColor || "#dedede")
-      };
-      var iconWrapperStyles = {
-        display: displayIcon ? "flex" : "none",
-        margin: "".concat(iconMarginTop).concat(iconMarginUnit, " ").concat(iconMarginRight).concat(iconMarginUnit, " ").concat(iconMarginBottom).concat(iconMarginUnit, " ").concat(iconMarginLeft).concat(iconMarginUnit),
-        background: iconBackgroundType === "fill" && iconBackgroundColor,
-        backgroundImage: iconBackgroundType === "gradient" && iconGradient,
-        borderRadius: "".concat(iconBorderRadius || 0, "%"),
-        boxShadow: "".concat(iconHOffset || 0, "px ").concat(iconVOffset || 0, "px ").concat(iconShadowBlur || 0, "px ").concat(iconShadowSpread || 0, "px ").concat(iconShadowColor || "#000000")
-      };
-      var iconStyles = {
-        color: iconColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_ICON_COLOR"],
-        fontSize: "".concat(iconSize || 14).concat(iconSizeUnit),
-        padding: "".concat(iconPaddingTop).concat(iconPaddingUnit, " ").concat(iconPaddingRight).concat(iconPaddingUnit, " ").concat(iconPaddingBottom).concat(iconPaddingUnit, " ").concat(iconPaddingLeft).concat(iconPaddingUnit, " "),
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
-      };
-      var titleStyles = {
-        titleWrapper: {
-          flexDirection: iconPosition === "right" && displayIcon ? "row-reverse" : "row",
-          justifyContent: iconPosition === "right" ? "space-between" : titleAlignment,
-          backgroundImage: titleBackgroundType === "gradient" ? titleBackgroundGradient : titleBackgroundType === "fill" ? undefined : "transparent",
-          borderWidth: "".concat(tabBorderWidth || 0).concat(tabBorderUnit),
-          borderColor: tabBorderColorType === "fill" && tabBorderColor ? tabBorderColor : "transparent",
-          borderRadius: "".concat(tabBorderRadius || 0).concat(tabRadiusUnit),
-          borderStyle: tabBorderStyle || "unset",
-          borderImage: tabBorderColorType === "gradient" && tabBorderGradient ? "".concat(tabBorderGradient, " ").concat(tabBorderImageSlice, "% stretch") : "none",
-          boxShadow: "".concat(tabHOffset || 0, "px ").concat(tabVOffset || 0, "px ").concat(tabShadowBlur || 0, "px ").concat(tabShadowSpread || 0, "px ").concat(tabShadowColor || "#dbdbdb"),
-          margin: "".concat(tabMarginTop || 0).concat(tabMarginUnit, " ").concat(tabMarginRight || 0).concat(tabMarginUnit, " ").concat(tabMarginBottom || 0).concat(tabMarginUnit, " ").concat(tabMarginLeft || 0).concat(tabMarginUnit),
-          padding: "".concat(tabPaddingTop || 0).concat(tabPaddingUnit, " ").concat(tabPaddingRight || 0).concat(tabPaddingUnit || 0, " ").concat(tabPaddingBottom || 0).concat(tabPaddingUnit, " ").concat(tabPaddingLeft || 0).concat(tabPaddingUnit)
-        },
-        title: {
-          color: titleColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_COLOR"],
-          fontSize: "".concat(titleFontSize || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_SIZE"]).concat(titleSizeUnit),
-          fontFamily: titleFontFamily,
-          fontWeight: titleFontWeight,
-          textTransform: titleTextTransform,
-          textDecoration: titleTextDecoration,
-          lineHeight: titleLineHeight ? "".concat(titleLineHeight).concat(titleLineHeightUnit) : undefined,
-          letterSpacing: titleLetterSpacing ? "".concat(titleLetterSpacing).concat(titleLetterSpacingUnit) : undefined,
-          margin: 0
-        }
-      };
-      var contentStyles = {
-        contentWrapper: {
-          textAlign: contentAlign,
-          backgroundColor: contentBackgroundType === "fill" && contentBackgroundColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_CONTENT_BACKGROUND"],
-          backgroundImage: contentBackgroundType === "gradient" ? contentGradient : "none",
-          borderStyle: "".concat(contentBorderStyle),
-          borderWidth: "".concat(contentBorderTop || 0, "px ").concat(contentBorderRight || 0, "px ").concat(contentBorderBottom || 0, "px ").concat(contentBorderLeft || 0, "px"),
-          borderColor: contentBorderColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_CONTENT_BORDER_COLOR"],
-          boxShadow: "".concat(contentHOffset || 0, "px ").concat(contentVOffset || 0, "px ").concat(contentShadowBlur || 0, "px  ").concat(contentShadowSpread || 0, "px ").concat(contentShadowColor),
-          transitionDuration: "".concat(transitionDuration || 500, "ms"),
-          transitionProperty: "max-height,opacity,height",
-          transitionTimingFunction: transitionFunction
-        },
-        content: {
-          margin: "".concat(contentMarginTop || 0).concat(contentMarginUnit, " ").concat(contentMarginRight || 0).concat(contentMarginUnit, " ").concat(contentMarginBottom || 0).concat(contentMarginUnit, " ").concat(contentMarginLeft || 0).concat(contentMarginUnit),
-          padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit),
-          fontSize: "".concat(contentFontSize || 18).concat(contentSizeUnit),
-          fontFamily: contentFontFamily,
-          fontWeight: contentFontWeight,
-          textTransform: contentTextTransform,
-          textDecoration: contentTextDecoration,
-          lineHeight: contentLineHeight ? "".concat(contentLineHeight).concat(contentLineHeightUnit) : undefined,
-          letterSpacing: contentLetterSpacing ? "".concat(contentLetterSpacing).concat(contentLetterSpacingUnit) : undefined,
-          color: contentColor || _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_CONTENT_COLOR"]
-        }
-      };
-      return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, this.props, {
-        onDeleteAccordion: this.onDeleteAccordion,
-        onSortEnd: this.onSortEnd,
-        onLevelChange: this.onLevelChange
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "eb-accordion-container",
-        style: containerStyle
-      }, accordions.map(function (accordion, index) {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "eb-accordion-wrapper",
-          key: index
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "eb-accordion-title-wrapper",
-          style: _objectSpread(_objectSpread({}, titleStyles.titleWrapper), {}, {
-            backgroundColor: backgroundType === "fill" ? _this2.getTitleBackground(index) : "transparent"
-          }),
-          onClick: function onClick() {
-            return _this2.onTitleClick(index);
-          },
-          onMouseEnter: function onMouseEnter() {
-            return setAttributes({
-              isHover: true,
-              hoverIndex: index
-            });
-          },
-          onMouseLeave: function onMouseLeave() {
-            return setAttributes({
-              isHover: false,
-              hoverIndex: null
-            });
-          }
-        }, /*#__PURE__*/React.createElement(_accordion_icon__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          icon: _this2.getTabIcon(index),
-          iconWrapperStyles: iconWrapperStyles,
-          iconStyles: _objectSpread(_objectSpread({}, iconStyles), {}, {
-            color: _this2.isExpanded(index) ? _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_ACTIVE_COLOR"] : _this2.getIconColor(index)
-          })
-        }), /*#__PURE__*/React.createElement(RichText, {
-          tagName: titleLevel,
-          className: "eb-accordion-title",
-          allowedFormats: [],
-          style: _objectSpread(_objectSpread({}, titleStyles.title), {}, {
-            color: _this2.isExpanded(index) ? _constants_constants__WEBPACK_IMPORTED_MODULE_4__["DEFAULT_TITLE_ACTIVE_COLOR"] : _this2.getTitleColor(index)
-          }),
-          placeholder: "Add Title Here",
-          value: accordion.title,
-          onChange: function onChange(nextTitle) {
-            return _this2.onChange(nextTitle, index, "title");
-          }
-        })), /*#__PURE__*/React.createElement("div", {
-          className: "eb-accordion-content-wrapper",
-          style: _objectSpread(_objectSpread({}, contentStyles.contentWrapper), {}, {
-            maxHeight: _this2.isExpanded(index) ? _constants_constants__WEBPACK_IMPORTED_MODULE_4__["MAX_HEIGHT"] : 0,
-            opacity: _this2.isExpanded(index) ? 1 : 0,
-            overflow: _this2.isExpanded(index) ? "visible" : "hidden"
-          })
-        }, /*#__PURE__*/React.createElement(RichText, {
-          tagName: "p",
-          className: "eb-accordion-content",
-          style: contentStyles.content,
-          placeholder: "Add Content Here",
-          allowedFormats: ["bold", "italic", "strikethrough"],
-          value: accordion.content,
-          onChange: function onChange(nextContent) {
-            return _this2.onChange(nextContent, index, "content");
-          }
-        })));
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "eb-accordion-add-button"
-      }, /*#__PURE__*/React.createElement(Button, {
-        className: "is-default",
-        label: __("Add Accordion Item"),
-        icon: "plus-alt",
-        onClick: this.addAccordion
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "eb-accordion-add-button-label"
-      }, "Add Accordion Item")))];
-    }
-  }]);
-
-  return Edit;
-}(Component);
-
-
+    })));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "eb-accordion-add-button"
+  }, /*#__PURE__*/React.createElement(Button, {
+    className: "is-default",
+    label: __("Add Accordion Item"),
+    icon: "plus-alt",
+    onClick: addAccordion
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eb-accordion-add-button-label"
+  }, "Add Accordion Item")))];
+}
 
 /***/ }),
 
@@ -7912,19 +7615,6 @@ var Inspector = function Inspector(props) {
     resOption: resOption,
     attributes: attributes
   };
-  var TITLE_SIZE_MIN = 1;
-  var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
-  var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
-  var TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
-  var TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
-  var TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
-  var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
-  var CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
-  var CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
-  var CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
-  var CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
-  var CONTENT_LINE_HEIGHT_MAX = contentLineHeightUnit === "em" ? 10 : 100;
-  var CONTENT_LINE_HEIGHT_STEP = contentLineHeightUnit === "em" ? 0.1 : 1;
   return /*#__PURE__*/React.createElement(InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {

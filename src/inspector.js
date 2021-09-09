@@ -31,25 +31,13 @@ import {
 	WRAPPER_BORDER_SHADOW,
 	TITLE_PADDING,
 	CONTENT_PADDING,
-
 	ACCORDION_TYPES,
-	BACKGROUND_TYPE,
-	TITLE_BACKGROUND_TYPE,
-	BACKGROUND_SIZE,
-	BACKGROUND_CLIP,
-	BACKGROUND_REPEAT,
-	BACKGROUND_ATTACHMENT,
-	BORDER_STYLES,
 	HEADERS,
 	ICON_POSITIONS,
 	TRANSITION_TYPES,
 	TITLE_ALIGNMENT,
 	CONTENT_ALIGN,
 	COLORS,
-	COLOR_TYPES,
-	FONT_WEIGHTS,
-	TEXT_TRANSFORM,
-	TEXT_DECORATION,
 } from "./constants/constants";
 
 import { TITLE_TYPOGRAPHY, CONTENT_TYPOGRAPHY } from "./constants/typography-constant";
@@ -255,25 +243,6 @@ const Inspector = (props) => {
 		resOption,
 		attributes,
 	};
-
-	const TITLE_SIZE_MIN = 1;
-	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
-	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
-
-	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
-	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
-
-	const TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
-	const TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
-
-	const CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
-	const CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
-
-	const CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
-	const CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
-
-	const CONTENT_LINE_HEIGHT_MAX = contentLineHeightUnit === "em" ? 10 : 100;
-	const CONTENT_LINE_HEIGHT_STEP = contentLineHeightUnit === "em" ? 0.1 : 1;
 
 	return (
 

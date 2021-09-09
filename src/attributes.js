@@ -196,58 +196,9 @@ const attributes = {
 		type: "string",
 		default: "custom",
 	},
-	backgroundType: {
-		type: "string",
-		default: "fill",
-	},
-	containerBackground: {
-		type: "string",
-	},
-	containerBorderType: {
-		type: "string",
-		default: "solid",
-	},
-	containerBorderSize: {
-		type: "number",
-	},
-	containerBorderColor: {
-		type: "string",
-	},
 	containerGradient: {
 		type: "string",
 		default: "linear-gradient(45deg, #c9d6ff, #e2e2e2)",
-	},
-	containerMarginTop: {
-		type: "number",
-		default: 0,
-	},
-	containerMarginRight: {
-		type: "number",
-		default: 0,
-	},
-	containerMarginBottom: {
-		type: "number",
-		default: 0,
-	},
-	containerMarginLeft: {
-		type: "number",
-		default: 0,
-	},
-	containerPaddingTop: {
-		type: "number",
-		default: 0,
-	},
-	containerPaddingRight: {
-		type: "number",
-		default: 0,
-	},
-	containerPaddingBottom: {
-		type: "number",
-		default: 0,
-	},
-	containerPaddingLeft: {
-		type: "number",
-		default: 0,
 	},
 	containerHOffset: {
 		type: "number",
@@ -268,13 +219,6 @@ const attributes = {
 		type: "string",
 		default: "h5",
 	},
-	titleFontSize: {
-		type: "number",
-	},
-	titleSizeUnit: {
-		type: "string",
-		default: "px",
-	},
 	titleColor: {
 		type: "string",
 	},
@@ -289,17 +233,6 @@ const attributes = {
 		type: "string",
 		default: "linear-gradient(45deg, #141e30, #243b55)",
 	},
-	tabBorderStyle: {
-		type: "string",
-		default: "solid",
-	},
-	tabBorderColor: {
-		type: "string",
-		default: "transparent",
-	},
-	tabBorderRadius: {
-		type: "number",
-	},
 	contentAlign: {
 		type: "string",
 		default: "left",
@@ -309,38 +242,6 @@ const attributes = {
 	},
 	contentFontSize: {
 		type: "number",
-	},
-	contentMarginTop: {
-		type: "number",
-		default: 10,
-	},
-	contentMarginRight: {
-		type: "number",
-		default: 10,
-	},
-	contentMarginBottom: {
-		type: "number",
-		default: 10,
-	},
-	contentMarginLeft: {
-		type: "number",
-		default: 10,
-	},
-	contentPaddingTop: {
-		type: "number",
-		default: 0,
-	},
-	contentPaddingRight: {
-		type: "number",
-		default: 0,
-	},
-	contentPaddingBottom: {
-		type: "number",
-		default: 0,
-	},
-	contentPaddingLeft: {
-		type: "number",
-		default: 0,
 	},
 	contentBackgroundType: {
 		type: "string",
@@ -356,29 +257,6 @@ const attributes = {
 	displayContentBorder: {
 		type: "boolean",
 		default: false,
-	},
-	contentBorderTop: {
-		type: "number",
-		default: 1,
-	},
-	contentBorderRight: {
-		type: "number",
-		default: 1,
-	},
-	contentBorderBottom: {
-		type: "number",
-		default: 1,
-	},
-	contentBorderLeft: {
-		type: "number",
-		default: 1,
-	},
-	contentBorderStyle: {
-		type: "string",
-		default: "solid",
-	},
-	contentBorderColor: {
-		type: "string",
 	},
 	contentHOffset: {
 		type: "number",
@@ -400,38 +278,6 @@ const attributes = {
 	},
 	iconSize: {
 		type: "number",
-	},
-	iconPaddingTop: {
-		type: "number",
-		default: 0,
-	},
-	iconPaddingRight: {
-		type: "number",
-		default: 0,
-	},
-	iconPaddingBottom: {
-		type: "number",
-		default: 0,
-	},
-	iconPaddingLeft: {
-		type: "number",
-		default: 0,
-	},
-	iconMarginTop: {
-		type: "number",
-		default: 0,
-	},
-	iconMarginRight: {
-		type: "number",
-		default: 0,
-	},
-	iconMarginBottom: {
-		type: "number",
-		default: 0,
-	},
-	iconMarginLeft: {
-		type: "number",
-		default: 0,
 	},
 	iconBackgroundType: {
 		type: "string",
