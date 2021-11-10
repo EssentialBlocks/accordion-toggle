@@ -1,9 +1,9 @@
 === Accordion Toggle ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
-Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 1.0.6
+Requires at least: 5.6
+Tested up to: 5.8
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

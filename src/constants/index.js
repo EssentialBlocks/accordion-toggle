@@ -108,9 +108,9 @@ export const TRANSITION_TYPES = [
 ];
 
 export const TITLE_ALIGNMENT = [
-	{ label: __("Left"), value: "flex-start" },
+	{ label: __("Left"), value: "left" },
 	{ label: __("Center"), value: "center" },
-	{ label: __("Right"), value: "flex-end" },
+	{ label: __("Right"), value: "right" },
 ];
 
 export const CONTENT_ALIGN = [

@@ -1,26 +1,45 @@
-import { registerBlockType } from "@wordpress/blocks";
-import { __ } from "@wordpress/i18n";
+/**
+ * WordPress dependencies
+ */
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 
+/**
+ * Internal dependencies
+ */
+import { AccordionIcon } from "../util/icons";
+import Edit from "./edit";
+import Save from "./save";
+import example from "./example";
+import metadata from "../block.json";
+import attributes from "./attributes";
 import "./style.scss";
 
-import Edit from "./edit";
-import save from "./save";
-import icon from "./icon";
-import attributes from "./attributes";
-import example from "./example";
+const { name, category } = metadata;
 
-registerBlockType("block/accordion", {
-	title: __("Accordion", "block"),
-	description: __("", "block"),
-	category: "widgets",
-	icon,
+registerBlockType(name, {
+	title: __("Accordion", "essential-blocks"),
+	description: __(
+		"Display your FAQs & improve user experience with Accordion/Toggle block"
+	),
+	icon: AccordionIcon,
+	category,
 	attributes,
+	supports: {
+		// inserter: false,
+		// reusable: false,
+		// html: false,
+		// anchor: true,
+		// Declare support for specific alignment options.
+		// align: ["wide", "full"],
+		align: ["wide", "full"],
+	},
 	keywords: [
 		__("accordion", "essential-blocks"),
 		__("toggle", "essential-blocks"),
-		__("essential", "essential-blocks"),
+		__("eb essential", "essential-blocks"),
 	],
 	edit: Edit,
-	save,
-	example,
+	save: Save,
+	example: example,
 });
