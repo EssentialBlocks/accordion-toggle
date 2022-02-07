@@ -1,23 +1,27 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { useEffect } = wp.element;
-const { RichText, useBlockProps } = wp.blockEditor;
-const { Button } = wp.components;
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
+import { select } from "@wordpress/data";
 
-const { select } = wp.data;
-
-import {
+const {
 	softMinifyCssStrings,
 	generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../util/helpers";
+} = window.EBAccordionControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import {
 	typoPrefix_title,
@@ -58,14 +62,14 @@ import {
 /**
  * Internal dependencies
  */
-import "./editor.scss";
-
 import arrayMove from "array-move";
 import AccordionIcon from "./components/accordion-icon";
+import classnames from "classnames";
+
 import Inspector from "./inspector";
 
 const Edit = (props) => {
-	const { attributes, setAttributes, isSelected, clientId } = props;
+	const { attributes, setAttributes, className, isSelected, clientId } = props;
 	const {
 		resOption,
 		blockId,
@@ -99,7 +103,9 @@ const Edit = (props) => {
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
@@ -115,16 +121,16 @@ const Edit = (props) => {
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	useEffect(() => {
-		mimmikCssForPreviewBtnClick({
-			domObj: document,
-			select,
-		});
-	}, []);
+	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+	// useEffect(() => {
+	// 	mimmikCssForPreviewBtnClick({
+	// 		domObj: document,
+	// 		select,
+	// 	});
+	// }, []);
 
 	const blockProps = useBlockProps({
-		className: `eb-guten-block-main-parent-wrapper`,
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
 	//
@@ -497,12 +503,6 @@ const Edit = (props) => {
 		attributes,
 	});
 	// styles related to generateResponsiveRangeStyles end
-
-	// console.log({
-	// 	icnZ_Range,
-	// 	TABicnZ_Range,
-	// 	MOBicnZ_Range,
-	// });
 
 	const wrapperStylesDesktop = `
 	
@@ -877,20 +877,20 @@ ${
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector
-				{...props}
-				addAccordion={addAccordion}
-				onDeleteAccordion={onDeleteAccordion}
-				onSortEnd={onSortEnd}
-				// onLevelChange={onLevelChange}
-			/>
-		),
-
-		<div {...blockProps}>
-			<style>
-				{`
+	return (
+		<>
+			{isSelected && (
+				<Inspector
+					{...props}
+					addAccordion={addAccordion}
+					onDeleteAccordion={onDeleteAccordion}
+					onSortEnd={onSortEnd}
+					// onLevelChange={onLevelChange}
+				/>
+			)}
+			<div {...blockProps}>
+				<style>
+					{`
 
 
 				${desktopAllStyles}
@@ -918,69 +918,72 @@ ${
 				
 				}
 				`}
-			</style>
-			<div className={`${blockId} eb-accordion-container`}>
-				<div className="eb-accordion-inner">
-					{accordions.map((accordion, index) => (
-						<div
-							className={`eb-accordion-wrapper ${
-								isExpanded(index) ? "expanded_tab" : " "
-							} for_edit_page`}
-							key={index}
-						>
+				</style>
+				<div className={`${blockId} eb-accordion-container`}>
+					<div className="eb-accordion-inner">
+						{accordions.map((accordion, index) => (
 							<div
-								className="eb-accordion-title-wrapper"
-								onClick={() => onTitleClick(index)}
+								className={`eb-accordion-wrapper ${
+									isExpanded(index) ? "expanded_tab" : " "
+								} for_edit_page`}
+								key={index}
 							>
-								{displayIcon && <AccordionIcon icon={getTabIcon(index)} />}
+								<div
+									className="eb-accordion-title-wrapper"
+									onClick={() => onTitleClick(index)}
+								>
+									{displayIcon && <AccordionIcon icon={getTabIcon(index)} />}
 
-								<RichText
-									tagName="h3"
-									className="eb-accordion-title"
-									allowedFormats={[]}
-									placeholder="Add Title Here"
-									value={accordion.title}
-									onChange={(nextTitle) => onChange(nextTitle, index, "title")}
-								/>
-							</div>
+									<RichText
+										tagName="h3"
+										className="eb-accordion-title"
+										allowedFormats={[]}
+										placeholder="Add Title Here"
+										value={accordion.title}
+										onChange={(nextTitle) =>
+											onChange(nextTitle, index, "title")
+										}
+									/>
+								</div>
 
-							<div
-								className="eb-accordion-content-wrapper"
-								style={{
-									maxHeight: isExpanded(index) ? 2000 : 0,
-									opacity: isExpanded(index) ? 1 : 0,
-									overflow: isExpanded(index) ? "visible" : "hidden",
-								}}
-							>
-								<RichText
-									tagName="p"
-									className="eb-accordion-content"
-									placeholder="Add Content Here"
-									allowedFormats={["bold", "italic", "strikethrough"]}
-									value={accordion.content}
-									onChange={(nextContent) =>
-										onChange(nextContent, index, "content")
-									}
-								/>
+								<div
+									className="eb-accordion-content-wrapper"
+									style={{
+										maxHeight: isExpanded(index) ? 2000 : 0,
+										opacity: isExpanded(index) ? 1 : 0,
+										overflow: isExpanded(index) ? "visible" : "hidden",
+									}}
+								>
+									<RichText
+										tagName="p"
+										className="eb-accordion-content"
+										placeholder="Add Content Here"
+										allowedFormats={["bold", "italic", "strikethrough"]}
+										value={accordion.content}
+										onChange={(nextContent) =>
+											onChange(nextContent, index, "content")
+										}
+									/>
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
+				</div>
+				<div className="eb-accordion-add-button">
+					<Button
+						className="is-default"
+						label={__("Add Accordion Item", "essential-blocks")}
+						icon="plus-alt"
+						onClick={addAccordion}
+					>
+						<span className="eb-accordion-add-button-label">
+							Add Accordion Item
+						</span>
+					</Button>
 				</div>
 			</div>
-			<div className="eb-accordion-add-button">
-				<Button
-					className="is-default"
-					label={__("Add Accordion Item")}
-					icon="plus-alt"
-					onClick={addAccordion}
-				>
-					<span className="eb-accordion-add-button-label">
-						Add Accordion Item
-					</span>
-				</Button>
-			</div>
-		</div>,
-	];
+		</>
+	);
 };
 
 export default Edit;

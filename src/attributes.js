@@ -31,13 +31,14 @@ import {
 	accGapRange,
 } from "./constants/rangeNames";
 
-import {
+const {
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
 	generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
-} from "../util/helpers";
+} = window.EBAccordionControls;
+
 
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend

@@ -1,11 +1,10 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { InspectorControls } = wp.blockEditor;
-const { useEffect } = wp.element;
-const { select } = wp.data;
-const {
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import { InspectorControls } from "@wordpress/block-editor";
+import {
 	PanelBody,
 	BaseControl,
 	ButtonGroup,
@@ -13,7 +12,13 @@ const {
 	ToggleControl,
 	RangeControl,
 	TabPanel,
-} = wp.components;
+} from "@wordpress/components";
+import { select } from "@wordpress/data";
+
+/**
+ * External dependencies
+ */
+import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 
 /**
  * Internal dependencies
@@ -24,20 +29,41 @@ import {
 	TITLE_ALIGNMENT,
 	CONTENT_ALIGN,
 } from "./constants";
-import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-import iconList from "../util/faIcons";
 import SortableAccordions from "./components/sortable-accordion";
-import ColorControl from "../util/color-control/index";
-import TypographyDropdown from "../util/typography-control-v2";
-import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
-import ResponsiveRangeController from "../util/responsive-range-control";
-import BorderShadowControl from "../util/border-shadow-control";
-import BackgroundControl from "../util/background-control";
 
-import {
-	mimmikCssForResBtns,
-	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-} from "../util/helpers";
+//
+// import iconList from "../../../util/faIcons";
+// import ColorControl from "../../../util/color-control/index";
+// import TypographyDropdown from "../../../util/typography-control-v2";
+// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
+// import ResponsiveRangeController from "../../../util/responsive-range-control";
+// import BorderShadowControl from "../../../util/border-shadow-control";
+// import BackgroundControl from "../../../util/background-control";
+
+// import {
+// 	mimmikCssForResBtns,
+// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+// } from "../../../util/helpers";
+
+const {
+	//
+	faIcons: iconList,
+	ColorControl,
+	TypographyDropdown,
+	ResponsiveDimensionsControl,
+	ResponsiveRangeController,
+	BorderShadowControl,
+	BackgroundControl,
+
+	//
+	// mimmikCssForResBtns,
+	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} = window.EBAccordionControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import objAttributes from "./attributes";
 
@@ -108,29 +134,31 @@ const Inspector = ({
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	useEffect(() => {
-		mimmikCssForResBtns({
-			domObj: document,
-			resOption,
-		});
-	}, [resOption]);
+	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	// useEffect(() => {
+	// 	mimmikCssForResBtns({
+	// 		domObj: document,
+	// 		resOption,
+	// 	});
+	// }, [resOption]);
 
-	// this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-	useEffect(() => {
-		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-			domObj: document,
-			select,
-			setAttributes,
-		});
-		return () => {
-			cleanUp();
-		};
-	}, []);
+	// // this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+	// useEffect(() => {
+	// 	const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+	// 		domObj: document,
+	// 		select,
+	// 		setAttributes,
+	// 	});
+	// 	return () => {
+	// 		cleanUp();
+	// 	};
+	// }, []);
 
 	const resRequiredProps = {
 		setAttributes,
@@ -170,13 +198,14 @@ const Inspector = ({
 								<>
 									<PanelBody>
 										<BaseControl
-											label={__("Accordion Types")}
+											label={__("Accordion Types", "essential-blocks")}
 											id="eb-accordion-type"
 										>
 											<ButtonGroup id="eb-accordion-type-btgrp">
-												{ACCORDION_TYPES.map((item) => (
+												{ACCORDION_TYPES.map((item, key) => (
 													<Button
-														isLarge
+														key={key}
+														// isLarge
 														isSecondary={accordionType !== item.value}
 														isPrimary={accordionType === item.value}
 														onClick={() =>
@@ -194,7 +223,7 @@ const Inspector = ({
 										<BaseControl
 											id="eb-accordion-sortable"
 											className="eb-accordion-sortable-base"
-											label={__("Accordion List")}
+											label={__("Accordion List", "essential-blocks")}
 										>
 											<SortableAccordions
 												accordions={accordions}
@@ -206,7 +235,7 @@ const Inspector = ({
 										<div className="eb-accordion-add-button">
 											<Button
 												className="is-default"
-												label={__("Add Accordion Item")}
+												label={__("Add Accordion Item", "essential-blocks")}
 												icon="plus-alt"
 												onClick={addAccordion}
 											>
@@ -217,7 +246,7 @@ const Inspector = ({
 										</div>
 
 										<RangeControl
-											label={__("Toggle Speed")}
+											label={__("Toggle Speed", "essential-blocks")}
 											value={transitionDuration}
 											onChange={(transitionDuration) =>
 												setAttributes({ transitionDuration })
@@ -229,7 +258,7 @@ const Inspector = ({
 
 										<ResponsiveRangeController
 											noUnits
-											baseLabel={__("Accordions Gap")}
+											baseLabel={__("Accordions Gap", "essential-blocks")}
 											controlName={accGapRange}
 											resRequiredProps={resRequiredProps}
 											min={1}
@@ -242,11 +271,11 @@ const Inspector = ({
 							{tab.name === "styles" && (
 								<>
 									<PanelBody
-										title={__("Icon")}
+										title={__("Icon", "essential-blocks")}
 										// initialOpen={false}
 									>
 										<ToggleControl
-											label={__("Display Icon")}
+											label={__("Display Icon", "essential-blocks")}
 											checked={displayIcon}
 											onChange={() =>
 												setAttributes({ displayIcon: !displayIcon })
@@ -254,7 +283,7 @@ const Inspector = ({
 										/>
 										{displayIcon && (
 											<>
-												<BaseControl label={__("Tab Icon")}>
+												<BaseControl label={__("Tab Icon", "essential-blocks")}>
 													<FontIconPicker
 														icons={iconList}
 														value={tabIcon}
@@ -263,7 +292,9 @@ const Inspector = ({
 													/>
 												</BaseControl>
 
-												<BaseControl label={__("Expanded Icon")}>
+												<BaseControl
+													label={__("Expanded Icon", "essential-blocks")}
+												>
 													<FontIconPicker
 														icons={iconList}
 														value={expandedIcon}
@@ -274,11 +305,14 @@ const Inspector = ({
 													/>
 												</BaseControl>
 
-												<BaseControl label={__("Icon Position")}>
+												<BaseControl
+													label={__("Icon Position", "essential-blocks")}
+												>
 													<ButtonGroup id="eb-icon-pos-btgrp">
-														{ICON_POSITIONS.map((item) => (
+														{ICON_POSITIONS.map((item, key) => (
 															<Button
-																isLarge
+																key={key}
+																// isLarge
 																isSecondary={iconPosition !== item.value}
 																isPrimary={iconPosition === item.value}
 																onClick={() =>
@@ -295,7 +329,7 @@ const Inspector = ({
 
 												<ResponsiveRangeController
 													noUnits
-													baseLabel={__("Icon Size")}
+													baseLabel={__("Icon Size", "essential-blocks")}
 													controlName={rangeIconSize}
 													resRequiredProps={resRequiredProps}
 													min={1}
@@ -304,7 +338,7 @@ const Inspector = ({
 												/>
 
 												<ColorControl
-													label={__("Icon Color")}
+													label={__("Icon Color", "essential-blocks")}
 													color={iconColor}
 													onChange={(iconColor) => setAttributes({ iconColor })}
 												/>
@@ -326,7 +360,7 @@ const Inspector = ({
 												</PanelBody>
 
 												<PanelBody
-													title={__("Background ")}
+													title={__("Background ", "essential-blocks")}
 													// initialOpen={false}
 												>
 													<BackgroundControl
@@ -352,14 +386,18 @@ const Inspector = ({
 										)}
 									</PanelBody>
 
-									<PanelBody title={__("Tab")} initialOpen={false}>
+									<PanelBody
+										title={__("Tab", "essential-blocks")}
+										initialOpen={false}
+									>
 										<BaseControl
-											label={__("Title Align ")}
+											label={__("Title Align ", "essential-blocks")}
 											id="eb-accoridon-title-align"
 										>
 											<ButtonGroup>
-												{TITLE_ALIGNMENT.map((item) => (
+												{TITLE_ALIGNMENT.map((item, key) => (
 													<Button
+														key={key}
 														isSecondary={titleAlignment !== item.value}
 														isPrimary={titleAlignment === item.value}
 														onClick={() =>
@@ -381,13 +419,13 @@ const Inspector = ({
 										/>
 
 										<ColorControl
-											label={__("Title Color")}
+											label={__("Title Color", "essential-blocks")}
 											color={titleColor}
 											onChange={(titleColor) => setAttributes({ titleColor })}
 										/>
 
 										<ColorControl
-											label={__("Title hover Color")}
+											label={__("Title hover Color", "essential-blocks")}
 											color={hoverTitleColor}
 											onChange={(hoverTitleColor) =>
 												setAttributes({ hoverTitleColor })
@@ -411,7 +449,7 @@ const Inspector = ({
 										</PanelBody>
 
 										<PanelBody
-											title={__("Background ")}
+											title={__("Background ", "essential-blocks")}
 											// initialOpen={false}
 										>
 											<BackgroundControl
@@ -423,11 +461,11 @@ const Inspector = ({
 										</PanelBody>
 
 										<PanelBody
-											title={__("Expanded Tab Colors")}
+											title={__("Expanded Tab Colors", "essential-blocks")}
 											// initialOpen={false}
 										>
 											<ColorControl
-												label={__("Background Color")}
+												label={__("Background Color", "essential-blocks")}
 												color={activeBgColor}
 												onChange={(activeBgColor) =>
 													setAttributes({ activeBgColor })
@@ -435,7 +473,7 @@ const Inspector = ({
 											/>
 
 											<ColorControl
-												label={__("Title Color")}
+												label={__("Title Color", "essential-blocks")}
 												color={activeTitleColor}
 												onChange={(activeTitleColor) =>
 													setAttributes({ activeTitleColor })
@@ -454,323 +492,18 @@ const Inspector = ({
 												// noBorder
 											/>
 										</PanelBody>
-
-										<>
-											{/* 
-										<BaseControl
-											label={__("Title Background Type")}
-											id="eb-accordion-title-bg-type"
-										>
-											<ButtonGroup id="eb-acc-t-bg-t-btgrp">
-												{TITLE_BACKGROUND_TYPE.map((item) => (
-													<Button
-														isLarge
-														isSecondary={titleBackgroundType !== item.value}
-														isPrimary={titleBackgroundType === item.value}
-														onClick={() =>
-															setAttributes({
-																titleBackgroundType: item.value,
-															})
-														}
-													>
-														{item.label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl>
-
-										{titleBackgroundType === "fill" && (
-											<ColorControl
-												label={__("Background Color")}
-												color={titleBackgroundColor}
-												onChange={(titleBackgroundColor) =>
-													setAttributes({ titleBackgroundColor })
-												}
-											/>
-										)}
-
-										{titleBackgroundType === "gradient" && (
-											<PanelBody
-												title={__("Gradient Colors")}
-												initialOpen={false}
-											>
-												<GradientColorControl
-													gradientColor={titleBackgroundGradient}
-													onChange={(titleBackgroundGradient) =>
-														setAttributes({ titleBackgroundGradient })
-													}
-												/>
-											</PanelBody>
-										)}
-
-
-										<PanelBody
-											title={__("Tab Margin & Padding")}
-											initialOpen={false}
-										>
-											<UnitControl
-												selectedUnit={tabMarginUnit}
-												unitTypes={[
-													{ label: "px", value: "px" },
-													{ label: "em", value: "em" },
-													{ label: "%", value: "%" },
-												]}
-												onClick={(tabMarginUnit) =>
-													setAttributes({ tabMarginUnit })
-												}
-											/>
-
-											<DimensionsControl
-												label={__("Margin")}
-												top={tabMarginTop}
-												right={tabMarginRight}
-												bottom={tabMarginBottom}
-												left={tabMarginLeft}
-												onChange={({ top, right, bottom, left }) =>
-													setAttributes({
-														tabMarginTop: top,
-														tabMarginRight: right,
-														tabMarginBottom: bottom,
-														tabMarginLeft: left,
-													})
-												}
-											/>
-
-											<UnitControl
-												selectedUnit={tabPaddingUnit}
-												unitTypes={[
-													{ label: "px", value: "px" },
-													{ label: "em", value: "em" },
-													{ label: "%", value: "%" },
-												]}
-												onClick={(tabPaddingUnit) =>
-													setAttributes({ tabPaddingUnit })
-												}
-											/>
-
-											<DimensionsControl
-												label={__("Padding")}
-												top={tabPaddingTop}
-												right={tabPaddingRight}
-												bottom={tabPaddingBottom}
-												left={tabPaddingLeft}
-												onChange={({ top, right, bottom, left }) =>
-													setAttributes({
-														tabPaddingTop: top,
-														tabPaddingRight: right,
-														tabPaddingBottom: bottom,
-														tabPaddingLeft: left,
-													})
-												}
-											/>
-										</PanelBody>
-
-										<PanelBody
-											title={__("Tab Border Settings")}
-											initialOpen={false}
-										>
-											<BaseControl label={__("Tab Border Type")}>
-												<ButtonGroup id="eb-acc-t-bg-t-btgrp">
-													{COLOR_TYPES.map((item) => (
-														<Button
-															isLarge
-															isSecondary={tabBorderColorType !== item.value}
-															isPrimary={tabBorderColorType === item.value}
-															onClick={() =>
-																setAttributes({
-																	tabBorderColorType: item.value,
-																})
-															}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
-
-											{tabBorderColorType === "fill" && (
-												<ColorControl
-													label={__("Border Color")}
-													color={tabBorderColor}
-													onChange={(tabBorderColor) =>
-														setAttributes({ tabBorderColor })
-													}
-												/>
-											)}
-
-											{tabBorderColorType === "gradient" && (
-												<PanelBody
-													title={__("Border Gradient")}
-													initialOpen={false}
-												>
-													<GradientColorControl
-														gradientColor={tabBorderGradient}
-														onChange={(tabBorderGradient) =>
-															setAttributes({ tabBorderGradient })
-														}
-													/>
-													<RangeControl
-														label={__("Tab Border Image Slice")}
-														value={tabBorderImageSlice}
-														onChange={(newValue) =>
-															setAttributes({
-																tabBorderImageSlice: newValue,
-															})
-														}
-														min={0}
-														max={50}
-													/>
-												</PanelBody>
-											)}
-
-											{tabBorderColorType === "fill" && (
-												<SelectControl
-													label={__("Border Style")}
-													value={tabBorderStyle}
-													options={BORDER_STYLES}
-													onChange={(newStyle) =>
-														setAttributes({ tabBorderStyle: newStyle })
-													}
-												/>
-											)}
-
-											<UnitControl
-												selectedUnit={tabBorderUnit}
-												unitTypes={[
-													{ label: "px", value: "px" },
-													{ label: "em", value: "em" },
-												]}
-												onClick={(tabBorderUnit) =>
-													setAttributes({ tabBorderUnit })
-												}
-											/>
-
-											<ResetControl
-												onReset={() =>
-													setAttributes({ tabBorderWidth: undefined })
-												}
-											>
-												<RangeControl
-													label={__("Tab Border Width")}
-													value={tabBorderWidth}
-													onChange={(newValue) =>
-														setAttributes({ tabBorderWidth: newValue })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-
-											<UnitControl
-												selectedUnit={tabRadiusUnit}
-												unitTypes={[
-													{ label: "px", value: "px" },
-													{ label: "em", value: "em" },
-													{ label: "%", value: "%" },
-												]}
-												onClick={(tabRadiusUnit) =>
-													setAttributes({ tabRadiusUnit })
-												}
-											/>
-
-											<ResetControl
-												onReset={() =>
-													setAttributes({ tabBorderRadius: undefined })
-												}
-											>
-												<RangeControl
-													label={__("Tab Border Radius")}
-													value={tabBorderRadius}
-													onChange={(newSize) =>
-														setAttributes({ tabBorderRadius: newSize })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-										</PanelBody>
-
-										<PanelBody
-											title={__("Tab Shadow Settings")}
-											initialOpen={false}
-										>
-											<ColorControl
-												label={__("Shadow Color")}
-												color={tabShadowColor}
-												onChange={(tabShadowColor) =>
-													setAttributes({ tabShadowColor })
-												}
-											/>
-
-											<ResetControl
-												onReset={() => setAttributes({ tabHOffset: undefined })}
-											>
-												<RangeControl
-													label={__("Horizontal Offset")}
-													value={tabHOffset}
-													onChange={(newValue) =>
-														setAttributes({ tabHOffset: newValue })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-
-											<ResetControl
-												onReset={() => setAttributes({ tabVOffset: undefined })}
-											>
-												<RangeControl
-													label={__("Vertical Offset")}
-													value={tabVOffset}
-													onChange={(newValue) =>
-														setAttributes({ tabVOffset: newValue })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-
-											<ResetControl
-												onReset={() =>
-													setAttributes({ tabShadowBlur: undefined })
-												}
-											>
-												<RangeControl
-													label={__("Shadow Blur")}
-													value={tabShadowBlur}
-													onChange={(newValue) =>
-														setAttributes({ tabShadowBlur: newValue })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-
-											<ResetControl
-												onReset={() =>
-													setAttributes({ tabShadowSpread: undefined })
-												}
-											>
-												<RangeControl
-													label={__("Shadow Spread")}
-													value={tabShadowSpread}
-													onChange={(newValue) =>
-														setAttributes({ tabShadowSpread: newValue })
-													}
-													min={0}
-													max={100}
-												/>
-											</ResetControl>
-										</PanelBody> */}
-										</>
 									</PanelBody>
 
-									<PanelBody title={__("Content ")} initialOpen={false}>
-										<BaseControl label={__("Align")}>
+									<PanelBody
+										title={__("Content ", "essential-blocks")}
+										initialOpen={false}
+									>
+										<BaseControl label={__("Align", "essential-blocks")}>
 											<ButtonGroup>
-												{CONTENT_ALIGN.map((item) => (
+												{CONTENT_ALIGN.map((item, key) => (
 													<Button
-														isLarge
+														key={key}
+														// isLarge
 														isSecondary={contentAlign !== item.value}
 														isPrimary={contentAlign === item.value}
 														onClick={() =>
@@ -790,7 +523,7 @@ const Inspector = ({
 										/>
 
 										<ColorControl
-											label={__("Content Color")}
+											label={__("Content Color", "essential-blocks")}
 											color={contentColor}
 											onChange={(contentColor) =>
 												setAttributes({ contentColor })
@@ -814,7 +547,7 @@ const Inspector = ({
 										</PanelBody>
 
 										<PanelBody
-											title={__("Background ")}
+											title={__("Background ", "essential-blocks")}
 											// initialOpen={false}
 										>
 											<BackgroundControl
@@ -842,7 +575,7 @@ const Inspector = ({
 							{tab.name === "advance" && (
 								<>
 									<PanelBody
-										title={__("Margin & Padding")}
+										title={__("Margin & Padding", "essential-blocks")}
 										// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
@@ -857,7 +590,10 @@ const Inspector = ({
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Background ")} initialOpen={false}>
+									<PanelBody
+										title={__("Background ", "essential-blocks")}
+										initialOpen={false}
+									>
 										<BackgroundControl
 											controlName={WrpBgConst}
 											resRequiredProps={resRequiredProps}

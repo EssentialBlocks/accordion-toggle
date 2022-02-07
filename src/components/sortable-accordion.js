@@ -1,9 +1,16 @@
-import React from "react";
 import {
 	SortableContainer,
 	SortableElement,
 	SortableHandle,
 } from "react-sortable-hoc";
+
+// const {
+// 	//
+
+// 	SortableContainer,
+// 	SortableElement,
+// 	SortableHandle,
+// } = window.EBAccordionControls;
 
 // Style objects
 const trashStyle = {
@@ -65,7 +72,9 @@ const SortableItem = SortableElement(
 		return (
 			<li className="drag-helper">
 				<span className="eb-accordion-sortable-item">
-					<span className="eb-accordion-sortable-title">{(accordion.title || "").replace(/\<br ?\/?\>/gi , " ")}</span>
+					<span className="eb-accordion-sortable-title">
+						{(accordion.title || "").replace(/\<br ?\/?\>/gi, " ")}
+					</span>
 					<DragHandle />
 					<TrashIcon
 						position={position}

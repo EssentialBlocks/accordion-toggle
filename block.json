@@ -1,9 +1,11 @@
 {
 	"name": "accordion-toggle/accordion-toggle",
-	"title": "Accordion",
+	"title": "Accordion block",
 	"category": "widgets",
-	"description": "Display Your FAQs & Improve User Experience with Accordion/Toggle Block.",
+	"description": "Display your FAQs & improve user experience with Accordion/Toggle block",
 	"textdomain": "accordion-toggle",
-	"editorScript": "file:./build/index.js",
-	"style": "file:./build/style-index.css"
+	"supports": {
+		"align": ["wide", "full"]
+	},
+	"editorScript": "create-block-accordion-block-editor"
 }

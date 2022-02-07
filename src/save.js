@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { useBlockProps, RichText } = wp.blockEditor;
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 /**
  * Inteanal dependencies
