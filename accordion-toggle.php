@@ -36,7 +36,7 @@ function create_block_accordion_block_init()
 	$script_asset_path = ACCORDION_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "block/testimonial" block first.'
+			'You need to run `npm start` or `npm run build` for the "accordion-toggle/accordion-toggle" block first.'
 		);
 	}
 	$script_asset = require($script_asset_path);
