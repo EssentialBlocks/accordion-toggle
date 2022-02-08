@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	if (!accordions) return;
 
 	for (let x = 0; x < accordions.length; x++) {
-		let accordion = accordions[x];
+		let accordion = accordions[x].parentElement;
 		let titleNodes = accordion.querySelectorAll(".eb-accordion-title-wrapper");
 		let contentNodes = accordion.querySelectorAll(
 			".eb-accordion-content-wrapper"
