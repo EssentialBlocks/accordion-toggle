@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-	let accordions = document.querySelectorAll(".eb-accordion-container");
+	let accordions = document.querySelectorAll(
+		".eb-accordion-container > .eb-accordion-inner"
+	);
 
 	// Return if there is no accoridion block
 	if (!accordions) return;
