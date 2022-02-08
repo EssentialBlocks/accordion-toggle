@@ -81,8 +81,18 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.1.0 - 08/02/2022 =
+* Added: Dynamic asset generation instead of inline styles
+* Added: Responsive controls with preview
+* Added: Design Presets
+* Added: New styling & design options
+* Improved: Controls, styling options and structure.
+* Improved: Removed all unnecessary enqueues from frontend.
+* Added: Support for full site editing & wp5.9
+
 = 1.0.6 - 25/03/2021 =
-* Fixed : typography panel width 
+* Fixed : typography panel width
 
 = 1.0.5 - 07/03/2021 =
 * Fixed : unwanted .github folder removed
@@ -103,3 +113,4 @@ Yes, it will work with any standard WordPress theme.
 * Initial Release
 
 == Upgrade Notice ==
+[Major Update] Structure and controls update, might break your existing block
