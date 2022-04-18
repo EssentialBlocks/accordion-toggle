@@ -39,7 +39,6 @@ const {
 	generateResponsiveRangeAttributes,
 } = window.EBAccordionControls;
 
-
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend
 	// responsive control attributes ⬇
@@ -85,6 +84,11 @@ const attributes = {
 				type: "string",
 				selector: ".eb-accordion-content",
 				source: "html",
+			},
+			clickable: {
+				type: "string",
+				source: "attribute",
+				attribute: "data-clickable",
 			},
 		},
 	},
@@ -185,6 +189,7 @@ const attributes = {
 	...generateBackgroundAttributes(tabBgConst, {
 		isBgDefaultGradient: true,
 		noMainBgi: true,
+		defaultFillColor: "#8672ff",
 		// defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
 		defaultBgGradient:
 			"linear-gradient(45deg, rgba(120,102,255,0.8) 0% , rgba(195,120,242,0.4) 100%)",

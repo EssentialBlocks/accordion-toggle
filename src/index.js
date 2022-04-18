@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { registerBlockType } from "@wordpress/blocks";
 
 /**
  * Internal dependencies
@@ -13,9 +12,8 @@ import example from "./example";
 import metadata from "../block.json";
 import attributes from "./attributes";
 import AccordionIcon from "./icon";
-import "./style.scss";
+import deprecated from "./deprecated";
 const { ebConditionalRegisterBlockType } = EBAccordionControls;
-const { name, category } = metadata;
 
 ebConditionalRegisterBlockType(metadata, {
 	icon: AccordionIcon,
@@ -28,4 +26,5 @@ ebConditionalRegisterBlockType(metadata, {
 	edit: Edit,
 	save: Save,
 	example: example,
+	deprecated,
 });

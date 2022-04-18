@@ -54,14 +54,11 @@ const {
 	ResponsiveRangeController,
 	BorderShadowControl,
 	BackgroundControl,
-
-	//
-	// mimmikCssForResBtns,
-	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+	AdvancedControls,
 } = window.EBAccordionControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -109,11 +106,12 @@ const Inspector = ({
 	addAccordion,
 	onDeleteAccordion,
 	onSortEnd,
+	onAccordionClick,
+	onAccordionChange,
+	clickedItem,
 }) => {
 	const {
 		resOption,
-
-		//
 		accordionType,
 		displayIcon,
 		transitionDuration,
@@ -229,6 +227,9 @@ const Inspector = ({
 												accordions={accordions}
 												onDeleteAccordion={onDeleteAccordion}
 												onSortEnd={onSortEnd}
+												onAccordionChange={onAccordionChange}
+												onAccordionClick={onAccordionClick}
+												clickedItem={clickedItem}
 											/>
 										</BaseControl>
 
@@ -272,7 +273,7 @@ const Inspector = ({
 								<>
 									<PanelBody
 										title={__("Icon", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										<ToggleControl
 											label={__("Display Icon", "essential-blocks")}
@@ -345,7 +346,7 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Margin & Padding")}
-													// initialOpen={true}
+												// initialOpen={true}
 												>
 													<ResponsiveDimensionsControl
 														resRequiredProps={resRequiredProps}
@@ -361,7 +362,7 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Background ", "essential-blocks")}
-													// initialOpen={false}
+												// initialOpen={false}
 												>
 													<BackgroundControl
 														controlName={iconBgConst}
@@ -373,13 +374,13 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Border & Shadow")}
-													// initialOpen={false}
+												// initialOpen={false}
 												>
 													<BorderShadowControl
 														controlName={iconBdShadowConst}
 														resRequiredProps={resRequiredProps}
-														// noShadow
-														// noBorder
+													// noShadow
+													// noBorder
 													/>
 												</PanelBody>
 											</>
@@ -434,7 +435,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Margin & Padding")}
-											// initialOpen={true}
+										// initialOpen={true}
 										>
 											<ResponsiveDimensionsControl
 												resRequiredProps={resRequiredProps}
@@ -450,7 +451,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Background ", "essential-blocks")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											<BackgroundControl
 												controlName={tabBgConst}
@@ -462,7 +463,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Expanded Tab Colors", "essential-blocks")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											<ColorControl
 												label={__("Background Color", "essential-blocks")}
@@ -483,13 +484,13 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Border & Shadow")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											<BorderShadowControl
 												controlName={tabBdShadowConst}
 												resRequiredProps={resRequiredProps}
-												// noShadow
-												// noBorder
+											// noShadow
+											// noBorder
 											/>
 										</PanelBody>
 									</PanelBody>
@@ -532,7 +533,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Margin & Padding")}
-											// initialOpen={true}
+										// initialOpen={true}
 										>
 											<ResponsiveDimensionsControl
 												resRequiredProps={resRequiredProps}
@@ -548,7 +549,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Background ", "essential-blocks")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											<BackgroundControl
 												controlName={conBgConst}
@@ -560,13 +561,13 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Border & Shadow")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											<BorderShadowControl
 												controlName={conBdShadowConst}
 												resRequiredProps={resRequiredProps}
-												// noShadow
-												// noBorder
+											// noShadow
+											// noBorder
 											/>
 										</PanelBody>
 									</PanelBody>
@@ -576,7 +577,7 @@ const Inspector = ({
 								<>
 									<PanelBody
 										title={__("Margin & Padding", "essential-blocks")}
-										// initialOpen={true}
+									// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -604,10 +605,12 @@ const Inspector = ({
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
+
+									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
 								</>
 							)}
 						</div>

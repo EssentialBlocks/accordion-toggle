@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		let contentNodes = accordion.querySelectorAll(
 			".eb-accordion-content-wrapper"
 		);
+		let accordionWrapper = accordion.querySelectorAll(".eb-accordion-wrapper");
 		let hide = "eb-accordion-hidden";
 
 		//  add a className after the domcontent has been loaded
@@ -53,6 +54,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 		}
 
+		// 
+		for (let i = 0; i < accordionWrapper.length; i++) {
+			let clickable = accordionWrapper[i].getAttribute("data-clickable");
+			if (clickable == "true") {
+				contentNodes[i].style.height = contentNodes[i].dataset.height;
+				changeIcon(
+					contentNodes[i].parentElement.querySelector(
+						".eb-accordion-title-wrapper"
+					)
+				);
+			} else {
+				contentNodes[i].parentElement.classList.add(hide);
+			}
+		}
+
 		function changeAllExpandIcons(accordion) {
 			let iconNodes = accordion.querySelectorAll(".eb-accordion-icon");
 
@@ -66,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 
 		// Hide all accordion content by default
-		hideContents(contentNodes, hide);
+		// hideContents(contentNodes, hide);
 
 		// Take action based on accordion type
 		accordionType === "toggle"

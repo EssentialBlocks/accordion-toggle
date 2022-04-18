@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 5.9
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -81,6 +81,14 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.0 - 18/04/2022 = 
+* Added: Animation Option
+* Added: Responsive Block Show/Hide option
+* Added: Custom CSS Option
+* Added: Few options for text edit
+* Added: Default Open Option 
+* Improved: Controls and structure
 
 = 1.1.0 - 08/02/2022 =
 * Added: Dynamic asset generation instead of inline styles

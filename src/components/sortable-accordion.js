@@ -3,6 +3,8 @@ import {
 	SortableElement,
 	SortableHandle,
 } from "react-sortable-hoc";
+import { BaseControl, TextControl, ToggleControl } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 
 // const {
 // 	//
@@ -68,11 +70,21 @@ const TrashIcon = ({ position, onDeleteAccordion }) => (
 );
 
 const SortableItem = SortableElement(
-	({ accordion, position, onDeleteAccordion }) => {
+	({
+		accordion,
+		position,
+		onDeleteAccordion,
+		clickedItem,
+		onAccordionChange,
+		onAccordionClick,
+	}) => {
 		return (
 			<li className="drag-helper">
 				<span className="eb-accordion-sortable-item">
-					<span className="eb-accordion-sortable-title">
+					<span
+						className="eb-accordion-sortable-title"
+						onClick={() => onAccordionClick(position)}
+					>
 						{(accordion.title || "").replace(/\<br ?\/?\>/gi, " ")}
 					</span>
 					<DragHandle />
@@ -81,33 +93,65 @@ const SortableItem = SortableElement(
 						onDeleteAccordion={onDeleteAccordion}
 					/>
 				</span>
+				{position === clickedItem && (
+					<>
+						<ToggleControl
+							label={__("Default Open?", "essential-blocks")}
+							checked={accordion.clickable === "true"}
+							onChange={(value) =>
+								onAccordionChange("clickable", value.toString(), position)
+							}
+						/>
+					</>
+				)}
 			</li>
 		);
 	}
 );
 
-const SortableList = SortableContainer(({ accordions, onDeleteAccordion }) => {
-	return (
-		<ul className="eb-sortable-accordion-list">
-			{accordions.map((accordion, index) => (
-				<SortableItem
-					key={`item-${index}`}
-					index={index}
-					position={index}
-					accordion={accordion}
-					onDeleteAccordion={onDeleteAccordion}
-				/>
-			))}
-		</ul>
-	);
-});
+const SortableList = SortableContainer(
+	({
+		accordions,
+		onDeleteAccordion,
+		onAccordionClick,
+		onAccordionChange,
+		clickedItem,
+	}) => {
+		return (
+			<ul className="eb-sortable-accordion-list">
+				{accordions.map((accordion, index) => (
+					<SortableItem
+						key={`item-${index}`}
+						index={index}
+						position={index}
+						accordion={accordion}
+						clickedItem={clickedItem}
+						onDeleteAccordion={onDeleteAccordion}
+						onAccordionClick={onAccordionClick}
+						onAccordionChange={onAccordionChange}
+					/>
+				))}
+			</ul>
+		);
+	}
+);
 
-const SortableAccordions = ({ accordions, onDeleteAccordion, onSortEnd }) => (
+const SortableAccordions = ({
+	accordions,
+	onDeleteAccordion,
+	onSortEnd,
+	clickedItem,
+	onAccordionClick,
+	onAccordionChange,
+}) => (
 	<SortableList
 		accordions={accordions}
 		onDeleteAccordion={onDeleteAccordion}
 		onSortEnd={onSortEnd}
 		useDragHandle={true}
+		onAccordionClick={onAccordionClick}
+		clickedItem={clickedItem}
+		onAccordionChange={onAccordionChange}
 	/>
 );
 
