@@ -255,6 +255,7 @@ const Inspector = ({
 											min={0}
 											max={5}
 											step={0.1}
+											allowReset={true}
 										/>
 
 										<ResponsiveRangeController
@@ -273,7 +274,7 @@ const Inspector = ({
 								<>
 									<PanelBody
 										title={__("Icon", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										<ToggleControl
 											label={__("Display Icon", "essential-blocks")}
@@ -346,7 +347,7 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Margin & Padding")}
-												// initialOpen={true}
+													// initialOpen={true}
 												>
 													<ResponsiveDimensionsControl
 														resRequiredProps={resRequiredProps}
@@ -362,7 +363,7 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Background ", "essential-blocks")}
-												// initialOpen={false}
+													// initialOpen={false}
 												>
 													<BackgroundControl
 														controlName={iconBgConst}
@@ -374,13 +375,13 @@ const Inspector = ({
 
 												<PanelBody
 													title={__("Border & Shadow")}
-												// initialOpen={false}
+													// initialOpen={false}
 												>
 													<BorderShadowControl
 														controlName={iconBdShadowConst}
 														resRequiredProps={resRequiredProps}
-													// noShadow
-													// noBorder
+														// noShadow
+														// noBorder
 													/>
 												</PanelBody>
 											</>
@@ -435,7 +436,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Margin & Padding")}
-										// initialOpen={true}
+											// initialOpen={true}
 										>
 											<ResponsiveDimensionsControl
 												resRequiredProps={resRequiredProps}
@@ -451,7 +452,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Background ", "essential-blocks")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											<BackgroundControl
 												controlName={tabBgConst}
@@ -463,7 +464,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Expanded Tab Colors", "essential-blocks")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											<ColorControl
 												label={__("Background Color", "essential-blocks")}
@@ -484,13 +485,13 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Border & Shadow")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											<BorderShadowControl
 												controlName={tabBdShadowConst}
 												resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+												// noShadow
+												// noBorder
 											/>
 										</PanelBody>
 									</PanelBody>
@@ -533,7 +534,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Margin & Padding")}
-										// initialOpen={true}
+											// initialOpen={true}
 										>
 											<ResponsiveDimensionsControl
 												resRequiredProps={resRequiredProps}
@@ -549,7 +550,7 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Background ", "essential-blocks")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											<BackgroundControl
 												controlName={conBgConst}
@@ -561,13 +562,13 @@ const Inspector = ({
 
 										<PanelBody
 											title={__("Border & Shadow")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											<BorderShadowControl
 												controlName={conBdShadowConst}
 												resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+												// noShadow
+												// noBorder
 											/>
 										</PanelBody>
 									</PanelBody>
@@ -577,7 +578,7 @@ const Inspector = ({
 								<>
 									<PanelBody
 										title={__("Margin & Padding", "essential-blocks")}
-									// initialOpen={true}
+										// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -605,12 +606,15 @@ const Inspector = ({
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-										// noShadow
-										// noBorder
+											// noShadow
+											// noBorder
 										/>
 									</PanelBody>
 
-									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
+									<AdvancedControls
+										attributes={attributes}
+										setAttributes={setAttributes}
+									/>
 								</>
 							)}
 						</div>
