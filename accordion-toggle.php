@@ -128,7 +128,7 @@ function create_block_accordion_block_init()
 	}
 }
 
-add_action('init', 'create_block_accordion_block_init');
+add_action('init', 'create_block_accordion_block_init', 99);
 
 if (!function_exists('eb_migrate_old_blocks')) {
 	function eb_migrate_old_blocks($old_namespace, $new_namespace)
