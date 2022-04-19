@@ -1,9 +1,9 @@
 === Accordion Toggle ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
-Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 1.0.6
+Requires at least: 5.6
+Tested up to: 5.9
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -81,8 +81,26 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.0 - 19/04/2022 = 
+* Added: Animation Option
+* Added: Responsive Block Show/Hide option
+* Added: Custom CSS Option
+* Added: Few options for text edit
+* Added: Default Open Option 
+* Improved: Controls and structure
+
+= 1.1.0 - 08/02/2022 =
+* Added: Dynamic asset generation instead of inline styles
+* Added: Responsive controls with preview
+* Added: Design Presets
+* Added: New styling & design options
+* Improved: Controls, styling options and structure.
+* Improved: Removed all unnecessary enqueues from frontend.
+* Added: Support for full site editing & wp5.9
+
 = 1.0.6 - 25/03/2021 =
-* Fixed : typography panel width 
+* Fixed : typography panel width
 
 = 1.0.5 - 07/03/2021 =
 * Fixed : unwanted .github folder removed
@@ -103,3 +121,4 @@ Yes, it will work with any standard WordPress theme.
 * Initial Release
 
 == Upgrade Notice ==
+[Major Update] Structure and controls update, might break your existing block

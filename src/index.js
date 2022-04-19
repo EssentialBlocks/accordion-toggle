@@ -1,26 +1,30 @@
-import { registerBlockType } from "@wordpress/blocks";
+/**
+ * WordPress dependencies
+ */
 import { __ } from "@wordpress/i18n";
 
-import "./style.scss";
-
+/**
+ * Internal dependencies
+ */
 import Edit from "./edit";
-import save from "./save";
-import icon from "./icon";
-import attributes from "./attributes";
+import Save from "./save";
 import example from "./example";
+import metadata from "../block.json";
+import attributes from "./attributes";
+import AccordionIcon from "./icon";
+import deprecated from "./deprecated";
+const { ebConditionalRegisterBlockType } = EBAccordionControls;
 
-registerBlockType("block/accordion", {
-	title: __("Accordion", "block"),
-	description: __("", "block"),
-	category: "widgets",
-	icon,
+ebConditionalRegisterBlockType(metadata, {
+	icon: AccordionIcon,
 	attributes,
 	keywords: [
 		__("accordion", "essential-blocks"),
 		__("toggle", "essential-blocks"),
-		__("essential", "essential-blocks"),
+		__("eb essential", "essential-blocks"),
 	],
 	edit: Edit,
-	save,
-	example,
+	save: Save,
+	example: example,
+	deprecated,
 });

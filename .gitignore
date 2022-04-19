@@ -25,6 +25,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.DS_Store
+
+
+index.js.map
 package-lock.json
 yarn.lock
+.DS_Store

@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name:     Accordion Toggle
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Display Your FAQs & Improve User Experience with Accordion/Toggle block.
- * Version:         1.0.6
+ * Version:         1.2.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -20,78 +21,122 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
+define('ACCORDION_BLOCK_VERSION', "1.2.0");
+define('ACCORDION_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
+define('ACCORDION_BLOCK_ADMIN_PATH', dirname(__FILE__));
+
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/lib/style-handler/style-handler.php';
+require_once __DIR__ . '/includes/helpers.php';
 
-function create_block_accordion_block_init() {
-	$dir = dirname( __FILE__ );
-
-	$script_asset_path = "$dir/build/index.asset.php";
-	if ( ! file_exists( $script_asset_path ) ) {
+function create_block_accordion_block_init()
+{
+	eb_migrate_old_blocks('block/accordion', 'accordion-toggle/accordion-toggle');
+	$script_asset_path = ACCORDION_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
+	if (!file_exists($script_asset_path)) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "create-block/accordion" block first.'
+			'You need to run `npm start` or `npm run build` for the "block/testimonial" block first.'
 		);
 	}
+	$script_asset = require($script_asset_path);
+	$all_dependencies = array_merge($script_asset['dependencies'], array(
+		'wp-blocks',
+		'wp-i18n',
+		'wp-element',
+		'wp-block-editor',
+		'accordion-block-controls-util',
+		'essential-blocks-eb-animation'
+	));
 
-	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
+	$index_js     = ACCORDION_BLOCK_ADMIN_URL . 'dist/index.js';
 	wp_register_script(
 		'create-block-accordion-block-editor',
-		plugins_url( $index_js, __FILE__ ),
-		$script_asset['dependencies'],
-		$script_asset['version']
+		$index_js,
+		$all_dependencies,
+		$script_asset['version'],
+		true
 	);
 
-
-	$style_css = 'build/style-index.css';
-	wp_register_style(
-		'create-block-accordion-block',
-		plugins_url( $style_css, __FILE__ ),
+	$frontend_js = ACCORDION_BLOCK_ADMIN_URL . 'dist/frontend/index.js';
+	wp_register_script(
+		'essential-blocks-accordion-frontend',
+		$frontend_js,
 		array(),
-		filemtime( "$dir/$style_css" )
+		ACCORDION_BLOCK_VERSION,
+		true
 	);
 
-	$fontpicker_theme = 'src/css/fonticonpicker.base-theme.react.css';
-	wp_enqueue_style(
+	$load_animation_js = ACCORDION_BLOCK_ADMIN_URL . 'assets/js/eb-animation-load.js';
+	wp_register_script(
+		'essential-blocks-eb-animation',
+		$load_animation_js,
+		array("jquery"),
+		ACCORDION_BLOCK_VERSION,
+		true
+	);
+
+	$animate_css = ACCORDION_BLOCK_ADMIN_URL . 'assets/css/animate.min.css';
+	wp_register_style(
+		'essential-blocks-animation',
+		$animate_css,
+		array(),
+		ACCORDION_BLOCK_VERSION
+	);
+
+	wp_register_style(
 		'fontpicker-default-theme',
-		plugins_url( $fontpicker_theme, __FILE__),
-		array()
+		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.base-theme.react.css',
+		array(),
+		ACCORDION_BLOCK_VERSION,
+		"all"
 	);
 
-	$fontpicker_material_theme = 'src/css/fonticonpicker.material-theme.react.css';
-	wp_enqueue_style(
+	wp_register_style(
 		'fontpicker-matetial-theme',
-		plugins_url( $fontpicker_material_theme, __FILE__),
-		array()
+		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.material-theme.react.css',
+		array(),
+		ACCORDION_BLOCK_VERSION,
+		"all"
 	);
 
-	$fontawesome_css = 'src/css/font-awesome5.css';
-	wp_enqueue_style(
+	wp_register_style(
 		'fontawesome-frontend-css',
-		plugins_url( $fontawesome_css, __FILE__),
-		array()
+		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/font-awesome5.css',
+		array(),
+		ACCORDION_BLOCK_VERSION,
+		"all"
 	);
 
-  if (!is_admin()) {
-    $frontend_js = 'src/frontend.js';
-    wp_enqueue_script(
-      'essential-blocks-accordion-frontend',
-      plugins_url( $frontend_js, __FILE__),
-      array( "jquery","wp-editor"),
-      true
-    );
-  }
-
-	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
-		register_block_type( 'block/accordion', array(
-			'editor_script' => 'create-block-accordion-block-editor',
-			'editor_style'  => 'create-block-accordion-block-editor',
-			'style'         => 'create-block-accordion-block',
-			'fontpicker_theme' => 'fontpicker-default-theme',
-			'fontpicker_material_theme' => 'fontpicker-material-theme',
-			'fontawesome_css' => 'fontawesome-frontend-css',
-			'frontend_script' => 'essential-blocks-accordion-frontend'
-		) );
+	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/accordion')) {
+		register_block_type(
+			Accordion_Helper::get_block_register_path("accordion-toggle/accordion-toggle", ACCORDION_BLOCK_ADMIN_PATH),
+			array(
+				'editor_script' => 'create-block-accordion-block-editor',
+				'editor_style' => 'accordion-editor-css',
+				'render_callback' => function ($attributes, $content) {
+					if (!is_admin()) {
+						wp_enqueue_style('fontawesome-frontend-css');
+						wp_enqueue_style('essential-blocks-animation');
+						wp_enqueue_script('essential-blocks-accordion-frontend');
+						wp_enqueue_script('essential-blocks-eb-animation');
+					}
+					return $content;
+				}
+			)
+		);
 	}
 }
-add_action( 'init', 'create_block_accordion_block_init' );
+
+add_action('init', 'create_block_accordion_block_init', 99);
+
+if (!function_exists('eb_migrate_old_blocks')) {
+	function eb_migrate_old_blocks($old_namespace, $new_namespace)
+	{
+		global $wpdb;
+		$posts = $wpdb->query("select * from  " . $wpdb->prefix . "posts where `post_content` like '%" . $old_namespace . "%'");
+		if ($posts) {
+			$wpdb->query("update " . $wpdb->prefix . "posts set `post_content`= replace(post_content, '" . $old_namespace . "', '" . $new_namespace . "') where `post_content` like '%" . $old_namespace . "%'");
+		}
+	}
+}

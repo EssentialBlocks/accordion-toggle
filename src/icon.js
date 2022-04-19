@@ -1,4 +1,4 @@
-export default function () {
+const AccordionIcon = () => {
 	return (
 		<svg
 			width="256"
@@ -64,4 +64,6 @@ export default function () {
 			</g>
 		</svg>
 	);
-}
+};
+
+export default AccordionIcon;
