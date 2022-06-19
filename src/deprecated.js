@@ -13,6 +13,9 @@ import attributes from "./attributes";
 const deprecated = [
 	{
 		attributes: { ...attributes },
+		supports: {
+			align: ["wide", "full"],
+		},
 		save: ({ attributes }) => {
 			const {
 				blockId,
@@ -34,7 +37,8 @@ const deprecated = [
 						<div className="eb-accordion-inner">
 							{accordions.map((accordion, index) => (
 								<div
-									className="eb-accordion-wrapper eb-accordion-hidden"
+									className="eb-accordion-wrapper"
+									data-clickable={`${accordion.clickable}`}
 									key={index}
 								>
 									<div className="eb-accordion-title-wrapper">

@@ -14,6 +14,7 @@ import attributes from "./attributes";
 import AccordionIcon from "./icon";
 import deprecated from "./deprecated";
 const { ebConditionalRegisterBlockType } = EBAccordionControls;
+const { name, category } = metadata;
 
 ebConditionalRegisterBlockType(metadata, {
 	icon: AccordionIcon,
