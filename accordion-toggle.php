@@ -86,7 +86,7 @@ function create_block_accordion_block_init()
 
 	wp_register_style(
 		'fontpicker-default-theme',
-		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.base-theme.react.css',
+		ACCORDION_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.base-theme.react.css',
 		array(),
 		ACCORDION_BLOCK_VERSION,
 		"all"
@@ -94,7 +94,7 @@ function create_block_accordion_block_init()
 
 	wp_register_style(
 		'fontpicker-matetial-theme',
-		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.material-theme.react.css',
+		ACCORDION_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.material-theme.react.css',
 		array(),
 		ACCORDION_BLOCK_VERSION,
 		"all"
@@ -102,10 +102,23 @@ function create_block_accordion_block_init()
 
 	wp_register_style(
 		'fontawesome-frontend-css',
-		ACCORDION_BLOCK_ADMIN_URL . '/assets/css/font-awesome5.css',
+		ACCORDION_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
 		array(),
 		ACCORDION_BLOCK_VERSION,
 		"all"
+	);
+
+	$style_css = ACCORDION_BLOCK_ADMIN_URL . 'dist/style.css';
+	wp_register_style(
+		'accordion-toggle-style-css',
+		$style_css,
+		array(
+			'fontpicker-default-theme',
+			'fontpicker-matetial-theme',
+			'fontawesome-frontend-css',
+			'essential-blocks-animation',
+		),
+		filemtime(ACCORDION_BLOCK_ADMIN_PATH . '/dist/style.css')
 	);
 
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/accordion')) {
@@ -113,7 +126,7 @@ function create_block_accordion_block_init()
 			Accordion_Helper::get_block_register_path("accordion-toggle/accordion-toggle", ACCORDION_BLOCK_ADMIN_PATH),
 			array(
 				'editor_script' => 'create-block-accordion-block-editor',
-				'editor_style' => 'accordion-editor-css',
+				'editor_style' => 'accordion-toggle-style-css',
 				'render_callback' => function ($attributes, $content) {
 					if (!is_admin()) {
 						wp_enqueue_style('fontawesome-frontend-css');
