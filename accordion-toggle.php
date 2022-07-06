@@ -32,7 +32,6 @@ require_once __DIR__ . '/includes/helpers.php';
 
 function create_block_accordion_block_init()
 {
-	eb_migrate_old_blocks('block/accordion', 'accordion-toggle/accordion-toggle');
 	$script_asset_path = ACCORDION_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
@@ -142,14 +141,3 @@ function create_block_accordion_block_init()
 }
 
 add_action('init', 'create_block_accordion_block_init', 99);
-
-if (!function_exists('eb_migrate_old_blocks')) {
-	function eb_migrate_old_blocks($old_namespace, $new_namespace)
-	{
-		global $wpdb;
-		$posts = $wpdb->query("select * from  " . $wpdb->prefix . "posts where `post_content` like '%" . $old_namespace . "%'");
-		if ($posts) {
-			$wpdb->query("update " . $wpdb->prefix . "posts set `post_content`= replace(post_content, '" . $old_namespace . "', '" . $new_namespace . "') where `post_content` like '%" . $old_namespace . "%'");
-		}
-	}
-}
