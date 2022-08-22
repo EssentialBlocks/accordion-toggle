@@ -82,15 +82,16 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.1 - dev =
-1. Improved: update Style handler form JS to php
+= 1.2.1 - 02/08/2022 =
+* Improved: update style handler version 2 to support reusable block and FSE
+* Improved: updated controls
 
-= 1.2.0 - 19/04/2022 = 
+= 1.2.0 - 19/04/2022 =
 * Added: Animation Option
 * Added: Responsive Block Show/Hide option
 * Added: Custom CSS Option
 * Added: Few options for text edit
-* Added: Default Open Option 
+* Added: Default Open Option
 * Improved: Controls and structure
 
 = 1.1.0 - 08/02/2022 =
