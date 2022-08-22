@@ -18,11 +18,6 @@ const {
 	duplicateBlockIdFix,
 } = window.EBAccordionControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 import {
 	typoPrefix_title,
 	typoPrefix_content,
@@ -102,16 +97,7 @@ const Edit = (props) => {
 	} = attributes;
 
 	const [clickedItem, setClickedItem] = useState(`false`);
-
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
-	useEffect(() => {
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-	}, []);
-
+	
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
 		const BLOCK_PREFIX = "eb-accordion";
