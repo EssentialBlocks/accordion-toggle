@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name:     Accordion Toggle
- * Plugin URI: 		https://essential-blocks.com
+ * Plugin URI: 		  https://essential-blocks.com
  * Description:     Display Your FAQs & Improve User Experience with Accordion/Toggle block.
  * Version:         1.2.2
  * Author:          WPDeveloper
- * Author URI: 		https://wpdeveloper.net
+ * Author URI: 		  https://wpdeveloper.net
  * License:         GPL-3.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:     accordion-toggle

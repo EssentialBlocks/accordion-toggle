@@ -82,7 +82,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.2 - dev = 
+= 1.2.2 - 23/08/2022 =
 * Improved: update style handler and controls
 
 = 1.2.1 - 02/08/2022 =
