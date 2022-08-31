@@ -28,6 +28,7 @@ import {
 	ICON_POSITIONS,
 	TITLE_ALIGNMENT,
 	CONTENT_ALIGN,
+	HEADING,
 } from "./constants";
 import SortableAccordions from "./components/sortable-accordion";
 
@@ -122,6 +123,7 @@ const Inspector = ({
 		hoverTitleColor,
 		activeBgColor,
 		activeTitleColor,
+		tagName,
 	} = attributes;
 
 	const resRequiredProps = {
@@ -211,6 +213,27 @@ const Inspector = ({
 												</span>
 											</Button>
 										</div>
+
+										<BaseControl
+											label={__("Title Level", "essential-blocks")}
+											id="eb-accordion-heading-alignment"
+										>
+											<ButtonGroup className="eb-accordion-heading-alignment eb-html-tag-buttongroup">
+												{HEADING.map((item, key) => (
+													<Button
+														key={key}
+														// isLarge
+														isPrimary={tagName === item.value}
+														isSecondary={tagName !== item.value}
+														onClick={() =>
+															setAttributes({ tagName: item.value })
+														}
+													>
+														{item.label}
+													</Button>
+												))}
+											</ButtonGroup>
+										</BaseControl>
 
 										<RangeControl
 											label={__("Toggle Speed", "essential-blocks")}

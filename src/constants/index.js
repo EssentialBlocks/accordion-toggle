@@ -143,5 +143,18 @@ export const TEXT_DECORATION = [
 	{ label: __("Overline", "essential-blocks"), value: "overline" },
 	{ label: __("Line Through", "essential-blocks"), value: "line-through" },
 	{ label: __("Underline", "essential-blocks"), value: "underline" },
-	{ label: __("Underline Oveline", "essential-blocks"), value: "underline overline" },
+	{
+		label: __("Underline Oveline", "essential-blocks"),
+		value: "underline overline",
+	},
+];
+
+export const HEADING = [
+	{ label: __("H1", "essential-blocks"), value: "h1" },
+	{ label: __("H2", "essential-blocks"), value: "h2" },
+	{ label: __("H3", "essential-blocks"), value: "h3" },
+	{ label: __("H4", "essential-blocks"), value: "h4" },
+	{ label: __("H5", "essential-blocks"), value: "h5" },
+	{ label: __("H6", "essential-blocks"), value: "h6" },
+	{ label: __("P", "essential-blocks"), value: "p" },
 ];

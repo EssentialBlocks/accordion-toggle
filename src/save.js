@@ -17,6 +17,7 @@ const Save = ({ attributes }) => {
 		accordions,
 		tabIcon,
 		expandedIcon,
+		tagName,
 	} = attributes;
 
 	return (
@@ -39,7 +40,7 @@ const Save = ({ attributes }) => {
 									{displayIcon && <AccordionIcon icon={tabIcon} />}
 
 									<RichText.Content
-										tagName="h3"
+										tagName={tagName}
 										className="eb-accordion-title"
 										value={accordion.title}
 									/>
