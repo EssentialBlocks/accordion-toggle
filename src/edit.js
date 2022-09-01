@@ -89,6 +89,7 @@ const Edit = (props) => {
 		hoverTitleColor,
 		activeBgColor,
 		activeTitleColor,
+		tagName,
 
 		//
 		icnZ_Range,
@@ -97,7 +98,7 @@ const Edit = (props) => {
 	} = attributes;
 
 	const [clickedItem, setClickedItem] = useState(`false`);
-	
+
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
 		const BLOCK_PREFIX = "eb-accordion";
@@ -511,7 +512,12 @@ const Edit = (props) => {
 		position:relative;
 	}
 
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper h1,
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper h2,
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper h3,
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper h4,
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper h5,
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper h6,
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper p{
 		margin:0;
 		padding:0;
@@ -919,7 +925,7 @@ ${
 										{displayIcon && <AccordionIcon icon={getTabIcon(index)} />}
 
 										<RichText
-											tagName="h3"
+											tagName={tagName}
 											className="eb-accordion-title"
 											allowedFormats={[]}
 											placeholder="Add Title Here"

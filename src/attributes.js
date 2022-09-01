@@ -150,6 +150,10 @@ const attributes = {
 	activeTitleColor: {
 		type: "string",
 	},
+	tagName: {
+		type: "string",
+		default: "h3",
+	},
 
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
