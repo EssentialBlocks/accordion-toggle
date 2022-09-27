@@ -113,7 +113,7 @@ const Edit = (props) => {
 		const innerBlocks = [...select("core/block-editor").getBlocks(clientId)];
 		let count = innerBlocks ? innerBlocks.length : 3;
 
-		const newBlock = createBlock("essential-blocks/accordion-item", {
+		const newBlock = createBlock("accordion-toggle/accordion-item", {
 			itemId: count + 1,
 			inheritedAccordionType: accordionType,
 			inheritedTagName: tagName,
