@@ -200,6 +200,7 @@ class EBAccordionToggle
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/post-meta.php';
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/lib/style-handler/style-handler.php';
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/helpers.php';
+		require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/class-faq-schema.php';
 
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion.php';
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion-item.php';
