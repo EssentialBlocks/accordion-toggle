@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		for (let i = 0; i < contentNodes.length; i++) {
 			contentNodes[i].style.height = "0px";
 		}
-
 		const testEl = document.createElement("span");
 
 		// Get all data attributes
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 		}
 
-		// 
+		//
 		for (let i = 0; i < accordionWrapper.length; i++) {
 			let clickable = accordionWrapper[i].getAttribute("data-clickable");
 			if (clickable == "true") {
@@ -169,4 +168,11 @@ function hideAccordionContents(contentNodes, hide) {
 		contentNodes[i].parentElement.classList.add(hide);
 		contentNodes[i].style.height = "0px";
 	}
+}
+
+function querySelectorFrom(selector, elements) {
+	const elementsArr = [...elements];
+	return [...document.querySelectorAll(selector)].filter((elm) =>
+		elementsArr.includes(elm)
+	);
 }

@@ -9,12 +9,11 @@ import { __ } from "@wordpress/i18n";
 import Edit from "./edit";
 import Save from "./save";
 import example from "./example";
-import metadata from "./block.json";
+import metadata from "../block.json";
 import attributes from "./attributes";
 import AccordionIcon from "./icon";
 import deprecated from "./deprecated";
 const { ebConditionalRegisterBlockType } = EBAccordionControls;
-const { name, category } = metadata;
 
 ebConditionalRegisterBlockType(metadata, {
 	icon: AccordionIcon,

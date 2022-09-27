@@ -25,11 +25,7 @@ import {
 	conBdShadowConst,
 } from "./constants/borderShadowConstants";
 
-import {
-	wrapperWidth,
-	rangeIconSize,
-	accGapRange,
-} from "./constants/rangeNames";
+import { rangeIconSize, accGapRange } from "./constants/rangeNames";
 
 const {
 	generateDimensionsAttributes,
@@ -46,7 +42,6 @@ const attributes = {
 		type: "string",
 		default: "Desktop",
 	},
-
 	// blockId attribute for making unique className and other uniqueness ⬇
 	blockId: {
 		type: "string",
@@ -55,12 +50,10 @@ const attributes = {
 		type: "string",
 		default: "essential_block",
 	},
-
 	// blockMeta is for keeping all the styles ⬇
 	blockMeta: {
 		type: "object",
 	},
-
 	// accordion attributes starts
 	accordionType: {
 		type: "string",
@@ -69,48 +62,15 @@ const attributes = {
 		attribute: "data-accordion-type",
 		default: "accordion",
 	},
-	accordions: {
-		type: "array",
-		selector: ".eb-accordion-wrapper",
-		source: "query",
-		default: [],
-		query: {
-			title: {
-				type: "string",
-				selector: ".eb-accordion-title",
-				source: "html",
-			},
-			content: {
-				type: "string",
-				selector: ".eb-accordion-content",
-				source: "html",
-			},
-			clickable: {
-				type: "string",
-				source: "attribute",
-				attribute: "data-clickable",
-			},
-		},
-	},
-	selectedTab: {
-		type: "string",
-		default: "",
-	},
-	expandedTabs: {
-		type: "array",
-		default: [],
-	},
 	displayIcon: {
 		type: "boolean",
 		default: true,
 	},
 	tabIcon: {
 		type: "string",
-		default: "fas fa-angle-right",
 	},
 	expandedIcon: {
 		type: "string",
-		default: "fas fa-angle-down",
 	},
 	transitionDuration: {
 		type: "number",
@@ -153,6 +113,14 @@ const attributes = {
 	tagName: {
 		type: "string",
 		default: "h3",
+	},
+	accordionChildCount: {
+		type: "number",
+		default: 3,
+	},
+	faqSchema: {
+		type: "boolean",
+		default: false,
 	},
 
 	// typography attributes

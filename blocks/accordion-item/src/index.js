@@ -13,7 +13,7 @@ import Icon from "./icon";
 import metadata from "../block.json";
 import attributes from "./attributes";
 
-const { ebConditionalRegisterBlockType } = EBControls;
+const { ebConditionalRegisterBlockType } = EBAccordionControls;
 
 ebConditionalRegisterBlockType(metadata, {
 	icon: Icon,

@@ -10,9 +10,8 @@ const plugins = defaultConfig.plugins.filter(
 
 let allEntries = {
 	dist: "./src/index.js",
-	"dist/frontend": "./blocks/accordion/src/frontend.js",
+	"dist/frontend": "./blocks/accordion-toggle/src/frontend.js",
 };
-
 
 const config = {
 	...defaultConfig,
