@@ -13,7 +13,7 @@
  *
  * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
-function accordion_item_block_init()
+function accordion_toggle_accordion_item_block_init()
 {
     // Skip block registration if Gutenberg is not enabled/merged.
     if (!function_exists('register_block_type')) {
@@ -27,4 +27,4 @@ function accordion_item_block_init()
         );
     }
 }
-add_action('init', 'accordion_item_block_init');
+add_action('init', 'accordion_toggle_accordion_item_block_init');

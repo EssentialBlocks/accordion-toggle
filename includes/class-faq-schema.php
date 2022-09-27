@@ -1,6 +1,6 @@
 <?php
 
-class FaqSchema
+class ATFaqSchema
 {
     /**
      * Google schema to add to head
@@ -229,4 +229,4 @@ class FaqSchema
     }
 }
 
-FaqSchema::init();
+ATFaqSchema::init();
