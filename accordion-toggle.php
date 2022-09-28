@@ -4,7 +4,7 @@
  * Plugin Name:     Accordion Toggle
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Display Your FAQs & Improve User Experience with Accordion/Toggle block.
- * Version:         1.2.3
+ * Version:         1.2.4
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('ACCORDION_BLOCK_VERSION', "1.2.3");
+define('ACCORDION_BLOCK_VERSION', "1.2.4");
 define('ACCORDION_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
 define('ACCORDION_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
