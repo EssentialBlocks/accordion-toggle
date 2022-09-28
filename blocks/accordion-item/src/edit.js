@@ -67,8 +67,10 @@ export default function Edit(props) {
 						className={`eb-accordion-title-wrapper`}
 						onClick={handleSlidingOfAccordion}
 						ref={accordionTitle}
-						data-tab-icon={inheritedTabIcon}
-						data-expanded-icon={inheritedExpandedIcon}
+						data-tab-icon={inheritedDisplayIcon ? inheritedTabIcon : ""}
+						data-expanded-icon={
+							inheritedDisplayIcon ? inheritedExpandedIcon : ""
+						}
 					>
 						{inheritedDisplayIcon && (
 							<span className="eb-accordion-icon-wrapper">

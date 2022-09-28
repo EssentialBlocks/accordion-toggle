@@ -15,7 +15,7 @@ import attributes from "./attributes";
 const deprecated = [
 	{
 		attributes: {
-			...attributes,
+			...omit({ ...attributes }, ["tabIcon", "expandedIcon"]),
 			accordions: {
 				type: "array",
 				selector: ".eb-accordion-wrapper",
@@ -46,6 +46,14 @@ const deprecated = [
 			expandedTabs: {
 				type: "array",
 				default: [],
+			},
+			tabIcon: {
+				type: "string",
+				default: "fas fa-angle-right",
+			},
+			expandedIcon: {
+				type: "string",
+				default: "fas fa-angle-down",
 			},
 		},
 		supports: {
