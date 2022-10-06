@@ -50,7 +50,7 @@ function create_block_accordion_block_init()
 
 	$index_js     = ACCORDION_BLOCK_ADMIN_URL . 'dist/index.js';
 	wp_register_script(
-		'create-block-accordion-block-editor',
+		'essential-blocks-accordion-block-editor',
 		$index_js,
 		$all_dependencies,
 		$script_asset['version'],
@@ -124,7 +124,7 @@ function create_block_accordion_block_init()
 		register_block_type(
 			Accordion_Helper::get_block_register_path("accordion-toggle/accordion-toggle", ACCORDION_BLOCK_ADMIN_PATH),
 			array(
-				'editor_script' => 'create-block-accordion-block-editor',
+				'editor_script' => 'essential-blocks-accordion-block-editor',
 				'editor_style' => 'accordion-toggle-style-css',
 				'render_callback' => function ($attributes, $content) {
 					if (!is_admin()) {
