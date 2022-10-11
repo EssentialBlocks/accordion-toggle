@@ -4,9 +4,10 @@
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, ToggleControl, TabPanel } from "@wordpress/components";
+const { ColorControl } = EBAccordionControls;
 
 const Inspector = ({ attributes, setAttributes }) => {
-	const { clickable } = attributes;
+	const { clickable, accordionColor, titleColor, iconColor } = attributes;
 
 	return (
 		<InspectorControls key="controls">
@@ -32,6 +33,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 											label={__("Default Open?", "essential-blocks")}
 											checked={clickable}
 											onChange={() => setAttributes({ clickable: !clickable })}
+										/>
+										<ColorControl
+											label={__(
+												"Accordion Backgrond Color",
+												"essential-blocks"
+											)}
+											color={accordionColor}
+											onChange={(accordionColor) =>
+												setAttributes({ accordionColor })
+											}
+										/>
+										<ColorControl
+											label={__("Accordion Title Color", "essential-blocks")}
+											color={titleColor}
+											onChange={(titleColor) => setAttributes({ titleColor })}
+										/>
+										<ColorControl
+											label={__("Accordion Icon Color", "essential-blocks")}
+											color={iconColor}
+											onChange={(iconColor) => setAttributes({ iconColor })}
 										/>
 									</PanelBody>
 								</>

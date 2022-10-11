@@ -4,6 +4,7 @@ const save = ({ attributes }) => {
 	const {
 		title,
 		clickable,
+		blockId,
 		inheritedTagName,
 		inheritedDisplayIcon,
 		inheritedTabIcon,
@@ -11,7 +12,10 @@ const save = ({ attributes }) => {
 
 	return (
 		<>
-			<div className="eb-accordion-wrapper" data-clickable={clickable}>
+			<div
+				className={`${blockId} eb-accordion-wrapper`}
+				data-clickable={clickable}
+			>
 				<div className={`eb-accordion-title-wrapper`}>
 					{inheritedDisplayIcon && (
 						<span className="eb-accordion-icon-wrapper">

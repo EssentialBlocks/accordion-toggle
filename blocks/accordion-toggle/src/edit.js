@@ -120,6 +120,7 @@ const Edit = (props) => {
 			inheritedDisplayIcon: displayIcon,
 			inheritedTabIcon: tabIcon,
 			inheritedExpandedIcon: expandedIcon,
+			parentBlockId: blockId,
 		});
 		innerBlocks.splice(innerBlocks.length, 0, newBlock);
 		dispatch("core/block-editor")
@@ -153,6 +154,7 @@ const Edit = (props) => {
 					inheritedExpandedIcon: expandedIcon,
 					inheritedTagName: tagName,
 					faqSchema: faqSchema,
+					parentBlockId: parentBlocks.attributes.blockId,
 				});
 			});
 		}

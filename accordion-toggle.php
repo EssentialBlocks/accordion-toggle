@@ -201,9 +201,10 @@ class EBAccordionToggle
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/lib/style-handler/style-handler.php';
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/helpers.php';
 		require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/class-faq-schema.php';
-
-		require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion.php';
-		require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion-item.php';
+		if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/accordion')) {
+			require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion.php';
+			require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion-item.php';
+		}
 	}
 }
 EBAccordionToggle::get_instance();

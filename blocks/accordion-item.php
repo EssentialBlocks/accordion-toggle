@@ -27,4 +27,4 @@ function accordion_toggle_accordion_item_block_init()
         );
     }
 }
-add_action('init', 'accordion_toggle_accordion_item_block_init');
+add_action('init', 'accordion_toggle_accordion_item_block_init',);

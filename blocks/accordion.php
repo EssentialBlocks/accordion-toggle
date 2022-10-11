@@ -52,4 +52,4 @@ function create_block_accordion_block_init()
     }
 }
 
-add_action('init', 'create_block_accordion_block_init', 99);
+add_action('init', 'create_block_accordion_block_init');
