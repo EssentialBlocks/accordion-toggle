@@ -3,9 +3,12 @@
  */
 import { __ } from "@wordpress/i18n";
 import { useEffect, useState } from "@wordpress/element";
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { select } from "@wordpress/data";
+import { select, dispatch } from "@wordpress/data";
+import { createBlock } from "@wordpress/blocks";
+
+const ALLOWED_BLOCKS = ["accordion-item/accordion-item"];
 
 const {
 	softMinifyCssStrings,
@@ -23,11 +26,7 @@ import {
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
-import {
-	wrapperWidth,
-	rangeIconSize,
-	accGapRange,
-} from "./constants/rangeNames";
+import { rangeIconSize, accGapRange } from "./constants/rangeNames";
 
 import {
 	wrapMarginConst,
@@ -57,11 +56,9 @@ import {
 /**
  * Internal dependencies
  */
-import arrayMove from "array-move";
-import AccordionIcon from "./components/accordion-icon";
 import classnames from "classnames";
-
 import Inspector from "./inspector";
+import { times } from "lodash";
 
 const Edit = (props) => {
 	const { attributes, setAttributes, className, isSelected, clientId } = props;
@@ -75,9 +72,6 @@ const Edit = (props) => {
 		accordionType,
 		displayIcon,
 		transitionDuration,
-		accordions,
-		expandedTabs,
-		selectedTab,
 		tabIcon,
 		expandedIcon,
 		titleColor = "#fff",
@@ -90,14 +84,14 @@ const Edit = (props) => {
 		activeBgColor,
 		activeTitleColor,
 		tagName,
+		faqSchema,
 
 		//
 		icnZ_Range,
 		TABicnZ_Range,
 		MOBicnZ_Range,
+		accordionChildCount,
 	} = attributes;
-
-	const [clickedItem, setClickedItem] = useState(`false`);
 
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
@@ -115,131 +109,58 @@ const Edit = (props) => {
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
-	//
+	const addAccordion = () => {
+		const innerBlocks = [...select("core/block-editor").getBlocks(clientId)];
+		let count = innerBlocks ? innerBlocks.length : 3;
+
+		const newBlock = createBlock("accordion-toggle/accordion-item", {
+			itemId: count + 1,
+			inheritedAccordionType: accordionType,
+			inheritedTagName: tagName,
+			inheritedDisplayIcon: displayIcon,
+			inheritedTabIcon: tabIcon,
+			inheritedExpandedIcon: expandedIcon,
+			parentBlockId: blockId,
+		});
+		innerBlocks.splice(innerBlocks.length, 0, newBlock);
+		dispatch("core/block-editor")
+			.replaceInnerBlocks(clientId, innerBlocks)
+			.then(() => {
+				setAttributes({ accordionChildCount: count + 1 });
+			});
+	};
+
 	useEffect(() => {
-		if (accordions.length > 0) return;
+		if (!tabIcon) {
+			setAttributes({ tabIcon: "fas fa-angle-right" });
+		}
+		if (!expandedIcon) {
+			setAttributes({ expandedIcon: "fas fa-angle-down" });
+		}
+		const parentBlocks = select("core/block-editor").getBlocksByClientId(
+			clientId
+		)[0];
 
-		const accFirstTime = [
-			{
-				title: "Accordion Tab Title 1",
-				content:
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-				clickable: "false",
-			},
-			{
-				title: "Accordion Tab Title 2",
-				content:
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-				clickable: "false",
-			},
-			{
-				title: "Accordion Tab Title 3",
-				content:
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-				clickable: "false",
-			},
-		];
+		const innerBlocks = parentBlocks?.innerBlocks;
 
-		setAttributes({ accordions: accFirstTime });
+		const { updateBlockAttributes } = dispatch("core/block-editor");
+
+		if (innerBlocks) {
+			times(innerBlocks.length, (n) => {
+				updateBlockAttributes(innerBlocks[n].clientId, {
+					inheritedAccordionType: accordionType,
+					inheritedDisplayIcon: displayIcon,
+					inheritedTabIcon: tabIcon,
+					inheritedExpandedIcon: expandedIcon,
+					inheritedTagName: tagName,
+					faqSchema: faqSchema,
+					parentBlockId: parentBlocks.attributes.blockId,
+				});
+			});
+		}
 	}, []);
 
-	const addAccordion = () => {
-		let counter = accordions.length + 1;
-		let newAccordions = [
-			...accordions,
-			{
-				title: `Accordion Tab Title ${counter}`,
-				content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-				clickable: "false",
-			},
-		];
-
-		setAttributes({ accordions: newAccordions });
-	};
-
-	const onDeleteAccordion = (position) => {
-		// Callback function for deleting accordion
-		let newAccordions = [...accordions];
-		newAccordions.splice(position, 1);
-
-		setAttributes({ accordions: newAccordions });
-	};
-
-	const onSortEnd = ({ oldIndex, newIndex }) => {
-		// Callback function for sorting accordion
-		setAttributes({
-			accordions: arrayMove([...accordions], oldIndex, newIndex),
-		});
-	};
-
-	const onAccordionClick = (index) => {
-		let newClickedItem = clickedItem === index ? null : index;
-		setClickedItem(newClickedItem);
-	};
-
-	const onAccordionChange = (key, value, position) => {
-		let newAccordions = [...accordions];
-		if ("accordion" === accordionType) {
-			newAccordions.map((item) => (item["clickable"] = false));
-		}
-		newAccordions[position][key] = value;
-
-		setAttributes({ accordions: newAccordions });
-	};
-
-	const isExpanded = (index) => {
-		if (accordionType === "accordion") {
-			return selectedTab === index;
-		}
-
-		if (accordionType === "toggle") {
-			return expandedTabs.includes(index);
-		}
-	};
-
-	const getTabIcon = (index) => {
-		// Return icon based on tab hidden/expanded state]
-		return isExpanded(index) ? expandedIcon : tabIcon;
-	};
-
-	const setToggleType = (index) => {
-		// If tab is already expanded, close it, otherwise open it
-		let newExpandedTabs = [...expandedTabs];
-
-		newExpandedTabs = newExpandedTabs.includes(index)
-			? newExpandedTabs.filter((titleIndex) => titleIndex !== index)
-			: [...newExpandedTabs, index];
-
-		setAttributes({ expandedTabs: newExpandedTabs });
-	};
-
-	const setAccordionType = (index) => {
-		// Save expanded tab name, remove when tab is hidden
-		let newSelectedTab = selectedTab === index ? undefined : index;
-		setAttributes({ selectedTab: newSelectedTab });
-	};
-
-	const onTitleClick = (index) => {
-		// Expand / Hide title
-
-		accordionType === "accordion" && setAccordionType(index);
-		accordionType === "toggle" && setToggleType(index);
-	};
-
-	const onChange = (newValue, index, key) => {
-		// onChange callback function for title and content
-		let newAccordions = [...accordions];
-		newAccordions[index][key] = newValue;
-
-		setAttributes({ accordions: newAccordions });
-	};
-
-	//
-	// styling codes starts here
-	//
-
 	// styles related to generateTypographyStyles start ⬇
-
 	const {
 		typoStylesDesktop: titleTypoStylesDesktop,
 		typoStylesTab: titleTypoStylesTab,
@@ -493,8 +414,14 @@ const Edit = (props) => {
 	// styles related to generateResponsiveRangeStyles end
 
 	const wrapperStylesDesktop = `
+
+	.eb-accordion-item.is-selected .eb-accordion-content-wrapper {
+		max-height:2000px;
+		opacity: 0;
+		overflow: visible;
+	}
 	
-	.eb-accordion-container .eb-accordion-content-wrapper p{
+	.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content {
 		border:1px solid #aaa;
 	}
 	
@@ -649,7 +576,7 @@ ${
 		transition: all ${transitionDuration || 0}s;
 	}
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper p{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		color:${contentColor};
 		text-align:${contentAlign};
 		${conBackgroundStylesDesktop}
@@ -660,7 +587,7 @@ ${
 		transition:${conBdShdTransitionStyle}, ${conBgTransitionStyle};
 	}
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover p{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conHoverBackgroundStylesDesktop}
 		${conBdShdStylesHoverDesktop}
 	}
@@ -738,14 +665,14 @@ ${
 
 
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper p{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		${contentTypoStylesTab}
 		${conMarginTab}
 		${conPaddingTab}
 		${conBdShdStyesTab}
 	}
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover P{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conBdShdStylesHoverTab}
 	}
 
@@ -819,14 +746,14 @@ ${
 		${titleTypoStylesMobile}
 	}
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper p{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		${contentTypoStylesMobile}
 		${conMarginMobile}
 		${conPaddingMobile}
 		${conBdShdStyesMobile} 
 	}
 	
-	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover P{
+	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conBdShdStylesHoverMobile}
 	}
 	`;
@@ -862,24 +789,19 @@ ${
 		}
 	}, [attributes]);
 
+	const insertAccodionItem = (accordionChildCount) => {
+		return times(accordionChildCount, (n) => [
+			"accordion-toggle/accordion-item",
+			{ itemId: n + 1 },
+		]);
+	};
+
 	return (
 		<>
-			{isSelected && (
-				<Inspector
-					{...props}
-					addAccordion={addAccordion}
-					onDeleteAccordion={onDeleteAccordion}
-					onSortEnd={onSortEnd}
-					onAccordionClick={onAccordionClick}
-					onAccordionChange={onAccordionChange}
-					clickedItem={clickedItem}
-				/>
-			)}
+			{isSelected && <Inspector {...props} addAccordion={addAccordion} />}
 			<div {...blockProps}>
 				<style>
 					{`
-
-
 				${desktopAllStyles}
 
 				/* mimmikcssStart */
@@ -910,61 +832,11 @@ ${
 				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 					<div className={`${blockId} eb-accordion-container`}>
 						<div className="eb-accordion-inner">
-							{accordions.map((accordion, index) => (
-								<div
-									className={`eb-accordion-wrapper ${
-										isExpanded(index) ? "expanded_tab" : " "
-									} for_edit_page`}
-									data-clickable={`${accordion.clickable}`}
-									key={index}
-								>
-									<div
-										className="eb-accordion-title-wrapper"
-										onClick={() => onTitleClick(index)}
-									>
-										{displayIcon && <AccordionIcon icon={getTabIcon(index)} />}
-
-										<RichText
-											tagName={tagName}
-											className="eb-accordion-title"
-											allowedFormats={[]}
-											placeholder="Add Title Here"
-											value={accordion.title}
-											onChange={(nextTitle) =>
-												onChange(nextTitle, index, "title")
-											}
-										/>
-									</div>
-									<div
-										className="eb-accordion-content-wrapper"
-										style={{
-											maxHeight: isExpanded(index) ? 2000 : 0,
-											opacity: isExpanded(index) ? 1 : 0,
-											overflow: isExpanded(index) ? "visible" : "hidden",
-										}}
-									>
-										<RichText
-											tagName="p"
-											className="eb-accordion-content"
-											placeholder="Add Content Here"
-											allowedFormats={[
-												"core/bold",
-												"core/italic",
-												"core/strikethrough",
-												"core/image",
-												"core/link",
-												"core/text-color",
-												"core/subscript",
-												"core/superscript",
-											]}
-											value={accordion.content}
-											onChange={(nextContent) =>
-												onChange(nextContent, index, "content")
-											}
-										/>
-									</div>
-								</div>
-							))}
+							<InnerBlocks
+								template={insertAccodionItem(accordionChildCount)}
+								templateLock={false}
+								allowedBlocks={ALLOWED_BLOCKS}
+							/>
 						</div>
 					</div>
 					<div className="eb-accordion-add-button">
@@ -975,7 +847,7 @@ ${
 							onClick={addAccordion}
 						>
 							<span className="eb-accordion-add-button-label">
-								Add Accordion Item
+								{__("Add Accordion Item", "essential-blocks")}
 							</span>
 						</Button>
 					</div>

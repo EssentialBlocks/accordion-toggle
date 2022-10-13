@@ -12,7 +12,7 @@ import { __ } from "@wordpress/i18n";
 // 	SortableContainer,
 // 	SortableElement,
 // 	SortableHandle,
-// } = window.EBAccordionControls;
+// } = window.EBAccordionControlsls;
 
 // Style objects
 const trashStyle = {

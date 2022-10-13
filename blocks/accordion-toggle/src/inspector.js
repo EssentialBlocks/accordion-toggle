@@ -4,6 +4,8 @@
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { InspectorControls } from "@wordpress/block-editor";
+import { select, dispatch } from "@wordpress/data";
+const { times } = lodash;
 import {
 	PanelBody,
 	BaseControl,
@@ -13,7 +15,6 @@ import {
 	RangeControl,
 	TabPanel,
 } from "@wordpress/components";
-import { select } from "@wordpress/data";
 
 /**
  * External dependencies
@@ -30,21 +31,6 @@ import {
 	CONTENT_ALIGN,
 	HEADING,
 } from "./constants";
-import SortableAccordions from "./components/sortable-accordion";
-
-//
-// import iconList from "../../../util/faIcons";
-// import ColorControl from "../../../util/color-control/index";
-// import TypographyDropdown from "../../../util/typography-control-v2";
-// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
-// import ResponsiveRangeController from "../../../util/responsive-range-control";
-// import BorderShadowControl from "../../../util/border-shadow-control";
-// import BackgroundControl from "../../../util/background-control";
-
-// import {
-// 	mimmikCssForResBtns,
-// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-// } from "../../../util/helpers";
 
 const {
 	//
@@ -65,11 +51,7 @@ import {
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
-import {
-	wrapperWidth,
-	rangeIconSize,
-	accGapRange,
-} from "./constants/rangeNames";
+import { rangeIconSize, accGapRange } from "./constants/rangeNames";
 
 import {
 	wrapMarginConst,
@@ -96,22 +78,12 @@ import {
 	conBdShadowConst,
 } from "./constants/borderShadowConstants";
 
-const Inspector = ({
-	attributes,
-	setAttributes,
-	addAccordion,
-	onDeleteAccordion,
-	onSortEnd,
-	onAccordionClick,
-	onAccordionChange,
-	clickedItem,
-}) => {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		resOption,
 		accordionType,
 		displayIcon,
 		transitionDuration,
-		accordions,
 		tabIcon,
 		expandedIcon,
 		titleColor,
@@ -124,6 +96,7 @@ const Inspector = ({
 		activeBgColor,
 		activeTitleColor,
 		tagName,
+		faqSchema,
 	} = attributes;
 
 	const resRequiredProps = {
@@ -133,13 +106,35 @@ const Inspector = ({
 		objAttributes,
 	};
 
+	useEffect(() => {
+		const parentBlocks = select("core/block-editor").getBlocksByClientId(
+			clientId
+		)[0];
+
+		const innerBlocks = parentBlocks?.innerBlocks;
+
+		const { updateBlockAttributes } = dispatch("core/block-editor");
+
+		if (innerBlocks) {
+			times(innerBlocks.length, (n) => {
+				updateBlockAttributes(innerBlocks[n].clientId, {
+					inheritedAccordionType: accordionType,
+					inheritedDisplayIcon: displayIcon,
+					inheritedTabIcon: tabIcon,
+					inheritedExpandedIcon: expandedIcon,
+					inheritedTagName: tagName,
+					faqSchema: faqSchema,
+				});
+			});
+		}
+	}, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
+
 	return (
 		<InspectorControls key="controls">
 			<div className="eb-panel-control">
 				<TabPanel
 					className="eb-parent-tab-panel"
 					activeClass="active-tab"
-					// onSelect={onSelect}
 					tabs={[
 						{
 							name: "general",
@@ -185,35 +180,6 @@ const Inspector = ({
 												))}
 											</ButtonGroup>
 										</BaseControl>
-
-										<BaseControl
-											id="eb-accordion-sortable"
-											className="eb-accordion-sortable-base"
-											label={__("Accordion List", "essential-blocks")}
-										>
-											<SortableAccordions
-												accordions={accordions}
-												onDeleteAccordion={onDeleteAccordion}
-												onSortEnd={onSortEnd}
-												onAccordionChange={onAccordionChange}
-												onAccordionClick={onAccordionClick}
-												clickedItem={clickedItem}
-											/>
-										</BaseControl>
-
-										<div className="eb-accordion-add-button">
-											<Button
-												className="is-default"
-												label={__("Add Accordion Item", "essential-blocks")}
-												icon="plus-alt"
-												onClick={addAccordion}
-											>
-												<span className="eb-accordion-add-button-label">
-													Add Accordion Item
-												</span>
-											</Button>
-										</div>
-
 										<BaseControl
 											label={__("Title Level", "essential-blocks")}
 											id="eb-accordion-heading-alignment"
@@ -234,7 +200,6 @@ const Inspector = ({
 												))}
 											</ButtonGroup>
 										</BaseControl>
-
 										<RangeControl
 											label={__("Toggle Speed", "essential-blocks")}
 											value={transitionDuration}
@@ -246,7 +211,6 @@ const Inspector = ({
 											step={0.1}
 											allowReset={true}
 										/>
-
 										<ResponsiveRangeController
 											noUnits
 											baseLabel={__("Accordions Gap", "essential-blocks")}
@@ -255,6 +219,11 @@ const Inspector = ({
 											min={1}
 											max={100}
 											step={1}
+										/>
+										<ToggleControl
+											label={__("Enable FAQ Schema", "essential-blocks")}
+											checked={faqSchema}
+											onChange={() => setAttributes({ faqSchema: !faqSchema })}
 										/>
 									</PanelBody>
 								</>
