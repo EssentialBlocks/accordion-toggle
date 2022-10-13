@@ -22,7 +22,7 @@ Display Your FAQs & Improve User Experience with Accordion/Toggle block.
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
 
-This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 700,000 happy users from 180+ countries).
+This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 1 million+ happy users from 180+ countries).
 
 ## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
@@ -85,6 +85,7 @@ Yes, it will work with any standard WordPress theme.
 = 1.2.4 - dev =
 * Added: innerBlocks support
 * Added: faqSchema support
+* Added: Individual accordion color controls
 
 = 1.2.3 - 01/09/2022 =
 * Added: Title tag option
