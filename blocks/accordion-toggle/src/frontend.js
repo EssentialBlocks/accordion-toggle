@@ -18,15 +18,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		//  add a className after the domcontent has been loaded
 		accordion.classList.add("eb_accdn_loaded");
 
-		// Add data-height, transition timing function, height css attribute to all content
-		for (let i = 0; i < contentNodes.length; i++) {
-			contentNodes[i].dataset.height = contentNodes[i].clientHeight + "px";
-		}
-
 		for (let i = 0; i < contentNodes.length; i++) {
 			contentNodes[i].style.height = "0px";
 		}
-
 		const testEl = document.createElement("span");
 
 		// Get all data attributes
@@ -54,11 +48,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 		}
 
-		// 
+		//
 		for (let i = 0; i < accordionWrapper.length; i++) {
 			let clickable = accordionWrapper[i].getAttribute("data-clickable");
 			if (clickable == "true") {
-				contentNodes[i].style.height = contentNodes[i].dataset.height;
+				setTimeout(() => {
+					contentNodes[i].style.height =
+						contentNodes[i].querySelector(".eb-accordion-content")
+							.offsetHeight + "px";
+				}, 100);
+
 				changeIcon(
 					contentNodes[i].parentElement.querySelector(
 						".eb-accordion-title-wrapper"
@@ -103,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		function onToggleTabClick() {
 			let clickedTab = this;
 			let contentNode = clickedTab.nextElementSibling;
-			let contentHeight = contentNode.getAttribute("data-height");
+			let contentHeight =
+				contentNode.querySelector(".eb-accordion-content").offsetHeight + "px";
 			let alreadyOpen = !contentNode.parentElement.classList.contains(hide);
 
 			// Change content height to 0, remove active color if it's open
@@ -133,7 +133,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		function onAccordionTabClick() {
 			let clickedTab = this;
 			let contentNode = this.nextElementSibling;
-			let contentHeight = contentNode.getAttribute("data-height");
+			let contentHeight =
+				contentNode.querySelector(".eb-accordion-content").offsetHeight + "px";
 			let alreadyOpen = !contentNode.parentElement.classList.contains(hide);
 
 			// Hide all contents, change expand icon to tab icon then
@@ -169,4 +170,11 @@ function hideAccordionContents(contentNodes, hide) {
 		contentNodes[i].parentElement.classList.add(hide);
 		contentNodes[i].style.height = "0px";
 	}
+}
+
+function querySelectorFrom(selector, elements) {
+	const elementsArr = [...elements];
+	return [...document.querySelectorAll(selector)].filter((elm) =>
+		elementsArr.includes(elm)
+	);
 }

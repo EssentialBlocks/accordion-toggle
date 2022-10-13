@@ -6,6 +6,5 @@
 	"textdomain": "accordion-toggle",
 	"supports": {
 		"align": ["wide", "full"]
-	},
-	"editorScript": "create-block-accordion-block-editor"
+	}
 }
