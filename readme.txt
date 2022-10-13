@@ -1,5 +1,5 @@
 === Accordion Toggle ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon, fencermonir
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 6.0
