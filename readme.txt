@@ -82,7 +82,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.4 - dev =
+= 1.2.4 - 13/10/2022 =
 * Added: innerBlocks support
 * Added: faqSchema support
 * Added: Individual accordion color controls
