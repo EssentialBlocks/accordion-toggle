@@ -1,0 +1,14 @@
+{
+	"title": "Accordion Item",
+	"name": "accordion-toggle/accordion-item",
+	"apiVersion": 2,
+	"textdomain": "essential-blocks",
+	"supports": {
+		"inserter": false,
+		"reusable": false,
+		"html": false,
+		"anchor": true,
+		"lock": false
+	},
+	"parent": ["accordion-toggle/accordion-toggle"]
+}

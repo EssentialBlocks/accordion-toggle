@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,7 +22,7 @@ Display Your FAQs & Improve User Experience with Accordion/Toggle block.
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
 
-This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 700,000 happy users from 180+ countries).
+This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 1 million+ happy users from 180+ countries).
 
 ## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
@@ -81,6 +81,11 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.4 - dev =
+* Added: innerBlocks support
+* Added: faqSchema support
+* Added: Individual accordion color controls
 
 = 1.2.3 - 01/09/2022 =
 * Added: Title tag option
