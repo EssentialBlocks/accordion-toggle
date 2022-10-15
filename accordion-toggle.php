@@ -72,7 +72,7 @@ class EBAccordionToggle
 
 		wp_localize_script('eb-accordion-toggle-controls-util', 'EssentialBlocksLocalize', array(
 			'eb_wp_version' => (float) get_bloginfo('version'),
-			'rest_rootURL' => get_rest_url(),
+			'rest_rootURL' => get_rest_url()
 		));
 
 		if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {
