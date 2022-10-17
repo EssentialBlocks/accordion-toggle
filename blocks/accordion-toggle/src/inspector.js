@@ -431,7 +431,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 													setAttributes({ activeBgColor })
 												}
 											/>
-
+											<span>
+												<em>
+													{__(
+														"Works in frontend page only",
+														"essential-blocks"
+													)}
+												</em>
+											</span>
 											<ColorControl
 												label={__("Title Color", "essential-blocks")}
 												color={activeTitleColor}

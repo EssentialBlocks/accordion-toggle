@@ -554,8 +554,12 @@ ${
 	activeBgColor
 		? `
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) .eb-accordion-title-wrapper,
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab .eb-accordion-title-wrapper{
-		${activeBgColor ? `background-color: ${activeBgColor} !important;` : ""}
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab .eb-accordion-title-wrapper {
+		${
+			activeBgColor
+				? `background-color: ${activeBgColor} !important; background-image: unset;`
+				: ""
+		}
 	}
 	`
 		: ""
