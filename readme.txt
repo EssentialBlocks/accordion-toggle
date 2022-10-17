@@ -82,8 +82,8 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.5 - dev =
-* Fixed: PHP trailling comma issue
+= 1.2.5 - 17/10/2022 =
+* Fixed: PHP error issue
 
 = 1.2.4 - 13/10/2022 =
 * Added: innerBlocks support
