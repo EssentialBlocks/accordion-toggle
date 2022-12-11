@@ -8,7 +8,7 @@ import { Button } from "@wordpress/components";
 import { select, dispatch } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
 
-const ALLOWED_BLOCKS = ["accordion-item/accordion-item"];
+const ALLOWED_BLOCKS = ["accordion-toggle/accordion-item"];
 
 const {
 	softMinifyCssStrings,
@@ -148,6 +148,7 @@ const Edit = (props) => {
 		if (innerBlocks) {
 			times(innerBlocks.length, (n) => {
 				updateBlockAttributes(innerBlocks[n].clientId, {
+					itemId: n + 1,
 					inheritedAccordionType: accordionType,
 					inheritedDisplayIcon: displayIcon,
 					inheritedTabIcon: tabIcon,
@@ -159,6 +160,21 @@ const Edit = (props) => {
 			});
 		}
 	}, []);
+
+	const insertAccodionItem = (accordionChildCount) => {
+		return times(accordionChildCount, (n) => [
+			"accordion-toggle/accordion-item",
+			{
+				itemId: n + 1,
+				inheritedAccordionType: accordionType,
+				inheritedDisplayIcon: displayIcon,
+				inheritedTabIcon: "fas fa-angle-right",
+				inheritedExpandedIcon: "fas fa-angle-down",
+				inheritedTagName: tagName,
+				faqSchema: faqSchema,
+			},
+		]);
+	};
 
 	// styles related to generateTypographyStyles start ⬇
 	const {
@@ -416,15 +432,11 @@ const Edit = (props) => {
 	const wrapperStylesDesktop = `
 
 	.eb-accordion-item.is-selected .eb-accordion-content-wrapper {
-		max-height:2000px;
+		height:auto;
 		opacity: 0;
 		overflow: visible;
 	}
-	
-	.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content {
-		border:1px solid #aaa;
-	}
-	
+
 	.eb-accordion-container.eb_accdn_loaded .eb-accordion-wrapper:not(.for_edit_page) .eb-accordion-content-wrapper{
 		visibility:visible;
 		position:static;
@@ -449,13 +461,13 @@ const Edit = (props) => {
 		margin:0;
 		padding:0;
 	}
-	
-	
+
+
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
 		${accGapDesktop}
 	}
-	
-	
+
+
 	.${blockId}.eb-accordion-container{
 		${wrpMarginDesktop}
 		${wrpPaddingDesktop}
@@ -464,12 +476,12 @@ const Edit = (props) => {
 		transition:${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
 		overflow:hidden;
 	}
-	
+
 	.${blockId}.eb-accordion-container:hover{
 		${wrpHoverBackgroundStylesDesktop}
 		${wrpBdShdStylesHoverDesktop}
 	}
-	
+
 	.${blockId}.eb-accordion-container:before{
 		${wrpOverlayStylesDesktop}
 		transition:${wrpOvlTransitionStyle};
@@ -499,14 +511,14 @@ ${
 			${iconHoverBackgroundStylesDesktop}
 			${iconBdShdStylesHoverDesktop}
 		}
-		
+
 		.${blockId}.eb-accordion-container .eb-accordion-icon{
 			text-align:center;
 			color: ${iconColor};
 			${iconSizeDesktop}
 			${icnZ_Range ? `width:${icnZ_Range}px;` : ""}
 		}
-		
+
 		`
 		: ""
 }
@@ -529,9 +541,9 @@ ${
 	.${blockId}.eb-accordion-container .eb-accordion-title-wrapper:hover{
 		${tabHoverBackgroundStylesDesktop}
 		${tabBdShdStylesHoverDesktop}
-	} 
-	
-	
+	}
+
+
 	.${blockId}.eb-accordion-container .eb-accordion-title{
 		text-align:${titleAlignment || "left"};
 		flex:1;
@@ -554,17 +566,17 @@ ${
 	activeBgColor
 		? `
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) .eb-accordion-title-wrapper,
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab .eb-accordion-title-wrapper {
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab .eb-accordion-title-wrapper{
 		${
 			activeBgColor
-				? `background-color: ${activeBgColor} !important; background-image: unset;`
+				? `background-color: ${activeBgColor} !important; background-image: unset`
 				: ""
 		}
 	}
 	`
 		: ""
 }
-	
+
 	${
 		hoverTitleColor
 			? `
@@ -574,12 +586,12 @@ ${
 			`
 			: ""
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper{
 		overflow: hidden !important;
-		transition: all ${transitionDuration || 0}s;
+		transition: height ${transitionDuration || 0}s ease-out;
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		color:${contentColor};
 		text-align:${contentAlign};
@@ -590,7 +602,7 @@ ${
 		${conBdShdStyesDesktop}
 		transition:${conBdShdTransitionStyle}, ${conBgTransitionStyle};
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conHoverBackgroundStylesDesktop}
 		${conBdShdStylesHoverDesktop}
@@ -603,7 +615,7 @@ ${
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
 		${accGapTab}
 	}
-	
+
 
 	.${blockId}.eb-accordion-container{
 		${wrpMarginTab}
@@ -611,12 +623,12 @@ ${
 		${wrpBackgroundStylesTab}
 		${wrpBdShdStyesTab}
 	}
-	
+
 	.${blockId}.eb-accordion-container:hover{
 		${wrpHoverBackgroundStylesTab}
 		${wrpBdShdStylesHoverTab}
 	}
-	
+
 	.${blockId}.eb-accordion-container:before{
 		${wrpOverlayStylesTab}
 	}
@@ -640,12 +652,12 @@ ${
 		.${blockId}.eb-accordion-container .eb-accordion-icon-wrapper:hover{
 			${iconBdShdStylesHoverTab}
 		}
-		
+
 		.${blockId}.eb-accordion-container .eb-accordion-icon{
 			${iconSizeTab}
 			${TABicnZ_Range ? `width:${TABicnZ_Range}px;` : ""}
 		}
-		
+
 		`
 		: ""
 }
@@ -661,21 +673,21 @@ ${
 
 	.${blockId}.eb-accordion-container .eb-accordion-title-wrapper:hover{
 		${tabBdShdStylesHoverTab}
-	} 
+	}
 
 	.${blockId}.eb-accordion-container .eb-accordion-title{
 		${titleTypoStylesTab}
 	}
 
 
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		${contentTypoStylesTab}
 		${conMarginTab}
 		${conPaddingTab}
 		${conBdShdStyesTab}
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conBdShdStylesHoverTab}
 	}
@@ -685,23 +697,23 @@ ${
 	`;
 
 	const wrapperStylesMobile = `
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
 		${accGapMobile}
 	}
-	
+
 	.${blockId}.eb-accordion-container{
 		${wrpMarginMobile}
 		${wrpPaddingMobile}
 		${wrpBackgroundStylesMobile}
 		${wrpBdShdStyesMobile}
 	}
-	
+
 	.${blockId}.eb-accordion-container:hover{
 		${wrpHoverBackgroundStylesMobile}
 		${wrpBdShdStylesHoverMobile}
 	}
-	
+
 	.${blockId}.eb-accordion-container:before{
 		${wrpOverlayStylesMobile}
 	}
@@ -720,21 +732,21 @@ ${
 				${iconPaddingMobile}
 				${iconBdShdStyesMobile}
 			}
-	
+
 			.${blockId}.eb-accordion-container .eb-accordion-icon-wrapper:hover{
 				${iconBdShdStylesHoverMobile}
 			}
-			
+
 			.${blockId}.eb-accordion-container .eb-accordion-icon{
 				${iconSizeMobile}
 				${MOBicnZ_Range ? `width:${MOBicnZ_Range}px;` : ""}
 			}
-			
+
 			`
 			: ""
 	}
-	
-	
+
+
 	.${blockId}.eb-accordion-container .eb-accordion-title-wrapper {
 		${tabMarginMobile}
 		${tabPaddingMobile}
@@ -744,26 +756,26 @@ ${
 
 	.${blockId}.eb-accordion-container .eb-accordion-title-wrapper:hover{
 		${tabBdShdStylesHoverMobile}
-	} 
+	}
 
 	.${blockId}.eb-accordion-container .eb-accordion-title{
 		${titleTypoStylesMobile}
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper .eb-accordion-content{
 		${contentTypoStylesMobile}
 		${conMarginMobile}
 		${conPaddingMobile}
-		${conBdShdStyesMobile} 
+		${conBdShdStyesMobile}
 	}
-	
+
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper:hover .eb-accordion-content{
 		${conBdShdStylesHoverMobile}
 	}
 	`;
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`		
+	const desktopAllStyles = softMinifyCssStrings(`
 		${wrapperStylesDesktop}
 	`);
 
@@ -793,13 +805,6 @@ ${
 		}
 	}, [attributes]);
 
-	const insertAccodionItem = (accordionChildCount) => {
-		return times(accordionChildCount, (n) => [
-			"accordion-toggle/accordion-item",
-			{ itemId: n + 1 },
-		]);
-	};
-
 	return (
 		<>
 			{isSelected && <Inspector {...props} addAccordion={addAccordion} />}
@@ -815,20 +820,20 @@ ${
 
 				/* mimmikcssEnd */
 
-				@media all and (max-width: 1024px) {	
+				@media all and (max-width: 1024px) {
 
-					/* tabcssStart */			
+					/* tabcssStart */
 					${softMinifyCssStrings(tabAllStyles)}
-					/* tabcssEnd */			
-				
+					/* tabcssEnd */
+
 				}
-				
+
 				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
+
+					/* mobcssStart */
 					${softMinifyCssStrings(mobileAllStyles)}
-					/* mobcssEnd */			
-				
+					/* mobcssEnd */
+
 				}
 				`}
 				</style>
@@ -846,12 +851,12 @@ ${
 					<div className="eb-accordion-add-button">
 						<Button
 							className="is-default"
-							label={__("Add Accordion Item", "essential-blocks")}
+							label={__("Add Accordion Item", "accordion-toggle")}
 							icon="plus-alt"
 							onClick={addAccordion}
 						>
 							<span className="eb-accordion-add-button-label">
-								{__("Add Accordion Item", "essential-blocks")}
+								{__("Add Accordion Item", "accordion-toggle")}
 							</span>
 						</Button>
 					</div>

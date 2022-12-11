@@ -193,7 +193,10 @@ const attributes = {
 	...generateBorderShadowAttributes(WrpBdShadowConst),
 	...generateBorderShadowAttributes(iconBdShadowConst),
 	...generateBorderShadowAttributes(tabBdShadowConst),
-	...generateBorderShadowAttributes(conBdShadowConst),
+	...generateBorderShadowAttributes(conBdShadowConst, {
+		defaultBdrColor: "#aaaaaa",
+		defaultBdrStyle: "solid",
+	}),
 
 	// ...generateBorderShadowAttributes(cdBoxsBdShadowConst, {
 	// 	// bdrDefaults: {

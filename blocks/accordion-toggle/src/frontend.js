@@ -8,13 +8,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	for (let x = 0; x < accordions.length; x++) {
 		let accordion = accordions[x].parentElement;
-		let titleNodes = accordion.querySelectorAll(".eb-accordion-title-wrapper");
-		let contentNodes = accordion.querySelectorAll(
-			".eb-accordion-content-wrapper"
-		);
-		let accordionWrapper = accordion.querySelectorAll(".eb-accordion-wrapper");
-		let hide = "eb-accordion-hidden";
+		let accordionWrapper = accordion.children[0].children;
+		let titleNodes = [];
+		Array.from(accordionWrapper).forEach(function (item) {
+			titleNodes.push(item.querySelector(".eb-accordion-title-wrapper"));
+		});
 
+		let contentNodes = [];
+		Array.from(accordionWrapper).forEach(function (item) {
+			contentNodes.push(item.querySelector(".eb-accordion-content-wrapper"));
+		});
+
+		let hide = "eb-accordion-hidden";
 		//  add a className after the domcontent has been loaded
 		accordion.classList.add("eb_accdn_loaded");
 
@@ -33,12 +38,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		let faTabPostfix = tabIcon.split(" ")[1];
 		let faExpandPrefix = expandedIcon.split(" ")[0];
 		let faExpandPostfix = expandedIcon.split(" ")[1];
-
 		function changeIcon(clickedTab) {
 			// Replace tab icon with expanded or vice versa
 			let iconNode = clickedTab.querySelector(".eb-accordion-icon") || testEl;
 			let isExpanded = iconNode.classList.contains(faExpandPostfix);
-
 			if (isExpanded) {
 				iconNode.classList.remove(faExpandPrefix, faExpandPostfix);
 				iconNode.classList.add(faTabPrefix, faTabPostfix);
@@ -52,25 +55,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		for (let i = 0; i < accordionWrapper.length; i++) {
 			let clickable = accordionWrapper[i].getAttribute("data-clickable");
 			if (clickable == "true") {
-				setTimeout(() => {
-					contentNodes[i].style.height =
-						contentNodes[i].querySelector(".eb-accordion-content")
-							.offsetHeight + "px";
-				}, 100);
-
+				contentNodes[i].setAttribute("data-collapsed", "false");
+				expandSection(contentNodes[i]);
 				changeIcon(
 					contentNodes[i].parentElement.querySelector(
 						".eb-accordion-title-wrapper"
 					)
 				);
 			} else {
-				contentNodes[i].parentElement.classList.add(hide);
+				contentNodes[i].setAttribute("data-collapsed", "true");
+				collapseSection(contentNodes[i]);
 			}
 		}
 
 		function changeAllExpandIcons(accordion) {
 			let iconNodes = accordion.querySelectorAll(".eb-accordion-icon");
-
 			// Replace expand icon with tab icon & change color
 			for (let i = 0; i < iconNodes.length; i++) {
 				if (iconNodes[i].classList.contains(faExpandPostfix)) {
@@ -79,9 +78,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				}
 			}
 		}
-
-		// Hide all accordion content by default
-		// hideContents(contentNodes, hide);
 
 		// Take action based on accordion type
 		accordionType === "toggle"
@@ -101,20 +97,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		function onToggleTabClick() {
 			let clickedTab = this;
-			let contentNode = clickedTab.nextElementSibling;
-			let contentHeight =
-				contentNode.querySelector(".eb-accordion-content").offsetHeight + "px";
-			let alreadyOpen = !contentNode.parentElement.classList.contains(hide);
+			let contentNode = this.nextElementSibling;
+			let isCollapsed = contentNode.getAttribute("data-collapsed") === "true";
 
-			// Change content height to 0, remove active color if it's open
-			if (alreadyOpen) {
-				contentNode.style.height = "0px";
+			// Change content.maxHeight to 0, remove active color if it's open
+			if (isCollapsed) {
+				expandSection(contentNode);
+				contentNode.setAttribute("data-collapsed", "false");
 			} else {
-				contentNode.style.height = contentHeight;
+				collapseSection(contentNode);
+				contentNode.setAttribute("data-collapsed", "true");
 			}
-
-			contentNode.parentElement.classList.toggle(hide);
-
 			// Change tab icon
 			changeIcon(clickedTab);
 		}
@@ -123,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		function setAccordionAction(titleNodes) {
 			for (let i = 0; i < titleNodes.length; i++) {
 				let selectedTab = titleNodes[i];
-
 				(function (selectedTab) {
 					selectedTab.addEventListener("click", onAccordionTabClick);
 				})(selectedTab);
@@ -133,48 +125,50 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		function onAccordionTabClick() {
 			let clickedTab = this;
 			let contentNode = this.nextElementSibling;
-			let contentHeight =
-				contentNode.querySelector(".eb-accordion-content").offsetHeight + "px";
-			let alreadyOpen = !contentNode.parentElement.classList.contains(hide);
-
-			// Hide all contents, change expand icon to tab icon then
-			// toggle clicked accordion
-			// If accordion was already open, hide it
+			let isCollapsed = contentNode.getAttribute("data-collapsed") === "true";
 			hideAccordionContents(contentNodes, hide);
 			changeAllExpandIcons(accordion);
-			contentNode.parentElement.classList.toggle(hide);
-
-			if (alreadyOpen) {
-				// Hide content and change background color, icon
-				contentNode.parentElement.classList.add(hide);
-				contentNode.style.height = "0px";
-				changeIcon(clickedTab);
+			if (isCollapsed) {
+				expandSection(contentNode);
+				contentNode.setAttribute("data-collapsed", "false");
 			} else {
-				contentNode.style.height = contentHeight;
+				collapseSection(contentNode);
+				contentNode.setAttribute("data-collapsed", "true");
+				changeIcon(clickedTab);
 			}
-
 			//Change tab icon
 			changeIcon(clickedTab);
 		}
 	}
 });
 
-function hideContents(contentNodes, hide) {
-	for (let i = 0; i < contentNodes.length; i++) {
-		contentNodes[i].parentElement.classList.add(hide);
-	}
+function collapseSection(element) {
+	var sectionHeight = element.scrollHeight;
+	var elementTransition = element.style.transition;
+	element.style.transition = "";
+	requestAnimationFrame(function () {
+		element.style.height = sectionHeight + "px";
+		element.style.transition = elementTransition;
+		requestAnimationFrame(function () {
+			element.style.height = 0 + "px";
+		});
+	});
+	element.setAttribute("data-collapsed", "true");
+}
+
+function expandSection(element) {
+	var sectionHeight = element.scrollHeight;
+	element.style.height = sectionHeight + "px";
+	element.addEventListener("transitionend", function (e) {
+		element.removeEventListener("transitionend", arguments.callee);
+		element.style.height = null;
+	});
+	element.setAttribute("data-collapsed", "false");
 }
 
 function hideAccordionContents(contentNodes, hide) {
 	for (let i = 0; i < contentNodes.length; i++) {
-		contentNodes[i].parentElement.classList.add(hide);
-		contentNodes[i].style.height = "0px";
+		contentNodes[i].style.height = 0 + "px";
+		contentNodes[i].setAttribute("data-collapsed", true);
 	}
-}
-
-function querySelectorFrom(selector, elements) {
-	const elementsArr = [...elements];
-	return [...document.querySelectorAll(selector)].filter((elm) =>
-		elementsArr.includes(elm)
-	);
 }

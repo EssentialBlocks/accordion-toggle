@@ -159,7 +159,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 								<>
 									<PanelBody>
 										<BaseControl
-											label={__("Accordion Types", "essential-blocks")}
+											label={__("Accordion Types", "accordion-toggle")}
 											id="eb-accordion-type"
 										>
 											<ButtonGroup id="eb-accordion-type-btgrp">
@@ -181,7 +181,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											</ButtonGroup>
 										</BaseControl>
 										<BaseControl
-											label={__("Title Level", "essential-blocks")}
+											label={__("Title Level", "accordion-toggle")}
 											id="eb-accordion-heading-alignment"
 										>
 											<ButtonGroup className="eb-accordion-heading-alignment eb-html-tag-buttongroup">
@@ -201,7 +201,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											</ButtonGroup>
 										</BaseControl>
 										<RangeControl
-											label={__("Toggle Speed", "essential-blocks")}
+											label={__("Toggle Speed", "accordion-toggle")}
 											value={transitionDuration}
 											onChange={(transitionDuration) =>
 												setAttributes({ transitionDuration })
@@ -213,7 +213,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										/>
 										<ResponsiveRangeController
 											noUnits
-											baseLabel={__("Accordions Gap", "essential-blocks")}
+											baseLabel={__("Accordions Gap", "accordion-toggle")}
 											controlName={accGapRange}
 											resRequiredProps={resRequiredProps}
 											min={1}
@@ -221,7 +221,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											step={1}
 										/>
 										<ToggleControl
-											label={__("Enable FAQ Schema", "essential-blocks")}
+											label={__("Enable FAQ Schema", "accordion-toggle")}
 											checked={faqSchema}
 											onChange={() => setAttributes({ faqSchema: !faqSchema })}
 										/>
@@ -231,11 +231,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							{tab.name === "styles" && (
 								<>
 									<PanelBody
-										title={__("Icon", "essential-blocks")}
+										title={__("Icon", "accordion-toggle")}
 										// initialOpen={false}
 									>
 										<ToggleControl
-											label={__("Display Icon", "essential-blocks")}
+											label={__("Display Icon", "accordion-toggle")}
 											checked={displayIcon}
 											onChange={() =>
 												setAttributes({ displayIcon: !displayIcon })
@@ -243,7 +243,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										/>
 										{displayIcon && (
 											<>
-												<BaseControl label={__("Tab Icon", "essential-blocks")}>
+												<BaseControl label={__("Tab Icon", "accordion-toggle")}>
 													<FontIconPicker
 														icons={iconList}
 														value={tabIcon}
@@ -253,7 +253,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												</BaseControl>
 
 												<BaseControl
-													label={__("Expanded Icon", "essential-blocks")}
+													label={__("Expanded Icon", "accordion-toggle")}
 												>
 													<FontIconPicker
 														icons={iconList}
@@ -266,7 +266,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												</BaseControl>
 
 												<BaseControl
-													label={__("Icon Position", "essential-blocks")}
+													label={__("Icon Position", "accordion-toggle")}
 												>
 													<ButtonGroup id="eb-icon-pos-btgrp">
 														{ICON_POSITIONS.map((item, key) => (
@@ -289,7 +289,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 												<ResponsiveRangeController
 													noUnits
-													baseLabel={__("Icon Size", "essential-blocks")}
+													baseLabel={__("Icon Size", "accordion-toggle")}
 													controlName={rangeIconSize}
 													resRequiredProps={resRequiredProps}
 													min={1}
@@ -298,7 +298,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												/>
 
 												<ColorControl
-													label={__("Icon Color", "essential-blocks")}
+													label={__("Icon Color", "accordion-toggle")}
 													color={iconColor}
 													onChange={(iconColor) => setAttributes({ iconColor })}
 												/>
@@ -320,7 +320,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												</PanelBody>
 
 												<PanelBody
-													title={__("Background ", "essential-blocks")}
+													title={__("Background ", "accordion-toggle")}
 													// initialOpen={false}
 												>
 													<BackgroundControl
@@ -338,6 +338,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 													<BorderShadowControl
 														controlName={iconBdShadowConst}
 														resRequiredProps={resRequiredProps}
+														defaultBdrColor={"#aaaaaa"}
+														defaultBdrStyle={"solid"}
 														// noShadow
 														// noBorder
 													/>
@@ -347,11 +349,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Tab", "essential-blocks")}
+										title={__("Tab", "accordion-toggle")}
 										initialOpen={false}
 									>
 										<BaseControl
-											label={__("Title Align ", "essential-blocks")}
+											label={__("Title Align ", "accordion-toggle")}
 											id="eb-accoridon-title-align"
 										>
 											<ButtonGroup>
@@ -379,13 +381,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										/>
 
 										<ColorControl
-											label={__("Title Color", "essential-blocks")}
+											label={__("Title Color", "accordion-toggle")}
 											color={titleColor}
 											onChange={(titleColor) => setAttributes({ titleColor })}
 										/>
 
 										<ColorControl
-											label={__("Title hover Color", "essential-blocks")}
+											label={__("Title hover Color", "accordion-toggle")}
 											color={hoverTitleColor}
 											onChange={(hoverTitleColor) =>
 												setAttributes({ hoverTitleColor })
@@ -409,7 +411,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										</PanelBody>
 
 										<PanelBody
-											title={__("Background ", "essential-blocks")}
+											title={__("Background ", "accordion-toggle")}
 											// initialOpen={false}
 										>
 											<BackgroundControl
@@ -421,26 +423,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										</PanelBody>
 
 										<PanelBody
-											title={__("Expanded Tab Colors", "essential-blocks")}
+											title={__("Expanded Tab Colors", "accordion-toggle")}
 											// initialOpen={false}
 										>
 											<ColorControl
-												label={__("Background Color", "essential-blocks")}
+												label={__("Background Color", "accordion-toggle")}
 												color={activeBgColor}
 												onChange={(activeBgColor) =>
 													setAttributes({ activeBgColor })
 												}
 											/>
-											<span>
-												<em>
-													{__(
-														"Works in frontend page only",
-														"essential-blocks"
-													)}
-												</em>
-											</span>
+
 											<ColorControl
-												label={__("Title Color", "essential-blocks")}
+												label={__("Title Color", "accordion-toggle")}
 												color={activeTitleColor}
 												onChange={(activeTitleColor) =>
 													setAttributes({ activeTitleColor })
@@ -462,10 +457,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Content ", "essential-blocks")}
+										title={__("Content ", "accordion-toggle")}
 										initialOpen={false}
 									>
-										<BaseControl label={__("Align", "essential-blocks")}>
+										<BaseControl label={__("Align", "accordion-toggle")}>
 											<ButtonGroup>
 												{CONTENT_ALIGN.map((item, key) => (
 													<Button
@@ -490,7 +485,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										/>
 
 										<ColorControl
-											label={__("Content Color", "essential-blocks")}
+											label={__("Content Color", "accordion-toggle")}
 											color={contentColor}
 											onChange={(contentColor) =>
 												setAttributes({ contentColor })
@@ -514,7 +509,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										</PanelBody>
 
 										<PanelBody
-											title={__("Background ", "essential-blocks")}
+											title={__("Background ", "accordion-toggle")}
 											// initialOpen={false}
 										>
 											<BackgroundControl
@@ -542,7 +537,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							{tab.name === "advance" && (
 								<>
 									<PanelBody
-										title={__("Margin & Padding", "essential-blocks")}
+										title={__("Margin & Padding", "accordion-toggle")}
 										// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
@@ -558,7 +553,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Background ", "essential-blocks")}
+										title={__("Background ", "accordion-toggle")}
 										initialOpen={false}
 									>
 										<BackgroundControl
