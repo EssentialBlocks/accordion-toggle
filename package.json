@@ -1,7 +1,7 @@
 {
 	"name": "accordion",
 	"version": "1.2.6",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"description": "Display your FAQs & improve user experience with Accordion/Toggle block.",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "Gruntfile.js",
