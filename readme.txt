@@ -2,8 +2,8 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon, fencermonir
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 6.0
-Stable tag: 1.2.5
+Tested up to: 6.1
+Stable tag: 1.2.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,9 +11,17 @@ Display Your FAQs & Improve User Experience with Accordion/Toggle block.
 
 == Description ==
 
-**Accordion Toggle** helps you to display FAQs or key pieces of content in a way that readers can easily find what they are looking for. Using this Accordion Toggle plugin, you can create those key contents within the Gutenberg.
+**Accordion Toggle** helps you display FAQs or key pieces of content in a way that readers can easily find what they are looking for. Using this Accordion Toggle plugin, you can create those key contents within Gutenberg.
+
+**STUNNING FEATURES:**
+ - Add images, videos, or any other multiple blocks under your accordion
+ - Create unlimited nested accordion sections under one accordion
+ - Get listed in search engines with FAQ schema support
+ - Make your accordion toggle multipurpose without coding
 
 **Completely Customizable:** You can customize Accordion Toggle just the way you want.
+
+**Modular Control:** You can easily disable unnecessary blocks from the settings panel and speed up your website.
 
 **Super Light-weight:** No extra resources used and it's highly optimized for super fast loading & instant Live editing.
 
@@ -22,14 +30,14 @@ Display Your FAQs & Improve User Experience with Accordion/Toggle block.
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
 
-This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 1 million+ happy users from 180+ countries).
+This Block is brought to you by [WPDeveloper](https://wpdeveloper.com), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 1 million+ happy users from 180+ countries).
 
 ## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
 - For documentation and tutorials go to our [documentation](https://essential-blocks.com/docs/)
 - To report issue and contribution visit [Github](https://github.com/EssentialBlocks/accordion-toggle).
 - If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/accordion-toggle).
-- For more information about features, FAQs and documentation, check out our website at [WPDeveloper](https://wpdeveloper.net/).
+- For more information about features, FAQs and documentation, check out our website at [WPDeveloper](https://wpdeveloper.com/).
 
 ## 🙌 JOIN THE COMMUNITY ##
 
@@ -37,11 +45,13 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 
 🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
 
-🧡 LOVED Accordion/Toggle? Rate us on WordPress Repository
+🧡 LOVED Accordion/Toggle? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/accordion-toggle/reviews/)
 
 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
 Consider checking out our other WordPress solutions & boost your WordPress website:
+
+💡 [Essential Blocks For Gutenberg](https://wordpress.org/plugins/essential-blocks/) Get all stunning & interactive Gutenberg blocks to design your website seamlessly
 
 🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/): Most popular Elementor addons with 70+ widgets & ready blocks
 
@@ -81,6 +91,10 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.6 - 14/12/2022 =
+* Fixed: Accordion height issue
+* Improved: WordPress 6.1 version compatibility
 
 = 1.2.5 - 17/10/2022 =
 * Fixed: PHP error issue

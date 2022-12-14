@@ -66,10 +66,10 @@ export default function Edit(props) {
 		let contentWrapper = accordionTitle.current.nextElementSibling;
 		let tabIcon = accordionTitle.current
 			.getAttribute("data-tab-icon")
-			.split(" ");
+			?.split(" ");
 		let expandedIcon = accordionTitle.current
 			.getAttribute("data-expanded-icon")
-			.split(" ");
+			?.split(" ");
 		let iconWrapper = accordionTitle.current.children[0].children[0];
 
 		if (contentWrapper.style.display === "block") {
@@ -91,7 +91,7 @@ export default function Edit(props) {
 	};
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`		
+	const desktopAllStyles = softMinifyCssStrings(`
 	${
 		accordionColor
 			? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-wrapper {
@@ -137,20 +137,20 @@ export default function Edit(props) {
 
 				/* mimmikcssEnd */
 
-				@media all and (max-width: 1024px) {	
+				@media all and (max-width: 1024px) {
 
-					/* tabcssStart */			
+					/* tabcssStart */
 					${softMinifyCssStrings(tabAllStyles)}
-					/* tabcssEnd */			
-				
+					/* tabcssEnd */
+
 				}
-				
+
 				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
+
+					/* mobcssStart */
 					${softMinifyCssStrings(mobileAllStyles)}
-					/* mobcssEnd */			
-				
+					/* mobcssEnd */
+
 				}
 				`}
 				</style>
