@@ -92,7 +92,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.6 - dev =
+= 1.2.6 - 14/12/2022 =
 * Fixed: Accordion height issue
 * Improved: WordPress 6.1 version compatibility
 
