@@ -106,9 +106,11 @@ const attributes = {
 	},
 	activeBgColor: {
 		type: "string",
+		default: "",
 	},
 	activeTitleColor: {
 		type: "string",
+		default: "",
 	},
 	tagName: {
 		type: "string",
