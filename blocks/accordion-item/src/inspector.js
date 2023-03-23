@@ -36,7 +36,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 										<ColorControl
 											label={__(
-												"Accordion Backgrond Color",
+												"Accordion Background Color",
 												"essential-blocks"
 											)}
 											color={accordionColor}

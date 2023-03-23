@@ -192,7 +192,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 														isPrimary={tagName === item.value}
 														isSecondary={tagName !== item.value}
 														onClick={() =>
-															setAttributes({ tagName: item.value })
+															setAttributes({
+																tagName: item.value,
+															})
 														}
 													>
 														{item.label}
@@ -204,7 +206,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											label={__("Toggle Speed", "accordion-toggle")}
 											value={transitionDuration}
 											onChange={(transitionDuration) =>
-												setAttributes({ transitionDuration })
+												setAttributes({
+													transitionDuration,
+												})
 											}
 											min={0}
 											max={5}
@@ -223,7 +227,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 										<ToggleControl
 											label={__("Enable FAQ Schema", "accordion-toggle")}
 											checked={faqSchema}
-											onChange={() => setAttributes({ faqSchema: !faqSchema })}
+											onChange={() =>
+												setAttributes({
+													faqSchema: !faqSchema,
+												})
+											}
 										/>
 									</PanelBody>
 								</>
@@ -238,7 +246,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											label={__("Display Icon", "accordion-toggle")}
 											checked={displayIcon}
 											onChange={() =>
-												setAttributes({ displayIcon: !displayIcon })
+												setAttributes({
+													displayIcon: !displayIcon,
+												})
 											}
 										/>
 										{displayIcon && (
@@ -247,7 +257,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 													<FontIconPicker
 														icons={iconList}
 														value={tabIcon}
-														onChange={(tabIcon) => setAttributes({ tabIcon })}
+														onChange={(tabIcon) =>
+															setAttributes({
+																tabIcon,
+															})
+														}
 														appendTo="body"
 													/>
 												</BaseControl>
@@ -259,7 +273,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 														icons={iconList}
 														value={expandedIcon}
 														onChange={(expandedIcon) =>
-															setAttributes({ expandedIcon })
+															setAttributes({
+																expandedIcon,
+															})
 														}
 														appendTo="body"
 													/>
@@ -300,7 +316,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												<ColorControl
 													label={__("Icon Color", "accordion-toggle")}
 													color={iconColor}
-													onChange={(iconColor) => setAttributes({ iconColor })}
+													onChange={(iconColor) =>
+														setAttributes({
+															iconColor,
+														})
+													}
 												/>
 
 												<PanelBody
@@ -390,7 +410,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 											label={__("Title hover Color", "accordion-toggle")}
 											color={hoverTitleColor}
 											onChange={(hoverTitleColor) =>
-												setAttributes({ hoverTitleColor })
+												setAttributes({
+													hoverTitleColor,
+												})
 											}
 										/>
 
@@ -430,7 +452,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												label={__("Background Color", "accordion-toggle")}
 												color={activeBgColor}
 												onChange={(activeBgColor) =>
-													setAttributes({ activeBgColor })
+													setAttributes({
+														activeBgColor,
+													})
 												}
 											/>
 
@@ -438,9 +462,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 												label={__("Title Color", "accordion-toggle")}
 												color={activeTitleColor}
 												onChange={(activeTitleColor) =>
-													setAttributes({ activeTitleColor })
+													setAttributes({
+														activeTitleColor,
+													})
 												}
 											/>
+											<span>
+												<i>
+													{__(
+														"To see the changes, go to frontend page",
+														"accordion-toggle"
+													)}
+												</i>
+											</span>
 										</PanelBody>
 
 										<PanelBody
@@ -469,7 +503,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 														isSecondary={contentAlign !== item.value}
 														isPrimary={contentAlign === item.value}
 														onClick={() =>
-															setAttributes({ contentAlign: item.value })
+															setAttributes({
+																contentAlign: item.value,
+															})
 														}
 													>
 														{item.label}

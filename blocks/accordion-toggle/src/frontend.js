@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			} else {
 				contentNodes[i].setAttribute("data-collapsed", "true");
 				collapseSection(contentNodes[i]);
+				contentNodes[i].parentElement.classList.add(hide);
 			}
 		}
 
@@ -104,9 +105,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (isCollapsed) {
 				expandSection(contentNode);
 				contentNode.setAttribute("data-collapsed", "false");
+				clickedTab.parentElement.classList.remove(hide);
 			} else {
 				collapseSection(contentNode);
 				contentNode.setAttribute("data-collapsed", "true");
+				clickedTab.parentElement.classList.add(hide);
 			}
 			// Change tab icon
 			changeIcon(clickedTab);
@@ -124,6 +127,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		function onAccordionTabClick() {
 			let clickedTab = this;
+			Array.from(accordionWrapper).forEach((item) => {
+				item.classList.add(hide);
+			});
 			let contentNode = this.nextElementSibling;
 			let isCollapsed = contentNode.getAttribute("data-collapsed") === "true";
 			hideAccordionContents(contentNodes, hide);
@@ -131,10 +137,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (isCollapsed) {
 				expandSection(contentNode);
 				contentNode.setAttribute("data-collapsed", "false");
+				clickedTab.parentElement.classList.remove(hide);
 			} else {
 				collapseSection(contentNode);
 				contentNode.setAttribute("data-collapsed", "true");
 				changeIcon(clickedTab);
+				clickedTab.parentElement.classList.add(hide);
 			}
 			//Change tab icon
 			changeIcon(clickedTab);
