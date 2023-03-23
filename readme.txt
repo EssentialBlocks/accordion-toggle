@@ -92,7 +92,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.7 - dev =
+= 1.2.7 - 23/03/2023 =
 * Improved: Font loader & controls
 
 = 1.2.6 - 14/12/2022 =
