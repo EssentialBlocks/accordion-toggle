@@ -29,7 +29,7 @@ function create_block_accordion_block_init()
     wp_register_script(
         'essential-blocks-accordion-frontend',
         ACCORDION_BLOCK_ADMIN_URL . 'dist/frontend/index.js',
-        $frontend_dependencies['dependencies'],
+        array_merge($frontend_dependencies['dependencies'],['essential-blocks-controls-frontend']),
         ACCORDION_BLOCK_VERSION,
         true
     );
@@ -40,7 +40,8 @@ function create_block_accordion_block_init()
             array(
                 'render_callback' => function ($attributes, $content) {
                     if (!is_admin()) {
-                        wp_enqueue_style('eb-fontawesome-admin');
+												wp_enqueue_style('dashicons');
+                        wp_enqueue_style('essential-blocks-fontawesome');
                         wp_enqueue_style('essential-blocks-animation');
                         wp_enqueue_script('essential-blocks-accordion-frontend');
                         wp_enqueue_script('essential-blocks-eb-animation');

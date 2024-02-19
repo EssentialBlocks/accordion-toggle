@@ -9,8 +9,9 @@ import { select } from "@wordpress/data";
 
 import classnames from "classnames";
 import Inspector from "./inspector";
+import Style from "./style";
 
-const { softMinifyCssStrings, duplicateBlockIdFix } = EBAccordionControls;
+const { duplicateBlockIdFix, EBDisplayIcon, getIconClass } = window.EBAccordionControls;
 
 export default function Edit(props) {
 	const { attributes, setAttributes, className, isSelected, clientId } = props;
@@ -49,33 +50,18 @@ export default function Edit(props) {
 		),
 	});
 
-	// Set All Style in "blockMeta" Attribute
-	useEffect(() => {
-		const styleObject = {
-			desktop: desktopAllStyles,
-			tab: tabAllStyles,
-			mobile: mobileAllStyles,
-		};
-		if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
-			setAttributes({ blockMeta: styleObject });
-		}
-	}, [attributes]);
-
 	const accordionTitle = useRef(null);
 	const handleSlidingOfAccordion = () => {
 		let contentWrapper = accordionTitle.current.nextElementSibling;
-		let tabIcon = accordionTitle.current
-			.getAttribute("data-tab-icon")
-			?.split(" ");
-		let expandedIcon = accordionTitle.current
-			.getAttribute("data-expanded-icon")
-			?.split(" ");
+		let tabIcon = accordionTitle.current.getAttribute("data-tab-icon");
+		let expandedIcon = accordionTitle.current.getAttribute("data-expanded-icon");
 		let iconWrapper = accordionTitle.current.children[0].children[0];
 
 		if (contentWrapper.style.display === "block") {
 			contentWrapper.style.display = "none";
 			iconWrapper.removeAttribute("class");
-			for (let i = 0; i < tabIcon.length; i++) {
+			tabIcon = getIconClass(tabIcon).split(" ");
+			for (let i = 0;i < tabIcon.length;i++) {
 				iconWrapper.classList.add(tabIcon[i]);
 			}
 			iconWrapper.classList.add("eb-accordion-icon");
@@ -83,77 +69,20 @@ export default function Edit(props) {
 			contentWrapper.style.display = "block";
 			contentWrapper.style.opacity = "1";
 			iconWrapper.removeAttribute("class");
-			for (let i = 0; i < expandedIcon.length; i++) {
+			expandedIcon = getIconClass(expandedIcon).split(" ");
+			for (let i = 0;i < expandedIcon.length;i++) {
 				iconWrapper.classList.add(expandedIcon[i]);
 			}
 			iconWrapper.classList.add("eb-accordion-icon");
 		}
 	};
 
-	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`
-	${
-		accordionColor
-			? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-wrapper {
-		background-image: unset;
-		background-color: ${accordionColor};
-	}`
-			: ""
-	}
-	${
-		titleColor
-			? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title {
-		color: ${titleColor};
-	}`
-			: ""
-	}
-	${
-		iconColor
-			? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-icon {
-		color: ${iconColor};
-	}`
-			: ""
-	}
-	`);
-
-	// all css styles for Tab in strings ⬇
-	const tabAllStyles = softMinifyCssStrings(``);
-
-	// all css styles for Mobile in strings ⬇
-	const mobileAllStyles = softMinifyCssStrings(``);
-
 	return (
 		<>
 			{isSelected && <Inspector {...props} />}
 			<div {...blockProps}>
-				<style>
-					{`
-				${desktopAllStyles}
+				<Style {...props} />
 
-				/* mimmikcssStart */
-
-				${resOption === "Tablet" ? tabAllStyles : " "}
-				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
-
-				/* mimmikcssEnd */
-
-				@media all and (max-width: 1024px) {
-
-					/* tabcssStart */
-					${softMinifyCssStrings(tabAllStyles)}
-					/* tabcssEnd */
-
-				}
-
-				@media all and (max-width: 767px) {
-
-					/* mobcssStart */
-					${softMinifyCssStrings(mobileAllStyles)}
-					/* mobcssEnd */
-
-				}
-				`}
-				</style>
 				<div
 					className={`${blockId} eb-accordion-wrapper for_edit_page`}
 					data-clickable={clickable}
@@ -167,9 +96,7 @@ export default function Edit(props) {
 					>
 						{inheritedDisplayIcon && (
 							<span className="eb-accordion-icon-wrapper">
-								<span
-									className={`${inheritedTabIcon} eb-accordion-icon`}
-								></span>
+								<EBDisplayIcon icon={inheritedTabIcon} />
 							</span>
 						)}
 

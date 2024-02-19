@@ -1,5 +1,5 @@
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
-
+const { getIconClass } = window.EBAccordionControls;
 const save = ({ attributes }) => {
 	const {
 		title,
@@ -16,10 +16,12 @@ const save = ({ attributes }) => {
 				className={`${blockId} eb-accordion-wrapper`}
 				data-clickable={clickable}
 			>
-				<div className={`eb-accordion-title-wrapper`}>
+				<div className={`eb-accordion-title-wrapper`} tabIndex={0}>
 					{inheritedDisplayIcon && (
 						<span className="eb-accordion-icon-wrapper">
-							<span className={`${inheritedTabIcon} eb-accordion-icon`}></span>
+							<span
+								className={`${getIconClass(inheritedTabIcon)} eb-accordion-icon`}
+							></span>
 						</span>
 					)}
 					<RichText.Content

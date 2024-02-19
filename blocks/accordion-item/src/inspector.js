@@ -4,7 +4,7 @@
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, ToggleControl, TabPanel } from "@wordpress/components";
-const { ColorControl } = EBAccordionControls;
+const { ColorControl } = window.EBAccordionControls;
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const { clickable, accordionColor, titleColor, iconColor } = attributes;

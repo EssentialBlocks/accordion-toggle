@@ -57,10 +57,10 @@ class EBAccordionToggle {
         /**
          * Scripts
          */
-        $controls_dependencies = include_once ACCORDION_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+        $controls_dependencies = include_once ACCORDION_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
         wp_register_script(
             "eb-accordion-toggle-controls-util",
-            ACCORDION_BLOCK_ADMIN_URL . '/dist/controls.js',
+            ACCORDION_BLOCK_ADMIN_URL . '/dist/modules.js',
             $controls_dependencies['dependencies'],
             $controls_dependencies['version'],
             true
@@ -68,7 +68,8 @@ class EBAccordionToggle {
 
         wp_localize_script( 'eb-accordion-toggle-controls-util', 'EssentialBlocksLocalize', [
             'eb_wp_version' => (float) get_bloginfo( 'version' ),
-            'rest_rootURL'  => get_rest_url()
+            'rest_rootURL'  => get_rest_url(),
+						'fontAwesome' => "true"
         ] );
 
         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
@@ -83,11 +84,10 @@ class EBAccordionToggle {
 
         wp_enqueue_style(
             'accordion-toggle-editor-css',
-            ACCORDION_BLOCK_ADMIN_URL . '/dist/controls.css',
+            ACCORDION_BLOCK_ADMIN_URL . '/dist/modules.css',
             [
-                'fontpicker-material-theme',
-                'fontpicker-default-theme',
-                'eb-fontawesome-admin'
+								'essential-blocks-fontawesome',
+								'essential-blocks-iconpicker-css'
             ],
             ACCORDION_BLOCK_VERSION,
             'all'
@@ -117,6 +117,13 @@ class EBAccordionToggle {
         /**
          * Enqueue resources for Animation ||Start||
          */
+				wp_register_script(
+            'essential-blocks-controls-frontend',
+            ACCORDION_BLOCK_ADMIN_URL . 'dist/frontend.js',
+            [],
+            ACCORDION_BLOCK_VERSION,
+            true
+        );
         //Animate JS
         wp_enqueue_script(
             'essential-blocks-eb-animation',
@@ -148,8 +155,8 @@ class EBAccordionToggle {
         );
 
         wp_register_style(
-            'eb-fontawesome-admin',
-            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
+            'essential-blocks-fontawesome',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css',
             [],
             ACCORDION_BLOCK_VERSION,
             'all'
@@ -170,6 +177,14 @@ class EBAccordionToggle {
             ACCORDION_BLOCK_VERSION,
             'all'
         );
+
+				wp_register_style(
+					'essential-blocks-iconpicker-css',
+					ACCORDION_BLOCK_ADMIN_URL . 'dist/style-modules.css',
+					[],
+          ACCORDION_BLOCK_VERSION,
+          'all'
+				);
 
         wp_register_style(
             'essential-blocks-hover-css',
