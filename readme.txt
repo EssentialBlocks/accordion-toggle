@@ -92,10 +92,10 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.8 - dev =
-* Accordion block expanded color issue
+= 1.2.8 - 19/02/2024 =
+* Fixed: Accordion block expanded color issue
 * Fixed: Accordion block collapse issue
-* Fixed: Accordion Block scroll issue if the content is bigger than the viewport
+* Fixed: Accordion block scroll issue if the content is bigger than the viewport
 
 = 1.2.7 - 23/03/2023 =
 * Improved: Font loader & controls
