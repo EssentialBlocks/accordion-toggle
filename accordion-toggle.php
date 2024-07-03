@@ -106,7 +106,7 @@ class EBAccordionToggle {
 
         wp_enqueue_script(
             'eb-accordion-toggle-editor',
-            ACCORDION_BLOCK_ADMIN_URL . '/dist/index.js',
+            ACCORDION_BLOCK_ADMIN_URL . 'dist/index.js',
             $all_dependencies,
             ACCORDION_BLOCK_VERSION,
             true

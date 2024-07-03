@@ -11,8 +11,7 @@ import { createBlock } from "@wordpress/blocks";
 const ALLOWED_BLOCKS = ["accordion-toggle/accordion-item"];
 
 const {
-	duplicateBlockIdFix,
-	EBDisplayIcon
+    BlockProps
 } = window.EBAccordionControls;
 
 /**
@@ -24,149 +23,136 @@ import { times } from "lodash";
 import Style from "./style";
 
 const Edit = (props) => {
-	const {
-		attributes,
-		setAttributes,
-		className,
-		isSelected,
-		clientId
-	} = props;
-	const {
-		blockId,
-		classHook,
-		accordionType,
-		displayIcon,
-		tabIcon,
-		expandedIcon,
-		tagName,
-		faqSchema,
-		accordionChildCount,
-	} = attributes;
+    const {
+        attributes,
+        setAttributes,
+        isSelected,
+        clientId
+    } = props;
+    const {
+        blockId,
+        classHook,
+        accordionType,
+        displayIcon,
+        tabIcon,
+        expandedIcon,
+        tagName,
+        faqSchema,
+        accordionChildCount,
+    } = attributes;
 
-	// this useEffect is for creating a unique blockId for each block's unique className
-	useEffect(() => {
-		const BLOCK_PREFIX = "eb-accordion";
-		duplicateBlockIdFix({
-			BLOCK_PREFIX,
-			blockId,
-			setAttributes,
-			select,
-			clientId,
-		});
-	}, []);
+    const enhancedProps = {
+        ...props,
+        blockPrefix: 'eb-accordion',
+        style: <Style {...props} />
+    };
 
-	const blockProps = useBlockProps({
-		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
-	});
+    const addAccordion = () => {
+        const innerBlocks = [
+            ...select("core/block-editor").getBlocks(clientId),
+        ];
+        let count = innerBlocks ? innerBlocks.length : 3;
 
-	const addAccordion = () => {
-		const innerBlocks = [
-			...select("core/block-editor").getBlocks(clientId),
-		];
-		let count = innerBlocks ? innerBlocks.length : 3;
+        const newBlock = createBlock("accordion-toggle/accordion-item", {
+            itemId: count + 1,
+            title: __(`Accordion title ${count + 1}`, "essential-blocks"),
+            inheritedAccordionType: accordionType,
+            inheritedTagName: tagName,
+            inheritedDisplayIcon: displayIcon,
+            inheritedTabIcon: tabIcon,
+            inheritedExpandedIcon: expandedIcon,
+            parentBlockId: blockId,
+        });
+        innerBlocks.splice(innerBlocks.length, 0, newBlock);
+        dispatch("core/block-editor")
+            .replaceInnerBlocks(clientId, innerBlocks)
+            .then(() => {
+                setAttributes({ accordionChildCount: count + 1 });
+            });
+    };
 
-		const newBlock = createBlock("accordion-toggle/accordion-item", {
-			itemId: count + 1,
-			title: __(`Accordion title ${count + 1}`, "essential-blocks"),
-			inheritedAccordionType: accordionType,
-			inheritedTagName: tagName,
-			inheritedDisplayIcon: displayIcon,
-			inheritedTabIcon: tabIcon,
-			inheritedExpandedIcon: expandedIcon,
-			parentBlockId: blockId,
-		});
-		innerBlocks.splice(innerBlocks.length, 0, newBlock);
-		dispatch("core/block-editor")
-			.replaceInnerBlocks(clientId, innerBlocks)
-			.then(() => {
-				setAttributes({ accordionChildCount: count + 1 });
-			});
-	};
+    useEffect(() => {
+        if (!tabIcon) {
+            setAttributes({ tabIcon: "fas fa-angle-right" });
+        }
+        if (!expandedIcon) {
+            setAttributes({ expandedIcon: "fas fa-angle-down" });
+        }
+        const parentBlocks = select("core/block-editor").getBlocksByClientId(
+            clientId
+        )[0];
 
-	useEffect(() => {
-		if (!tabIcon) {
-			setAttributes({ tabIcon: "fas fa-angle-right" });
-		}
-		if (!expandedIcon) {
-			setAttributes({ expandedIcon: "fas fa-angle-down" });
-		}
-		const parentBlocks = select("core/block-editor").getBlocksByClientId(
-			clientId
-		)[0];
+        const innerBlocks = parentBlocks?.innerBlocks;
 
-		const innerBlocks = parentBlocks?.innerBlocks;
+        const { updateBlockAttributes } = dispatch("core/block-editor");
 
-		const { updateBlockAttributes } = dispatch("core/block-editor");
+        if (innerBlocks) {
+            times(innerBlocks.length, (n) => {
+                updateBlockAttributes(innerBlocks[n].clientId, {
+                    itemId: n + 1,
+                    inheritedAccordionType: accordionType,
+                    inheritedDisplayIcon: displayIcon,
+                    inheritedTabIcon: tabIcon,
+                    inheritedExpandedIcon: expandedIcon,
+                    inheritedTagName: tagName,
+                    faqSchema: faqSchema,
+                    parentBlockId: parentBlocks.attributes.blockId,
+                });
+            });
+        }
+    }, []);
 
-		if (innerBlocks) {
-			times(innerBlocks.length, (n) => {
-				updateBlockAttributes(innerBlocks[n].clientId, {
-					itemId: n + 1,
-					inheritedAccordionType: accordionType,
-					inheritedDisplayIcon: displayIcon,
-					inheritedTabIcon: tabIcon,
-					inheritedExpandedIcon: expandedIcon,
-					inheritedTagName: tagName,
-					faqSchema: faqSchema,
-					parentBlockId: parentBlocks.attributes.blockId,
-				});
-			});
-		}
-	}, []);
+    const insertAccodionItem = (accordionChildCount) => {
+        return times(accordionChildCount, (n) => [
+            "accordion-toggle/accordion-item",
+            {
+                itemId: n + 1,
+                title: __(`Accordion title ${n + 1}`, "essential-blocks"),
+                inheritedAccordionType: accordionType,
+                inheritedDisplayIcon: displayIcon,
+                inheritedTabIcon: "fas fa-angle-right",
+                inheritedExpandedIcon: "fas fa-angle-down",
+                inheritedTagName: tagName,
+                faqSchema: faqSchema,
+                parentBlockId: blockId,
+            },
+        ]);
+    };
 
-	const insertAccodionItem = (accordionChildCount) => {
-		return times(accordionChildCount, (n) => [
-			"accordion-toggle/accordion-item",
-			{
-				itemId: n + 1,
-				title: __(`Accordion title ${n + 1}`, "essential-blocks"),
-				inheritedAccordionType: accordionType,
-				inheritedDisplayIcon: displayIcon,
-				inheritedTabIcon: "fas fa-angle-right",
-				inheritedExpandedIcon: "fas fa-angle-down",
-				inheritedTagName: tagName,
-				faqSchema: faqSchema,
-				parentBlockId: blockId,
-			},
-		]);
-	};
-
-	return (
-		<>
-			{isSelected && <Inspector {...props} addAccordion={addAccordion} />}
-			<div {...blockProps}>
-				<Style {...props} />
-
-				<div
-					className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}
-				>
-					<div className={`${blockId} eb-accordion-container`}>
-						<div className="eb-accordion-inner">
-							<InnerBlocks
-								template={insertAccodionItem(
-									accordionChildCount
-								)}
-								templateLock={false}
-								allowedBlocks={ALLOWED_BLOCKS}
-							/>
-						</div>
-					</div>
-					<div className="eb-accordion-add-button">
-						<Button
-							className="is-default"
-							label={__("Add Accordion Item", "essential-blocks")}
-							icon="plus-alt"
-							onClick={addAccordion}
-						>
-							<span className="eb-accordion-add-button-label">
-								{__("Add Accordion Item", "essential-blocks")}
-							</span>
-						</Button>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+    return (
+        <>
+            {isSelected && <Inspector {...props} addAccordion={addAccordion} />}
+            <BlockProps.Edit {...enhancedProps}>
+                <div
+                    className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}
+                >
+                    <div className={`${blockId} eb-accordion-container`}>
+                        <div className="eb-accordion-inner">
+                            <InnerBlocks
+                                template={insertAccodionItem(
+                                    accordionChildCount
+                                )}
+                                templateLock={false}
+                                allowedBlocks={ALLOWED_BLOCKS}
+                            />
+                        </div>
+                    </div>
+                    <div className="eb-accordion-add-button">
+                        <Button
+                            className="is-default"
+                            label={__("Add Accordion Item", "essential-blocks")}
+                            icon="plus-alt"
+                            onClick={addAccordion}
+                        >
+                            <span className="eb-accordion-add-button-label">
+                                {__("Add Accordion Item", "essential-blocks")}
+                            </span>
+                        </Button>
+                    </div>
+                </div>
+            </BlockProps.Edit>
+        </>
+    );
 };
 
 export default Edit;

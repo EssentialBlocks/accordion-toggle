@@ -12,7 +12,10 @@ export { default as faIcons } from "../controls/src/extras/faIcons";
 import "../controls/src/group-controls";
 export { default as AdvancedControls } from "../controls/src/group-controls/components/advanced-controls";
 export { EBIconPicker, EBDisplayIcon } from "../controls/src/controls/icon-picker";
-
+export { BlockProps } from "../controls/src/components/BlockComponents/EBBlockProps";
+export { default as DynamicInputValueHandler } from "../controls/src/controls/dynamic-field/DynamicInputValueHandler";
+export { default as DynamicFormFieldValueHandler } from "../controls/src/controls/dynamic-field/DynamicFormFieldValueHandler";
+export { DynamicInputControl, DynamicFormFieldControl } from "../controls/src/controls/dynamic-field";
 //Export Helper Functions
 export {
 	mimmikCssForResBtns,
