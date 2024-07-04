@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon, fencermonir
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,6 +91,12 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.9 - 04/07/2024 =
+* Fixed: Accordion block title align not working
+* Fixed: Accordion block style conflict with inner Accordion block
+* Fixed: Accordion block hover color issue
+* Improved: controls
 
 = 1.2.8 - 19/02/2024 =
 * Fixed: Accordion block expanded color issue
