@@ -51,3 +51,28 @@ controls
 lib/style-handler/style-handler.js
 lib/style-handler/helpers.js
 .wordpress-org
+
+# Babel configuration (build-time only)
+.babelrc.js
+.babelrc.json
+babel.config.js
+babel.config.json
+
+# Build tooling / bundler config (build-time only)
+config
+postcss.config.js
+tailwind.config.js
+.prettierrc
+.prettierrc.js
+.prettierignore
+.nvmrc
+.npmrc
+pnpm-lock.yaml
+
+# Source maps — dev-only, ~6MB of the archive
+*.map
+
+# Internal docs, not shipped to wordpress.org
+compatibility-report.md
+CHANGELOG.md
+CONTRIBUTING.md
