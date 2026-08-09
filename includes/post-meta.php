@@ -9,7 +9,10 @@ class Accordion_Post_Meta
 {
     public function __construct()
     {
-        add_filter('init', array($this, 'register_meta'));
+        // `init` is an action, not a filter. Both go through the same registry
+        // so this is behaviour-identical, but add_filter() on an action trips
+        // static analysis and WPCS.
+        add_action('init', array($this, 'register_meta'));
     }
 
     /**
@@ -21,6 +24,9 @@ class Accordion_Post_Meta
             'post',
             '_eb_attr',
             array(
+                // `type` is implicitly 'string' when omitted; declaring it
+                // explicitly is required for a stable REST schema on WP 5.5+.
+                'type' => 'string',
                 'show_in_rest' => true,
                 'single' => true,
                 'auth_callback' => [$this, 'auth_callback'],

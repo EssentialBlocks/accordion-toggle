@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class ATFaqSchema
 {
     /**
@@ -53,7 +58,11 @@ class ATFaqSchema
     {
         $this->render_accordion_item_faq_schema();
 
-        echo self::$faq_schema;
+        if (!empty(self::$faq_schema)) {
+            // Schema markup is assembled from escaped values inside this class,
+            // so it is emitted verbatim as a JSON-LD <script> block.
+            echo self::$faq_schema; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
     }
 
     /**
@@ -73,44 +82,41 @@ class ATFaqSchema
                 return;
             }
 
-            if (!method_exists($post, 'post_content')) {
-                $blocks = $this->eb_parse_blocks($post->post_content);
+            $blocks = $this->eb_parse_blocks($post->post_content);
 
-                if (!is_array($blocks) || empty($blocks)) {
-                    return;
-                }
-                foreach ($blocks as $block) {
+            if (!is_array($blocks) || empty($blocks)) {
+                return;
+            }
+            foreach ($blocks as $block) {
 
-                    if (!is_object($block) && is_array($block) && isset($block['blockName'])) {
+                if (!is_object($block) && is_array($block) && isset($block['blockName'])) {
 
-                        if ('accordion-toggle/accordion-toggle' === $block['blockName']) {
+                    if ('accordion-toggle/accordion-toggle' === $block['blockName']) {
 
-                            if (isset($block['attrs']) && is_array($block['attrs'])) {
-                                $attributes = $block['attrs'];
-                                if (!empty($attributes['blockId'])) {
+                        if (isset($block['attrs']) && is_array($block['attrs'])) {
+                            $attributes = $block['attrs'];
+                            if (!empty($attributes['blockId'])) {
 
-                                    $unique_id = $attributes['blockId'];
-                                    if (isset($attributes['faqSchema']) && $attributes['faqSchema']) {
-                                        $faq_script_id = 'eb-faq' . esc_attr($unique_id);
-                                        if (is_null(self::$faq_schema)) {
-                                            self::$faq_schema = '<script type="application/ld+json" class="eb-faq-schema-graph eb-faq-schema-graph--' . $faq_script_id . '">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}</script>';
-                                        }
+                                $unique_id = $attributes['blockId'];
+                                if (isset($attributes['faqSchema']) && $attributes['faqSchema']) {
+                                    $faq_script_id = 'eb-faq' . esc_attr($unique_id);
+                                    if (is_null(self::$faq_schema)) {
+                                        self::$faq_schema = '<script type="application/ld+json" class="eb-faq-schema-graph eb-faq-schema-graph--' . $faq_script_id . '">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}</script>';
                                     }
                                 }
                             }
                         }
-                        // check for accordion-item blocks
-                        if ('accordion-toggle/accordion-item' === $block['blockName']) {
-                            die('innerblocks');
-                            if (isset($block['attrs']) && is_array($block['attrs'])) {
-                                if (isset($block['attrs']['faqSchema']) && $block['attrs']['faqSchema']) {
-                                    $this->render_accordion_item_scheme_head($block);
-                                }
+                    }
+                    // check for accordion-item blocks
+                    if ('accordion-toggle/accordion-item' === $block['blockName']) {
+                        if (isset($block['attrs']) && is_array($block['attrs'])) {
+                            if (isset($block['attrs']['faqSchema']) && $block['attrs']['faqSchema']) {
+                                $this->render_accordion_item_scheme_head($block);
                             }
                         }
-                        if (isset($block['innerBlocks']) && !empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
-                            $this->recursive_inner_blocks($block['innerBlocks']);
-                        }
+                    }
+                    if (isset($block['innerBlocks']) && !empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+                        $this->recursive_inner_blocks($block['innerBlocks']);
                     }
                 }
             }
@@ -180,7 +186,7 @@ class ATFaqSchema
     public function render_accordion_item_scheme_head($block)
     {
         if (!is_null(self::$faq_schema)) {
-            if (is_array($block['innerBlocks']) && !empty($block['innerBlocks'])) {
+            if (isset($block['innerBlocks']) && is_array($block['innerBlocks']) && !empty($block['innerBlocks'])) {
 
                 $answer = '';
                 foreach ($block['innerBlocks'] as $inner_block) {
@@ -212,7 +218,11 @@ class ATFaqSchema
                     }
                 }
 
-                $block_inner_html = trim(strip_tags($block['innerHTML']));
+                // Cast before strip_tags(): passing null to a non-nullable
+                // internal string parameter is deprecated as of PHP 8.1, and
+                // the key is missing entirely on some parsed block shapes.
+                $raw_inner_html   = isset($block['innerHTML']) ? (string) $block['innerHTML'] : '';
+                $block_inner_html = trim(strip_tags($raw_inner_html));
                 $question = !empty($block_inner_html) ? $block_inner_html : '';
 
 

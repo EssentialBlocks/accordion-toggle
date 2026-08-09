@@ -4,12 +4,15 @@
  * Plugin Name:     Accordion Toggle
  * Plugin URI:         https://essential-blocks.com
  * Description:     Display Your FAQs & Improve User Experience with Accordion/Toggle block.
- * Version:         1.2.9
+ * Version:         1.5.0
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:     accordion-toggle
+ * Requires at least: 5.6
+ * Requires PHP:    7.2
+ * Tested up to:    7.0
  *
  * @package         accordion-toggle
  */
@@ -26,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ACCORDION_BLOCK_VERSION', "1.2.9" );
+define( 'ACCORDION_BLOCK_VERSION', "1.5.0" );
 define( 'ACCORDION_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'ACCORDION_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -57,7 +60,7 @@ class EBAccordionToggle {
         /**
          * Scripts
          */
-        $controls_dependencies = include_once ACCORDION_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
+        $controls_dependencies = Accordion_Helper::get_asset_file( '/dist/modules.asset.php' );
         wp_register_script(
             "eb-accordion-toggle-controls-util",
             ACCORDION_BLOCK_ADMIN_URL . '/dist/modules.js',
@@ -93,9 +96,8 @@ class EBAccordionToggle {
             'all'
         );
 
-        $script_asset_path = ACCORDION_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
-        $script_asset      = require $script_asset_path;
-        $all_dependencies  = array_merge( $script_asset['dependencies'], [
+        $script_asset     = Accordion_Helper::get_asset_file( '/dist/index.asset.php' );
+        $all_dependencies = array_merge( $script_asset['dependencies'], [
             'wp-blocks',
             'wp-i18n',
             'wp-element',
@@ -203,10 +205,43 @@ class EBAccordionToggle {
         );
     }
 
+    /**
+     * Warn an administrator when the style-handler submodule is absent.
+     *
+     * Runs on `admin_notices`, so the translation calls happen well after
+     * `init` (loading them earlier triggers a _doing_it_wrong notice on WP 6.7+).
+     */
+    public function style_handler_missing_notice() {
+        if ( ! current_user_can( 'activate_plugins' ) ) {
+            return;
+        }
+
+        printf(
+            '<div class="notice notice-error"><p><strong>%s</strong> %s</p><p><code>git submodule update --init --recursive</code></p></div>',
+            esc_html__( 'Accordion Toggle:', 'accordion-toggle' ),
+            esc_html__( 'the bundled style-handler library is missing, so block styles will not be generated and the front end will render unstyled. If this is a development checkout, initialise the git submodules:', 'accordion-toggle' )
+        );
+    }
+
     private function load_block_dependencies() {
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/font-loader.php';
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/post-meta.php';
-        require_once ACCORDION_BLOCK_ADMIN_PATH . '/lib/style-handler/style-handler.php';
+
+        // `lib/style-handler` is a git submodule; guard so an uninitialised
+        // submodule degrades instead of fataling the whole site.
+        //
+        // It is NOT optional: it turns each block's `blockMeta` attribute into
+        // the generated stylesheet under uploads/eb-style/. Without it the
+        // editor still looks right (it computes styles in JS) but the front end
+        // renders completely unstyled. Surface a notice rather than failing
+        // silently — a silent skip here is very hard to diagnose.
+        $style_handler = ACCORDION_BLOCK_ADMIN_PATH . '/lib/style-handler/style-handler.php';
+        if ( file_exists( $style_handler ) ) {
+            require_once $style_handler;
+        } else {
+            add_action( 'admin_notices', [$this, 'style_handler_missing_notice'] );
+        }
+
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/helpers.php';
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/class-faq-schema.php';
         if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
