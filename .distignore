@@ -76,3 +76,17 @@ pnpm-lock.yaml
 compatibility-report.md
 CHANGELOG.md
 CONTRIBUTING.md
+
+# Orphaned Font Awesome 4/5 + fontIconPicker webfonts (~3.7MB).
+# Nothing references them: the only enqueued icon stylesheet is
+# assets/css/fontawesome/css/all.min.css, which resolves to
+# assets/css/fontawesome/webfonts/, and dist/*.css inlines
+# fontIconPicker as data URIs.
+assets/fonts
+
+# Editor "controls" bundle (~2.5MB) — built by webpack but never enqueued.
+# accordion-toggle.php registers eb-accordion-toggle-controls-util from
+# dist/modules.js, not dist/controls.js.
+dist/controls.js
+dist/controls.css
+dist/controls.asset.php
