@@ -37,7 +37,8 @@ const {
     BorderShadowControl,
     BackgroundControl,
     AdvancedControls,
-    EBIconPicker
+    EBIconPicker,
+    ResetControl
 } = window.EBAccordionControls;
 
 import objAttributes from "./attributes";
@@ -227,22 +228,34 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 ))}
                                             </ButtonGroup>
                                         </BaseControl>
-                                        <RangeControl
-                                            label={__(
-                                                "Toggle Speed",
-                                                "essential-blocks"
-                                            )}
-                                            value={transitionDuration}
-                                            onChange={(transitionDuration) =>
+                                        <ResetControl
+                                            onReset={() =>
                                                 setAttributes({
-                                                    transitionDuration,
+                                                    transitionDuration:
+                                                        objAttributes
+                                                            .transitionDuration
+                                                            .default,
                                                 })
                                             }
-                                            min={0}
-                                            max={5}
-                                            step={0.1}
-                                            allowReset={true}
-                                        />
+                                        >
+                                            <RangeControl
+                                                label={__(
+                                                    "Toggle Speed",
+                                                    "essential-blocks"
+                                                )}
+                                                value={transitionDuration}
+                                                onChange={(
+                                                    transitionDuration
+                                                ) =>
+                                                    setAttributes({
+                                                        transitionDuration,
+                                                    })
+                                                }
+                                                min={0}
+                                                max={5}
+                                                step={0.1}
+                                            />
+                                        </ResetControl>
                                         <ResponsiveRangeController
                                             noUnits
                                             baseLabel={__(

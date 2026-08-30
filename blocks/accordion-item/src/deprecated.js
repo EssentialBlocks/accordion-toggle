@@ -6,10 +6,60 @@ const { omit } = lodash;
 const { getIconClass, EBDisplayIcon } = window.EBAccordionControls;
 
 import attributes from "./attributes";
+import save from "./save";
+
+/**
+ * titlePrefixIcon / titleSuffixIcon used to default to a full CSS class string
+ * ("dashicon dashicons dashicons-admin-users") instead of the bare icon name the
+ * picker stores and EBDisplayIcon expects. EBDisplayIcon prepends "dashicons-" to
+ * whatever it is given, so the old default rendered a malformed class list
+ * containing a bogus `dashicons-dashicon`, and the picker could not match the
+ * value against its list of names so it showed nothing as selected.
+ *
+ * The defaults are now bare names. Every deprecation below that still carries
+ * these two attributes keeps the legacy defaults so posts saved before the change
+ * — which have the old class string baked into their markup and no explicit value
+ * in the block comment — still validate, and `migrateLegacyIcons` normalises them
+ * on load.
+ */
+const LEGACY_ICON_CLASS_PREFIX = "dashicon dashicons ";
+
+const legacyIconDefaults = {
+    titlePrefixIcon: {
+        type: "string",
+        default: "dashicon dashicons dashicons-admin-users",
+    },
+    titleSuffixIcon: {
+        type: "string",
+        default: "dashicon dashicons dashicons-admin-site",
+    },
+};
+
+const toIconName = (value) =>
+    typeof value === "string" && value.startsWith(LEGACY_ICON_CLASS_PREFIX)
+        ? value.slice(LEGACY_ICON_CLASS_PREFIX.length)
+        : value;
+
+const migrateLegacyIcons = (attrs) => ({
+    ...attrs,
+    titlePrefixIcon: toIconName(attrs.titlePrefixIcon),
+    titleSuffixIcon: toIconName(attrs.titleSuffixIcon),
+});
 
 const deprecated = [
+    // Current markup, saved while the icon attributes still defaulted to the
+    // legacy class strings. Same `save` as the live block - only the defaults differ.
     {
-        attributes: { ...attributes },
+        attributes: {
+            ...attributes,
+            ...legacyIconDefaults,
+        },
+        save,
+        migrate: migrateLegacyIcons,
+    },
+    {
+        attributes: { ...attributes, ...legacyIconDefaults },
+        migrate: migrateLegacyIcons,
         save: ({ attributes }) => {
             const {
                 title,
@@ -117,7 +167,9 @@ const deprecated = [
             ...omit({ ...attributes }, [
                 "parentBlockId",
             ]),
+            ...legacyIconDefaults,
         },
+        migrate: migrateLegacyIcons,
         save: ({ attributes }) => {
             const {
                 title,
@@ -278,7 +330,8 @@ const deprecated = [
         },
     },
     {
-        attributes: { ...attributes },
+        attributes: { ...attributes, ...legacyIconDefaults },
+        migrate: migrateLegacyIcons,
         save: ({ attributes }) => {
             const {
                 title,
@@ -331,7 +384,9 @@ const deprecated = [
                 "iconColor",
                 "parentBlockId",
             ]),
+            ...legacyIconDefaults,
         },
+        migrate: migrateLegacyIcons,
         save: ({ attributes }) => {
             const {
                 title,

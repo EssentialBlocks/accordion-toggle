@@ -7,13 +7,47 @@ import {
     PanelBody, ToggleControl, TabPanel, Button, BaseControl,
     ButtonGroup,
 } from "@wordpress/components";
-const { ColorControl, DynamicInputControl, EBIconPicker, ImageAvatar } = window.EBAccordionControls;
+const { ColorControl, DynamicInputControl, EBIconPicker, ImageAvatar, ResponsiveAlignControl } = window.EBAccordionControls;
 
 import {
     MEDIA_TYPES,
+    TITLE_CONTENT_DIRECTION,
+    TITLE_CONTENT_VERTICAL_ALIGN,
+    TITLE_CONTENT_HORIZONTAL_ALIGN,
+    titleContentDirection,
+    titleContentVAlign,
 } from "./constants";
 
+import objAttributes from "./attributes";
+
 const Inspector = ({ attributes, setAttributes }) => {
+    // Shape the shared responsive controls expect. It was referenced further
+    // down by controls that had been commented out, but never defined.
+    const resRequiredProps = {
+        setAttributes,
+        resOption: attributes.resOption,
+        attributes,
+        objAttributes,
+    };
+
+    // `align-items` is the flex cross axis: vertical while the row is
+    // flex-direction:row, horizontal once it is flex-direction:column. The values
+    // are identical, so only the button labels follow the layout.
+    //
+    // Read the direction for the device currently being previewed, mirroring the
+    // CSS fallback where an empty tablet/mobile value inherits the wider one.
+    const activeDirection =
+        attributes.resOption === "Mobile"
+            ? attributes[`MOB${titleContentDirection}`] ||
+              attributes[`TAB${titleContentDirection}`] ||
+              attributes[titleContentDirection]
+            : attributes.resOption === "Tablet"
+              ? attributes[`TAB${titleContentDirection}`] ||
+                attributes[titleContentDirection]
+              : attributes[titleContentDirection];
+
+    const isColumnLayout = activeDirection === "column";
+
     const { clickable, accordionColor,
         titleColor, iconColor,
         title,
@@ -75,6 +109,45 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                                     <PanelBody title={__("Title", "essential-blocks")}>
                                         <PanelBody title={__("Title Prefix", "essential-blocks")}>
+                                            <ResponsiveAlignControl
+                                                baseLabel={__(
+                                                    "Prefix & Title Layout",
+                                                    "essential-blocks"
+                                                )}
+                                                controlName={
+                                                    titleContentDirection
+                                                }
+                                                resRequiredProps={
+                                                    resRequiredProps
+                                                }
+                                                options={
+                                                    TITLE_CONTENT_DIRECTION
+                                                }
+                                            />
+
+                                            <ResponsiveAlignControl
+                                                baseLabel={
+                                                    isColumnLayout
+                                                        ? __(
+                                                              "Prefix & Title Horizontal Align",
+                                                              "essential-blocks"
+                                                          )
+                                                        : __(
+                                                              "Prefix & Title Vertical Align",
+                                                              "essential-blocks"
+                                                          )
+                                                }
+                                                controlName={titleContentVAlign}
+                                                resRequiredProps={
+                                                    resRequiredProps
+                                                }
+                                                options={
+                                                    isColumnLayout
+                                                        ? TITLE_CONTENT_HORIZONTAL_ALIGN
+                                                        : TITLE_CONTENT_VERTICAL_ALIGN
+                                                }
+                                            />
+
                                             <BaseControl id="eb-accordion-image-icon">
                                                 <ButtonGroup id="eb-accordion-image-icon">
                                                     {MEDIA_TYPES.map(

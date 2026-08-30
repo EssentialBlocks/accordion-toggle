@@ -13,7 +13,7 @@ class Accordion_Font_Loder {
     protected static $instances = null;
 
     public static $gfonts      = [];
-    private static $block_name = [];
+    private static $block_name = '';
 
     /**
      * Registers the plugin.
@@ -48,8 +48,11 @@ class Accordion_Font_Loder {
      * @access public
      */
     public function get_fonts_on_render_block( $block_content, $block ) {
-        if ( isset( $block['attrs'] ) ) {
-            if ( 'essential-blocks' === self::$block_name || $block['blockName'] === self::$block_name ) {
+        if ( isset( $block['attrs'] ) && is_array( $block['attrs'] ) ) {
+            // `blockName` is null for classic/freeform content and can be absent
+            // on synthetic block arrays — reading it blind warns on PHP 8.0+.
+            $block_name = isset( $block['blockName'] ) ? $block['blockName'] : '';
+            if ( 'essential-blocks' === self::$block_name || $block_name === self::$block_name ) {
                 $fonts        = self::get_fonts_family( $block['attrs'] );
                 self::$gfonts = array_unique( array_merge( self::$gfonts, $fonts ) );
             }
@@ -64,9 +67,22 @@ class Accordion_Font_Loder {
      * @access public
      */
     public static function get_fonts_family( $attributes ) {
-        $keys             = preg_grep( '/^(\w+)FontFamily/i', array_keys( $attributes ), 0 );
         $googleFontFamily = [];
+        if ( ! is_array( $attributes ) ) {
+            return $googleFontFamily;
+        }
+
+        $keys = preg_grep( '/^(\w+)FontFamily/i', array_keys( $attributes ), 0 );
+        if ( empty( $keys ) ) {
+            return $googleFontFamily;
+        }
+
         foreach ( $keys as $key ) {
+            // A non-scalar attribute value used as an array key is an
+            // "Illegal offset type" TypeError on PHP 8.0+.
+            if ( ! is_string( $attributes[$key] ) || '' === $attributes[$key] ) {
+                continue;
+            }
             $googleFontFamily[$attributes[$key]] = $attributes[$key];
         }
         return $googleFontFamily;
@@ -87,7 +103,7 @@ class Accordion_Font_Loder {
         if ( 'false' !== $googleFont ) {
             $fonts = self::$gfonts;
 
-            if (  ( $key = array_search( 'Default', $fonts ) ) !== false ) {
+            if (  ( $key = array_search( 'Default', $fonts, true ) ) !== false ) {
                 unset( $fonts[$key] );
             }
             if ( ! empty( $fonts ) ) {
@@ -102,7 +118,7 @@ class Accordion_Font_Loder {
                     ];
                     wp_register_style(
                         $handle_name,
-                        add_query_arg( $query_args, '//fonts.googleapis.com/css' ),
+                        add_query_arg( $query_args, 'https://fonts.googleapis.com/css' ),
                         []
                     );
                     wp_enqueue_style( $handle_name );

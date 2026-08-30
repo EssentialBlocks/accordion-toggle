@@ -250,9 +250,39 @@ const hideAccordionContents = (accordion, transitionDuration) => {
     }
 }
 
+/**
+ * One owned slide timer per element.
+ *
+ * slideUp() and slideDown() finish asynchronously: each schedules a setTimeout that
+ * applies the final state after `duration` ms -- slideUp's sets `display: none`.
+ * That timer belonged to nobody and was never cancelled, so a slide that started
+ * while an earlier slide on the same element was still pending got silently undone
+ * when the stale timer fired.
+ *
+ * The initialisation loop calls slideUp() on every collapsed panel at load, so a
+ * click inside that window (up to the block's Toggle Speed, which is configurable up
+ * to 5s) ran slideDown() and set data-collapsed="false", and then the leftover init
+ * timer forced `display: none`. The panel was left desynced -- flagged open, rendered
+ * closed. onToggleTabClick()/onAccordionTabClick() branch on data-collapsed alone, so
+ * from then on every click took the close branch and the panel refused to open.
+ *
+ * Owning the timer on the element and clearing it before each new slide keeps the two
+ * in step for any panel, for both accordion types, and also covers rapid repeat clicks
+ * during an in-flight animation.
+ */
+const EB_SLIDE_TIMER = "__ebSlideTimer";
+
+const cancelPendingSlide = (target) => {
+    if (target[EB_SLIDE_TIMER]) {
+        window.clearTimeout(target[EB_SLIDE_TIMER]);
+        target[EB_SLIDE_TIMER] = null;
+    }
+};
+
 /* SLIDE UP */
 const slideUp = (target, duration = 500) => {
 
+    cancelPendingSlide(target);
     target.style.transitionProperty = 'height, margin, padding';
     target.style.transitionDuration = duration + 'ms';
     target.style.boxSizing = 'border-box';
@@ -264,7 +294,8 @@ const slideUp = (target, duration = 500) => {
     target.style.paddingBottom = 0;
     target.style.marginTop = 0;
     target.style.marginBottom = 0;
-    window.setTimeout(() => {
+    target[EB_SLIDE_TIMER] = window.setTimeout(() => {
+        target[EB_SLIDE_TIMER] = null;
         target.style.display = 'none';
         target.style.removeProperty('height');
         target.style.removeProperty('padding-top');
@@ -280,6 +311,8 @@ const slideUp = (target, duration = 500) => {
 
 /* SLIDE DOWN */
 const slideDown = (target, duration = 500) => {
+
+    cancelPendingSlide(target);
 
     target.style.removeProperty('display');
     let display = window.getComputedStyle(target).display;
@@ -301,7 +334,8 @@ const slideDown = (target, duration = 500) => {
     target.style.removeProperty('padding-bottom');
     target.style.removeProperty('margin-top');
     target.style.removeProperty('margin-bottom');
-    window.setTimeout(() => {
+    target[EB_SLIDE_TIMER] = window.setTimeout(() => {
+        target[EB_SLIDE_TIMER] = null;
         target.style.removeProperty('height');
         target.style.removeProperty('overflow');
         target.style.removeProperty('transition-duration');
