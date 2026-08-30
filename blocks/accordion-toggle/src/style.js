@@ -707,6 +707,32 @@ ${displayIcon
 	.${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title{
 		${titleTypoStylesTab}
 	}
+    .${blockId}.eb-accordion-container .title-content-${blockId}{
+        ${titlePrefixGapTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-text{
+        ${titlePrefixTextTypoTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-icon{
+        ${titlePrefixIconWidthTab}
+        ${titlePrefixIconHeightTab}
+        ${titlePrefixIconSizeTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-img{
+        ${titlePrefixImgWidthTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-text{
+        ${titleSuffixTextTypoTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-icon{
+        ${titleSuffixIconWidthTab}
+        ${titleSuffixIconHeightTab}
+        ${titleSuffixIconSizeTab}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-img{
+        ${titleSuffixImgWidthTab}
+    }
+
 
 
 
@@ -789,6 +815,32 @@ ${displayIcon
 	.${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title{
 		${titleTypoStylesMobile}
 	}
+    .${blockId}.eb-accordion-container .title-content-${blockId}{
+        ${titlePrefixGapMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-text{
+        ${titlePrefixTextTypoMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-icon{
+        ${titlePrefixIconWidthMobile}
+        ${titlePrefixIconHeightMobile}
+        ${titlePrefixIconSizeMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-prefix-img{
+        ${titlePrefixImgWidthMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-text{
+        ${titleSuffixTextTypoMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-icon{
+        ${titleSuffixIconWidthMobile}
+        ${titleSuffixIconHeightMobile}
+        ${titleSuffixIconSizeMobile}
+    }
+    .${blockId}.eb-accordion-container .title-content-${blockId} .eb-accordion-title-suffix-img{
+        ${titleSuffixImgWidthMobile}
+    }
+
 
 	.${blockId}.eb-accordion-container .eb-accordion-content-wrapper-${blockId} .eb-accordion-content{
 		${contentTypoStylesMobile}
@@ -805,6 +857,47 @@ ${displayIcon
     // all css styles for large screen width (desktop/laptop) in strings ⬇
     const desktopAllStyles = softMinifyCssStrings(`
 		${wrapperStylesDesktop}
+	`);
+
+    /**
+     * Editor-only restatement of the Accordions Gap.
+     *
+     * The gap ships as `padding-top` on
+     * `.eb-accordion-wrapper + .eb-accordion-wrapper`, which relies on the wrappers
+     * being adjacent siblings. That holds on the front end, where save() renders them
+     * straight into `.eb-accordion-inner`. In the editor InnerBlocks puts every item
+     * inside its own `.block-editor-block-list__block` wrapper within a
+     * `.block-editor-block-list__layout`, and StyleComponent's <style> element sits
+     * between items, so no two `.eb-accordion-wrapper` elements are ever adjacent and
+     * the rule matched nothing -- the gap silently did nothing in the editor.
+     *
+     * Rather than duplicate the stylesheet, the same generated value is re-applied
+     * against the editor's own structure and handed to StyleComponent through its
+     * `editorDesktopStyles` / `editorTabStyles` / `editorMobileStyles` props, which it
+     * renders in place of the front-end strings when present. The front-end CSS, and
+     * everything written into `blockMeta` for the generated stylesheet, is untouched.
+     */
+    const editorGapStyles = (gapStyles) =>
+        gapStyles
+            ? `
+	.${blockId}.eb-accordion-container .block-editor-block-list__layout > *:not(:first-child) .eb-accordion-wrapper{
+		${gapStyles}
+	}`
+            : "";
+
+    const editorDesktopStyles = softMinifyCssStrings(`
+		${wrapperStylesDesktop}
+		${editorGapStyles(accGapDesktop)}
+	`);
+
+    const editorTabStyles = softMinifyCssStrings(`
+		${wrapperStylesTab}
+		${editorGapStyles(accGapTab)}
+	`);
+
+    const editorMobileStyles = softMinifyCssStrings(`
+		${wrapperStylesMobile}
+		${editorGapStyles(accGapMobile)}
 	`);
 
     // all css styles for Tab in strings ⬇
@@ -825,6 +918,9 @@ ${displayIcon
                 desktopAllStyles={desktopAllStyles}
                 tabAllStyles={tabAllStyles}
                 mobileAllStyles={mobileAllStyles}
+                editorDesktopStyles={editorDesktopStyles}
+                editorTabStyles={editorTabStyles}
+                editorMobileStyles={editorMobileStyles}
                 blockName={name}
             />
         </>

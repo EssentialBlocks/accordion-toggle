@@ -2,9 +2,9 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon, fencermonir, rahatsheikhleon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.5.0
+Stable tag: 1.3.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -93,17 +93,13 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.5.0 - 09/08/2026 =
-* Improved: Full PHP 7.2–8.5 and WordPress 5.6–7.0 compatibility pass over the whole plugin
-* Fixed: Leftover debug `die()` that could halt page rendering when an Accordion Item block was parsed at the top level of post content
-* Fixed: Fatal `TypeError` on PHP 8.0+ when a font-family block attribute was not a string
-* Fixed: Fatal error when the `lib/style-handler` submodule or the `dist` build was missing
-* Fixed: `include_once` on generated asset files returned `true` instead of the dependency array, producing empty script dependencies and an "array offset on true" warning
-* Fixed: Undefined array key reads and `null` passed to `strip_tags()` (deprecated as of PHP 8.1)
-* Fixed: WordPress version detection now uses `version_compare()` instead of a float cast, which misread versions like "x.10"
-* Improved: Guarded both block init functions against fatal redeclaration and renamed the unprefixed scaffold function
-* Improved: Added `ABSPATH` guards to all source files and switched Google Fonts to HTTPS
-* Changed: `Requires PHP` is now declared as 7.2, matching WordPress core's own minimum
+= 1.3.0 - 30/08/2026 =
+* Fixed: PHP 8.0–8.5 compatibility issues
+* Fixed: WordPress version detection
+* Fixed: PHP 7.x compatibility
+* Fixed: Asset loading issues on newer WordPress versions
+* Improved: Asset loading and overall stability
+* Tested up to WordPress 7.1
 
 = 1.2.9 - 04/07/2024 =
 * Fixed: Accordion block title align not working

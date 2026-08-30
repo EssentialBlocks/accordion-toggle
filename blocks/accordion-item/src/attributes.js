@@ -1,3 +1,7 @@
+import { titleContentDirection, titleContentVAlign } from "./constants";
+
+const { generateResponsiveAlignAttributes } = window.EBAccordionControls;
+
 const attributes = {
     // the following 4 attributes is must required for responsive options and asset generation for frontend
     // responsive control attributes ⬇
@@ -5,6 +9,16 @@ const attributes = {
         type: "string",
         default: "Desktop",
     },
+
+    // Layout of the title row (prefix + title + suffix).
+    // Defaults mirror the values hard-coded in ./style.scss, so blocks saved
+    // before this control existed keep rendering exactly as they did.
+    ...generateResponsiveAlignAttributes(titleContentDirection, {
+        defaultAlign: "row",
+    }),
+    ...generateResponsiveAlignAttributes(titleContentVAlign, {
+        defaultAlign: "center",
+    }),
     // blockId attribute for making unique className and other uniqueness ⬇
     blockId: {
         type: "string",
@@ -111,11 +125,11 @@ const attributes = {
     },
     titlePrefixIcon: {
         type: "string",
-        default: "dashicon dashicons dashicons-admin-users",
+        default: "dashicons-admin-users",
     },
     titleSuffixIcon: {
         type: "string",
-        default: "dashicon dashicons dashicons-admin-site",
+        default: "dashicons-admin-site",
     },
 };
 

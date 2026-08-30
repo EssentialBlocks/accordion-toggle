@@ -1,8 +1,10 @@
 /**
  * Internal dependencies
  */
+import { titleContentDirection, titleContentVAlign } from "./constants";
 
-const { softMinifyCssStrings, StyleComponent } = window.EBAccordionControls;
+
+const { softMinifyCssStrings, StyleComponent, generateResponsiveAlignStyles } = window.EBAccordionControls;
 
 export default function Style(props) {
     const { attributes, setAttributes, name } = props;
@@ -19,6 +21,30 @@ export default function Style(props) {
         titlePrefixColor,
         titleSuffixIconColor,
     } = attributes;
+
+    const {
+        alignStylesDesktop: directionDesktop,
+        alignStylesTab: directionTab,
+        alignStylesMobile: directionMobile,
+    } = generateResponsiveAlignStyles({
+        controlName: titleContentDirection,
+        property: "flex-direction",
+        attributes,
+    });
+
+    const {
+        alignStylesDesktop: vAlignDesktop,
+        alignStylesTab: vAlignTab,
+        alignStylesMobile: vAlignMobile,
+    } = generateResponsiveAlignStyles({
+        controlName: titleContentVAlign,
+        property: "align-items",
+        attributes,
+    });
+
+    // Selector for this item's title row. Scoped to ${blockId} so each
+    // Accordion Item can lay its prefix out independently.
+    const titleRow = `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-content-wrap`;
 
     // CSS/styling Codes Starts from Here
 
@@ -43,6 +69,10 @@ export default function Style(props) {
 	}`
             : ""
         }
+        ${titleRow} {
+            ${directionDesktop}
+            ${vAlignDesktop}
+        }
         .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-prefix-text,
         .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-prefix-icon {
             color: ${titlePrefixColor};
@@ -55,10 +85,20 @@ export default function Style(props) {
 	`);
 
     // all css styles for Tab in strings ⬇
-    const tabAllStyles = softMinifyCssStrings(``);
+    const tabAllStyles = softMinifyCssStrings(`
+        ${titleRow} {
+            ${directionTab}
+            ${vAlignTab}
+        }
+    `);
 
     // all css styles for Mobile in strings ⬇
-    const mobileAllStyles = softMinifyCssStrings(``);
+    const mobileAllStyles = softMinifyCssStrings(`
+        ${titleRow} {
+            ${directionMobile}
+            ${vAlignMobile}
+        }
+    `);
 
     return (
         <>

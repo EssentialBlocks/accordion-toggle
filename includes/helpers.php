@@ -11,6 +11,47 @@ class Accordion_Helper
     /**
      * Registers the plugin.
      */
+    /**
+     * Breakpoints the editor preview builds its media queries from.
+     *
+     * `StyleComponent` (controls/src/helpers/StyleComponent.js) interpolates
+     * `EssentialBlocksLocalize.responsiveBreakpoints.tablet` / `.mobile` straight into
+     * `@media all and (max-width: {n}px)`. This plugin never localized the value, so the
+     * editor emitted `@media all and (max-width: undefinedpx)` -- an invalid media query,
+     * which browsers discard whole. Every tablet and mobile rule was therefore dropped in
+     * the editor preview while the front end, whose CSS is generated in PHP by
+     * EbStyleHandlerParseCss, applied them correctly. That is the editor/front-end
+     * mismatch this method fixes.
+     *
+     * Defaults are 1024 / 767 to match the values `class-parse-css.php` writes into the
+     * generated front-end stylesheet, so both sides stay in step.
+     *
+     * @return array{tablet:int,mobile:int}
+     */
+    public static function get_responsive_breakpoints()
+    {
+        $defaults = array('tablet' => 1024, 'mobile' => 767);
+
+        $settings = get_option('eb_settings', []);
+        if (!is_array($settings) || !isset($settings['responsiveBreakpoints'])) {
+            return $defaults;
+        }
+
+        $breakpoints = $settings['responsiveBreakpoints'];
+        if (is_string($breakpoints)) {
+            if (strlen($breakpoints) === 0) {
+                return $defaults;
+            }
+            $breakpoints = json_decode(html_entity_decode(stripslashes($breakpoints)), true);
+        }
+        $breakpoints = (array) $breakpoints;
+
+        return array(
+            'tablet' => isset($breakpoints['tablet']) ? (int) $breakpoints['tablet'] : $defaults['tablet'],
+            'mobile' => isset($breakpoints['mobile']) ? (int) $breakpoints['mobile'] : $defaults['mobile'],
+        );
+    }
+
     public static function register()
     {
         if (null === self::$instance) {

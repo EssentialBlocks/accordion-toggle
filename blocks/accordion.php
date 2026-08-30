@@ -49,6 +49,7 @@ if (!function_exists('accordion_toggle_accordion_block_init')) {
                     'render_callback' => function ($attributes, $content) {
                         if (!is_admin()) {
                             wp_enqueue_style('dashicons');
+                            wp_enqueue_style('eb-accordion-toggle-frontend-style');
                             wp_enqueue_style('essential-blocks-fontawesome');
                             wp_enqueue_style('essential-blocks-animation');
                             wp_enqueue_script('essential-blocks-accordion-frontend');
