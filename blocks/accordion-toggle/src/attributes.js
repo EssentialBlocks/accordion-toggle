@@ -11,12 +11,7 @@ import {
 	conPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import {
-	WrpBgConst,
-	iconBgConst,
-	tabBgConst,
-	conBgConst,
-} from "./constants/backgroundsConstants";
+import { WrpBgConst, iconBgConst, tabBgConst, conBgConst } from "./constants/backgroundsConstants";
 
 import {
 	WrpBdShadowConst,
@@ -25,7 +20,16 @@ import {
 	conBdShadowConst,
 } from "./constants/borderShadowConstants";
 
-import { rangeIconSize, accGapRange } from "./constants/rangeNames";
+import { 
+    rangeIconSize, 
+    accGapRange, 
+    titlePrefixIconSize, 
+    titlePrefixImgWidth, 
+    titlePrefixGap, 
+    titleSuffixIconSize, 
+    titleSuffixImgWidth, 
+    titleSuffixGap 
+} from "./constants/rangeNames";
 
 const {
 	generateDimensionsAttributes,
@@ -125,6 +129,38 @@ const attributes = {
 		default: false,
 	},
 
+    titlePrefixColor: {
+        type: "string",
+        default: "#000",
+    },
+
+    titleSuffixColor: {
+        type: "string",
+        default: "#000",
+    },
+
+    ...generateResponsiveRangeAttributes(titlePrefixIconSize, {
+        defaultRange: 20,
+    }),
+
+    ...generateResponsiveRangeAttributes(titlePrefixImgWidth, {
+        defaultRange: 30,
+    }),
+    ...generateResponsiveRangeAttributes(titlePrefixGap, {
+        defaultRange: 15,
+    }),
+
+    ...generateResponsiveRangeAttributes(titleSuffixIconSize, {
+        defaultRange: 20,
+    }),
+
+    ...generateResponsiveRangeAttributes(titleSuffixImgWidth, {
+        defaultRange: 30,
+    }),
+    ...generateResponsiveRangeAttributes(titleSuffixGap, {
+        defaultRange: 15,
+    }),
+
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
 
@@ -179,15 +215,6 @@ const attributes = {
 		noMainBgi: true,
 	}),
 
-	// ...generateBackgroundAttributes(cdBoxsBgConst, {
-	// 	// defaultFillColor: "#7967ff",
-	// 	isBgDefaultGradient: true,
-	// 	noOverlay: true,
-	// 	noMainBgi: true,
-	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// }),
-
 	// boxs background attributes ends
 
 	// boxs BorderShadow attributes ⬇
@@ -199,23 +226,6 @@ const attributes = {
 		defaultBdrColor: "#aaaaaa",
 		defaultBdrStyle: "solid",
 	}),
-
-	// ...generateBorderShadowAttributes(cdBoxsBdShadowConst, {
-	// 	// bdrDefaults: {
-	// 	// 	top: 0,
-	// 	// 	bottom: 0,
-	// 	// 	right: 0,
-	// 	// 	left: 0,
-	// 	// },
-	// 	rdsDefaults: {
-	// 		top: 10,
-	// 		bottom: 10,
-	// 		right: 10,
-	// 		left: 10,
-	// 	},
-	// 	// noShadow: true,
-	// 	// noBorder: true,
-	// }),
 
 	// boxs BorderShadow attributes ends
 
@@ -241,12 +251,6 @@ const attributes = {
 		right: 15,
 		// isLinked: false,
 	}),
-
-	// ...generateDimensionsAttributes(iconsWrapMargin, {
-	// 	// top: 10,
-	// 	// bottom: 20,
-	// 	// isLinked: false,
-	// }),
 
 	// dimensions Control related Attributes ends
 };
