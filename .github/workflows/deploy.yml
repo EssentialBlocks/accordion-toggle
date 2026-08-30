@@ -24,15 +24,30 @@ jobs:
       # node version
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          # The tree pinned by yarn.lock is a Node 14/16-era tree:
+          # eslint-plugin-jsdoc@36 caps at "^12 || ^14 || ^16", so 16 is the
+          # highest version it installs cleanly on. Moves off the EOL Node 14.
+          node-version: '16'
       # Runs a single command using the runners shell
       # - name: Git Submodule Cloning
       #   run: git submodule update --init --recursive
         # env:
         #   GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      - name: Running NPM Install & Build
+      - name: Running Install & Build
+        # `npm install` ignored this repository's lockfile. yarn.lock is the only
+        # lockfile tracked here -- package-lock.json was deleted in c349e30 -- and npm
+        # reads only package-lock.json / npm-shrinkwrap.json. Every run therefore
+        # re-resolved the "^" ranges against the current registry rather than the
+        # pinned tree, which by 2026 meant webpack 5.110 / sass 1.103 / chokidar 5,
+        # all requiring Node 18/20+. Newer webpack emits `Object.hasOwn` in its
+        # generated runtime, and mini-css-extract-plugin executes that module inside
+        # the Node process to extract the CSS, so the build failed on Node 14 with
+        # "Object.hasOwn is not a function" while pointing at style.scss.
+        #
+        # Installing from the tracked lockfile pins webpack 5.75.0 / sass 1.56.2,
+        # the tree this plugin is developed and released against.
         run: |
-          npm install
+          yarn install --frozen-lockfile
           npm run build
       - name: WordPress Plugin Deploy
         id: deploy
