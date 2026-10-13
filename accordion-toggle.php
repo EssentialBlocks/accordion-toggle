@@ -51,6 +51,8 @@ class EBAccordionToggle {
         add_action( 'enqueue_block_editor_assets', [$this, 'frontend_backend_assets'], 100 );
         add_action( 'wp_enqueue_scripts', [$this, 'frontend_backend_assets'], 100 );
         add_action( 'enqueue_block_assets', [$this, 'block_canvas_assets'] );
+        // Before wp_print_footer_scripts (wp_footer, priority 20).
+        add_action( 'wp_footer', [$this, 'avoid_double_accordion_script'], 19 );
 
         // Load All Block Files
         $this->load_block_dependencies();
@@ -330,10 +332,28 @@ class EBAccordionToggle {
 
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/helpers.php';
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/class-faq-schema.php';
-        if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/accordion' ) ) {
-            require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion.php';
-            require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion-item.php';
+        require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion.php';
+        require_once ACCORDION_BLOCK_ADMIN_PATH . '/blocks/accordion-item.php';
+    }
+
+    /**
+     * One accordion script per page.
+     *
+     * Both plugins' front-end scripts initialise every `.eb-accordion-container` on
+     * the page (the markup is shared), so on a page holding both an Accordion Toggle
+     * block and an Essential Blocks accordion, loading both would bind every item
+     * twice and each click would open and immediately close it. Essential Blocks'
+     * script handles this plugin's markup as well, so in that case this plugin's
+     * copy is dropped. Pages with only one plugin's accordions are unaffected.
+     */
+    public function avoid_double_accordion_script() {
+        if ( ! wp_script_is( 'accordion-toggle-frontend', 'enqueued' ) ) {
+            return;
         }
+        if ( ! wp_script_is( 'essential-blocks-accordion-frontend', 'enqueued' ) ) {
+            return;
+        }
+        wp_dequeue_script( 'accordion-toggle-frontend' );
     }
 }
 EBAccordionToggle::get_instance();

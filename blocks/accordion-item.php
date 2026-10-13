@@ -26,9 +26,7 @@ if (!function_exists('accordion_toggle_accordion_item_block_init')) {
             return;
         }
 
-        if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/accordion')) {
-            register_block_type(Accordion_Helper::get_block_register_path("accordion-item"));
-        }
+        register_block_type(Accordion_Helper::get_block_register_path("accordion-item"));
     }
     add_action('init', 'accordion_toggle_accordion_item_block_init');
 }
