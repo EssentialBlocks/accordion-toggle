@@ -4,7 +4,7 @@ Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenbe
 Requires at least: 5.6
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,6 +92,24 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.4.0 - 13/10/2026 =
+* Added: Open an accordion item from a link: an item with an HTML anchor opens when the page URL ends in #that-anchor
+* Added: Expanded icon colour
+* Added: Individual Accordion Item styling: margin, padding, background, border and shadow, with separate background and border for the open item
+* Added: Background, margin, padding and border for the title prefix and suffix, plus a per-item prefix / suffix background colour
+* Added: HTML anchor for the Accordion block
+* Added: Accordions Gap and Icon Size can be set to 0
+* Added: "Use latest fixes" option under Advanced, to apply the fixes below to an existing accordion
+* Fixed: Accordions stopped working when a site optimiser blocked or delayed the plugin's helper script
+* Fixed: Screen readers were told an item that opens by default was closed, and that items closed by opening another were still open
+* Fixed: With Essential Blocks active, its Horizontal and Image accordions stopped working because they ran this plugin's script
+* Fixed: Accordion blocks could go unregistered when Essential Blocks loaded before this plugin
+* Fixed (new accordions): Expanded title colour now applies to every title tag, not only H3
+* Fixed (new accordions): Accordions Gap no longer applies to accordions nested inside an item
+* Improved (new accordions): Visible keyboard focus outline on item titles
+* Improved (new accordions): A tall item is scrolled back into view after it opens
+* Improved: Accordions saved with earlier versions keep their look and behaviour; the fixes marked "new accordions" apply only to accordions added from this version on, or turned on with "Use latest fixes"
 
 = 1.3.0 - 30/08/2026 =
 * Fixed: PHP 8.0–8.5 compatibility issues
