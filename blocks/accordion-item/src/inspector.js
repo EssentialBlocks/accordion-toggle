@@ -5,9 +5,9 @@ import { __ } from "@wordpress/i18n";
 import { InspectorControls, MediaUpload } from "@wordpress/block-editor";
 import {
     PanelBody, ToggleControl, TabPanel, Button, BaseControl,
-    ButtonGroup,
+    ButtonGroup, TextControl,
 } from "@wordpress/components";
-const { ColorControl, DynamicInputControl, EBIconPicker, ImageAvatar, ResponsiveAlignControl } = window.EBAccordionControls;
+const { ColorControl, EBIconPicker, ImageAvatar, ResponsiveAlignControl } = window.EBAccordionControls;
 
 import {
     MEDIA_TYPES,
@@ -65,7 +65,9 @@ const Inspector = ({ attributes, setAttributes }) => {
         titleSuffixIconColor,
         titleSuffixImgUrl,
         titleSuffixImgId,
-        titleSuffixImgAlt
+        titleSuffixImgAlt,
+        titlePrefixBGColor,
+        titleSuffixBGColor,
     } = attributes;
 
     return (
@@ -98,11 +100,9 @@ const Inspector = ({ attributes, setAttributes }) => {
                                             checked={clickable}
                                             onChange={() => setAttributes({ clickable: !clickable })}
                                         />
-                                        <DynamicInputControl
-                                            label="Title Text"
-                                            attrName="titleText"
-                                            inputValue={title}
-                                            setAttributes={setAttributes}
+                                        <TextControl
+                                            label={__("Title Text", "essential-blocks")}
+                                            value={title || ""}
                                             onChange={(text) => setAttributes({ title: text })}
                                         />
                                     </PanelBody>
@@ -210,11 +210,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                                                     {titlePrefixType === "text" && (
                                                         <>
-                                                            <DynamicInputControl
-                                                                label="Prefix Text"
-                                                                attrName="titlePrefixText"
-                                                                inputValue={titlePrefixText}
-                                                                setAttributes={setAttributes}
+                                                            <TextControl
+                                                                label={__("Prefix Text", "essential-blocks")}
+                                                                value={titlePrefixText || ""}
                                                                 onChange={(text) =>
                                                                     setAttributes({
                                                                         titlePrefixText: text,
@@ -248,6 +246,20 @@ const Inspector = ({ attributes, setAttributes }) => {
                                                                     ) =>
                                                                         setAttributes({
                                                                             titlePrefixColor,
+                                                                        })
+                                                                    }
+                                                                />
+                                                                <ColorControl
+                                                                    label={__(
+                                                                        "Background Color",
+                                                                        "essential-blocks"
+                                                                    )}
+                                                                    color={titlePrefixBGColor}
+                                                                    onChange={(
+                                                                        titlePrefixBGColor
+                                                                    ) =>
+                                                                        setAttributes({
+                                                                            titlePrefixBGColor,
                                                                         })
                                                                     }
                                                                 />
@@ -371,11 +383,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                                                     {titleSuffixType === "text" && (
                                                         <>
-                                                            <DynamicInputControl
-                                                                label="Suffix Text"
-                                                                attrName="titleSuffixText"
-                                                                inputValue={titleSuffixText}
-                                                                setAttributes={setAttributes}
+                                                            <TextControl
+                                                                label={__("Suffix Text", "essential-blocks")}
+                                                                value={titleSuffixText || ""}
                                                                 onChange={(text) =>
                                                                     setAttributes({
                                                                         titleSuffixText: text,
@@ -409,6 +419,20 @@ const Inspector = ({ attributes, setAttributes }) => {
                                                                     ) =>
                                                                         setAttributes({
                                                                             titleSuffixIconColor,
+                                                                        })
+                                                                    }
+                                                                />
+                                                                <ColorControl
+                                                                    label={__(
+                                                                        "Background Color",
+                                                                        "essential-blocks"
+                                                                    )}
+                                                                    color={titleSuffixBGColor}
+                                                                    onChange={(
+                                                                        titleSuffixBGColor
+                                                                    ) =>
+                                                                        setAttributes({
+                                                                            titleSuffixBGColor,
                                                                         })
                                                                     }
                                                                 />

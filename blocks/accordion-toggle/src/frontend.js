@@ -1,4 +1,23 @@
-const { EBGetIconClass, EBGetIconType } = window.eb_frontend;
+/**
+ * Icon helpers from the controls frontend bundle (`window.eb_frontend`).
+ *
+ * If that bundle is blocked or deferred (an optimiser, a firewall) the destructuring
+ * used to throw and no accordion on the page could open. Fall back to helpers that
+ * keep the stored class and let the accordion work without icon swapping.
+ */
+const ebFrontend = window.eb_frontend || {};
+const EBGetIconClass =
+    typeof ebFrontend.EBGetIconClass === "function"
+        ? ebFrontend.EBGetIconClass
+        : (value) => (typeof value === "string" ? value : "");
+const EBGetIconType =
+    typeof ebFrontend.EBGetIconType === "function"
+        ? ebFrontend.EBGetIconType
+        : (value) =>
+            typeof value === "string" && value.indexOf("dashicons") !== -1
+                ? "dashicon"
+                : "fontawesome";
+
 document.addEventListener("DOMContentLoaded", function (event) {
     let accordions = document.querySelectorAll(
         ".eb-accordion-container > .eb-accordion-inner"
@@ -10,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     for (let x = 0;x < accordions.length;x++) {
         let accordion = accordions[x].parentElement;
         let transitionDuration = Number(accordion.getAttribute('data-transition-duration'));
+        // Only blocks on the 1.4.0 design carry this attribute (see `designVersion`).
+        let isLatestDesign = Number(accordion.getAttribute("data-design-version") || 0) >= 2;
         let accordionWrapper = accordion.children[0].children;
 
         let titleNodes = [];
@@ -119,6 +140,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let clickable = accordionWrapper[i].getAttribute("data-clickable");
             if (clickable == "true") {
                 contentNodes[i].setAttribute("data-collapsed", "false");
+                if (titleNodes[i]) {
+                    titleNodes[i].setAttribute("aria-expanded", "true");
+                }
                 slideDown(contentNodes[i], transitionDuration);
                 changeIcon(
                     contentNodes[i].parentElement.querySelector(
@@ -151,6 +175,52 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ? setToggleAction(titleNodes)
             : setAccordionAction(titleNodes);
 
+        /**
+         * Open the item whose anchor (Advanced > HTML anchor on the item) matches the
+         * URL hash, on load and whenever the hash changes - as the Essential Blocks
+         * accordion does. Only acts on a collapsed item, so a link never closes one.
+         */
+        function openItemFromHash() {
+            let hash = window.location.hash ? window.location.hash.substr(1) : "";
+            if (!hash) return;
+            try {
+                hash = decodeURIComponent(hash);
+            } catch (e) {
+                // Keep the raw hash when it is not valid URI encoding.
+            }
+            titleNodes.forEach(function (titleNode) {
+                if (!titleNode || titleNode.parentElement.getAttribute("id") !== hash) return;
+                let contentNode = titleNode.nextElementSibling;
+                if (contentNode && contentNode.getAttribute("data-collapsed") === "true") {
+                    accordionType === "toggle"
+                        ? onToggleTabClick.call(titleNode)
+                        : onAccordionTabClick.call(titleNode);
+                }
+            });
+        }
+        openItemFromHash();
+        window.addEventListener("hashchange", openItemFromHash);
+
+        /**
+         * Latest-design blocks only: when an opened item is taller than the viewport,
+         * bring its title back into view once it has finished opening, so the reader
+         * is not left in the middle of the content.
+         */
+        function scrollTitleIntoViewIfTall(clickedTab, contentNode) {
+            if (!isLatestDesign) return;
+            window.setTimeout(function () {
+                if (contentNode.getAttribute("data-collapsed") !== "false") return;
+                if (contentNode.offsetHeight <= window.innerHeight) return;
+                let top = clickedTab.getBoundingClientRect().top;
+                if (top < 0 || top > window.innerHeight) {
+                    window.scrollTo({
+                        top: top + window.pageYOffset - 10,
+                        behavior: "smooth",
+                    });
+                }
+            }, transitionDuration + 20);
+        }
+
         // Toggle action here
         function setToggleAction(titleNodes) {
             for (let i = 0;i < titleNodes.length;i++) {
@@ -179,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 contentNode.setAttribute("data-collapsed", "false");
                 clickedTab.setAttribute("aria-expanded", "true");
                 clickedTab.parentElement.classList.remove(hide);
+                scrollTitleIntoViewIfTall(clickedTab, contentNode);
             } else {
                 slideUp(contentNode, transitionDuration);
                 contentNode.setAttribute("data-collapsed", "true");
@@ -215,12 +286,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             changeAllExpandIcons(accordion);
             hideAccordionContents(accordion, transitionDuration);
+            // hideAccordionContents() closes the other panels but reported the state
+            // on the panels, not on their buttons; keep screen readers in step.
+            titleNodes.forEach(function (titleNode) {
+                if (titleNode && titleNode !== clickedTab) {
+                    titleNode.setAttribute("aria-expanded", "false");
+                }
+            });
 
             if (isCollapsed) {
                 slideDown(contentNode, transitionDuration);
                 contentNode.setAttribute("data-collapsed", "false");
                 clickedTab.setAttribute("aria-expanded", "true");
                 clickedTab.parentElement.classList.remove(hide);
+                scrollTitleIntoViewIfTall(clickedTab, contentNode);
             } else {
                 slideUp(contentNode, transitionDuration);
                 contentNode.setAttribute("data-collapsed", "true");
