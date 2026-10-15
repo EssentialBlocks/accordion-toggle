@@ -91,6 +91,17 @@ Yes, it will work with any standard WordPress theme.
 == Screenshots ==
 
 
+== External services ==
+
+This plugin can load fonts from Google Fonts, a service provided by Google LLC.
+
+* **What and when:** when an Accordion block on a page uses a Google font (any Typography "Font Family" setting other than Default), the page requests that font's stylesheet from `https://fonts.googleapis.com`, and the fonts themselves from `https://fonts.gstatic.com`. Pages whose accordions keep the default fonts make no request.
+* **What is sent:** the visitor's browser sends its IP address, user agent and the page address (referrer) to Google, as with any embedded web font. The plugin sends no other data.
+* **Google Fonts terms:** https://developers.google.com/fonts/terms
+* **Google privacy policy:** https://policies.google.com/privacy
+
+To avoid the request, keep the accordion typography on Default or a font your theme already provides.
+
 == Changelog ==
 
 = 1.4.0 - 13/10/2026 =
@@ -109,6 +120,10 @@ Yes, it will work with any standard WordPress theme.
 * Fixed (new accordions): Accordions Gap no longer applies to accordions nested inside an item
 * Improved (new accordions): Visible keyboard focus outline on item titles
 * Improved (new accordions): A tall item is scrolled back into view after it opens
+* Fixed: Replaced the bundled animate.css 4.1.1 (Hippocratic License 2.1, not GPL-compatible) with animate.css 3.7.2 (MIT). Every animation offered in the Advanced tab is still available
+* Removed: The unused `_eb_attr` post meta registration, which exposed the meta in the REST API without being used by the plugin
+* Removed: The unused EBRenderIcon helper from the front-end icon helper script
+* Improved: Documented the Google Fonts request in an External services section
 * Improved: Accordions saved with earlier versions keep their look and behaviour; the fixes marked "new accordions" apply only to accordions added from this version on, or turned on with "Use latest fixes"
 
 = 1.3.0 - 30/08/2026 =

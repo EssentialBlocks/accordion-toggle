@@ -313,7 +313,6 @@ class EBAccordionToggle {
 
     private function load_block_dependencies() {
         require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/font-loader.php';
-        require_once ACCORDION_BLOCK_ADMIN_PATH . '/includes/post-meta.php';
 
         // `lib/style-handler` is a git submodule; guard so an uninitialised
         // submodule degrades instead of fataling the whole site.

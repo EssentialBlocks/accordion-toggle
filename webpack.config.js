@@ -11,6 +11,12 @@ const plugins = defaultConfig.plugins.filter(
 let allEntries = {
 	dist: "./src/index.js",
 	"dist/frontend": "./blocks/accordion-toggle/src/frontend.js",
+	// window.eb_frontend icon helpers, written to dist/frontend.js (not frontend/index.js).
+	"frontend-helpers": {
+		import: "./src/frontend-helpers.js",
+		filename: "dist/frontend.js",
+		library: { name: "eb_frontend", type: "window" },
+	},
 };
 
 const config = {
