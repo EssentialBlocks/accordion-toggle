@@ -121,6 +121,8 @@ To avoid the request, keep the accordion typography on Default or a font your th
 * Improved (new accordions): Visible keyboard focus outline on item titles
 * Improved (new accordions): A tall item is scrolled back into view after it opens
 * Fixed: Replaced the bundled animate.css 4.1.1 (Hippocratic License 2.1, not GPL-compatible) with animate.css 3.7.2 (MIT). Every animation offered in the Advanced tab is still available
+* Fixed: FAQ schema produced invalid JSON when an answer contained a backslash or a line break
+* Security: Hardened the FAQ schema output, the generated block CSS for authors without the unfiltered_html capability, and reusable block references
 * Removed: The unused `_eb_attr` post meta registration, which exposed the meta in the REST API without being used by the plugin
 * Removed: The unused EBRenderIcon helper from the front-end icon helper script
 * Improved: Documented the Google Fonts request in an External services section
