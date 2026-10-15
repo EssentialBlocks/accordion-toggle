@@ -135,7 +135,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }
 
-        //
+        /**
+         * Apply the initial open / closed state without animating the styling.
+         *
+         * The saved markup has no `eb-accordion-hidden` class, so until this runs every
+         * item matches the "expanded" rules (Expanded Tab background, title and icon
+         * colours, Expanded Accordion box). Adding the class to the closed items below
+         * used to start each title's and item's own CSS transition (0.5s by default),
+         * so on every page load the closed items visibly faded from the expanded
+         * colours to their normal ones. Transitions on the items and titles are
+         * suspended while the initial classes are set and restored on the next frames.
+         * The panels' slide is driven by slideUp() / slideDown() and is not affected.
+         */
+        const initialStyleNodes = [];
+        for (let i = 0;i < accordionWrapper.length;i++) {
+            initialStyleNodes.push(accordionWrapper[i]);
+            if (titleNodes[i]) {
+                initialStyleNodes.push(titleNodes[i]);
+            }
+        }
+        initialStyleNodes.forEach(function (node) {
+            node.style.setProperty("transition", "none", "important");
+        });
+
         for (let i = 0;i < accordionWrapper.length;i++) {
             let clickable = accordionWrapper[i].getAttribute("data-clickable");
             if (clickable == "true") {
@@ -155,6 +177,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 contentNodes[i].parentElement.classList.add(hide);
             }
         }
+
+        // Commit the initial styles, then hand transitions back to the stylesheet so
+        // clicks animate as before.
+        accordion.offsetHeight; // eslint-disable-line no-unused-expressions
+        window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+                initialStyleNodes.forEach(function (node) {
+                    node.style.removeProperty("transition");
+                });
+            });
+        });
 
         function changeAllExpandIcons(accordion) {
             let iconNodes = accordion.querySelectorAll(".eb-accordion-icon");
