@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     for (let x = 0;x < accordions.length;x++) {
         let accordion = accordions[x].parentElement;
         let transitionDuration = Number(accordion.getAttribute('data-transition-duration'));
-        // Only blocks on the 1.4.0 design carry this attribute (see `designVersion`).
+        // Only blocks on the 1.3.1 design carry this attribute (see `designVersion`).
         let isLatestDesign = Number(accordion.getAttribute("data-design-version") || 0) >= 2;
         let accordionWrapper = accordion.children[0].children;
 

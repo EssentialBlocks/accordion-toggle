@@ -26,7 +26,7 @@ const Save = ({ attributes }) => {
                     data-tab-icon={displayIcon ? tabIcon : ""}
                     data-expanded-icon={displayIcon ? expandedIcon : ""}
                     data-transition-duration={transitionDuration ? Number(transitionDuration) * 1000 : 500}
-                    // Only written for blocks on the 1.4.0 design (see `designVersion`), so
+                    // Only written for blocks on the 1.3.1 design (see `designVersion`), so
                     // blocks saved by earlier versions keep byte-identical markup.
                     {...(designVersion ? { "data-design-version": designVersion } : {})}
                 >

@@ -9,7 +9,7 @@ export const tabPaddingConst = "tabPad_";
 export const conMarginConst = "conMrg_";
 export const conPaddingConst = "conPad_";
 
-// Added in 1.4.0 (same names as the Essential Blocks accordion).
+// Added in 1.3.1 (same names as the Essential Blocks accordion).
 export const accordionMargin = "accordionMargin";
 export const accordionPadding = "accordionPadding";
 export const titlePrefixPadding = "titlePrefixPadding";

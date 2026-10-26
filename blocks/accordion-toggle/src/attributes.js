@@ -151,8 +151,8 @@ const attributes = {
 	/**
 	 * Design/behaviour generation of this block.
 	 *
-	 * Blocks saved before 1.4.0 have no value and keep their exact 1.3.0 CSS and
-	 * frontend behaviour, even when re-saved. Blocks inserted from 1.4.0 on (and
+	 * Blocks saved before 1.3.1 have no value and keep their exact 1.3.0 CSS and
+	 * frontend behaviour, even when re-saved. Blocks inserted from 1.3.1 on (and
 	 * blocks the user opts in from the Advanced tab) get 2, which turns on the fixes
 	 * that would otherwise change an existing design: expanded title colour for every
 	 * heading tag, the nested-accordion gap fix, the keyboard focus ring and
@@ -291,7 +291,7 @@ const attributes = {
 
 	// dimensions Control related Attributes ends
 
-	// 1.4.0: individual accordion item box (normal + expanded) and the title
+	// 1.3.1: individual accordion item box (normal + expanded) and the title
 	// prefix / suffix boxes, ported from the Essential Blocks accordion. All start
 	// empty, so they produce no CSS until the user sets them.
 	...generateDimensionsAttributes(accordionMargin),

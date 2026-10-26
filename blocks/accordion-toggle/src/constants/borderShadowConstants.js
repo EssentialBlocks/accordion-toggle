@@ -5,7 +5,7 @@ export const iconBdShadowConst = "icnBdSd_";
 export const tabBdShadowConst = "tabBdSd_";
 export const conBdShadowConst = "conBdSd_";
 
-// Added in 1.4.0 (same names as the Essential Blocks accordion).
+// Added in 1.3.1 (same names as the Essential Blocks accordion).
 export const accordionBorder = "accordionBorder";
 export const accordionExpandedBorder = "accordionExpandedBorder";
 export const titlePrefixBorder = "titlePrefixBorder";

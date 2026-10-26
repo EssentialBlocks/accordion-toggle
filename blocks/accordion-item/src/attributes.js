@@ -131,7 +131,7 @@ const attributes = {
         type: "string",
         default: "dashicons-admin-site",
     },
-    // 1.4.0: per-item background behind the prefix / suffix text or icon.
+    // 1.3.1: per-item background behind the prefix / suffix text or icon.
     titlePrefixBGColor: {
         type: "string",
     },

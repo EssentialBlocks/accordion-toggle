@@ -4,7 +4,7 @@ Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenbe
 Requires at least: 5.6
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.4.0
+Stable tag: 1.3.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,7 +104,7 @@ To avoid the request, keep the accordion typography on Default or a font your th
 
 == Changelog ==
 
-= 1.4.0 - 26/10/2026 =
+= 1.3.1 - 26/10/2026 =
 * Improved: Security enhancements
 * Few minor bug fixes & improvements
 

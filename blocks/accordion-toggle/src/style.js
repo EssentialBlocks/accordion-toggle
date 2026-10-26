@@ -461,7 +461,7 @@ export default function Style(props) {
     });
     // styles related to generateResponsiveRangeStyles end
 
-    // 1.4.0 styles (individual item box, expanded item box, prefix / suffix boxes) ⬇
+    // 1.3.1 styles (individual item box, expanded item box, prefix / suffix boxes) ⬇
     const latestDesign = isLatestDesign(attributes);
 
     const dimensions = (controlName, styleFor) => {
@@ -617,7 +617,7 @@ export default function Style(props) {
             : "";
 
     // Legacy gap rule: a descendant selector, so it also reaches nested accordions.
-    // Kept byte-for-byte for blocks saved before 1.4.0.
+    // Kept byte-for-byte for blocks saved before 1.3.1.
     const legacyGapRule = (gapStyles) =>
         latestDesign
             ? ""
@@ -625,7 +625,7 @@ export default function Style(props) {
 		${gapStyles}
 	}`;
 
-    // Legacy expanded-title rule targets h3 only. Kept for blocks saved before 1.4.0.
+    // Legacy expanded-title rule targets h3 only. Kept for blocks saved before 1.3.1.
     const legacyActiveTitleRule = latestDesign
         ? ""
         : activeTitleColor
