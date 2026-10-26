@@ -24,7 +24,9 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: WordPress.org plugin asset/readme update
-        uses: 10up/action-wordpress-plugin-asset-update@stable
+        # Pinned to the 2.2.0 release commit: this step holds the WordPress.org SVN
+        # credentials, so it must not follow a mutable branch.
+        uses: 10up/action-wordpress-plugin-asset-update@2480306f6f693672726d08b5917ea114cb2825f7 # 2.2.0
         env:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}

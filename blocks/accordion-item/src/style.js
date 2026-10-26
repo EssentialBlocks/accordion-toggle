@@ -20,6 +20,8 @@ export default function Style(props) {
         parentBlockId,
         titlePrefixColor,
         titleSuffixIconColor,
+        titlePrefixBGColor,
+        titleSuffixBGColor,
     } = attributes;
 
     const {
@@ -80,6 +82,20 @@ export default function Style(props) {
         .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-suffix-text,
         .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-suffix-icon {
             color: ${titleSuffixIconColor};
+        }
+        ${titlePrefixBGColor
+            ? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-prefix-text,
+        .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-prefix-icon {
+            background: ${titlePrefixBGColor};
+        }`
+            : ""
+        }
+        ${titleSuffixBGColor
+            ? `.${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-suffix-text,
+        .${parentBlockId}.eb-accordion-container .${blockId}.eb-accordion-wrapper .eb-accordion-title-suffix-icon {
+            background: ${titleSuffixBGColor};
+        }`
+            : ""
         }
 
 	`);

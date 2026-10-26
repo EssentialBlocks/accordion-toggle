@@ -15,6 +15,13 @@ class ATFaqSchema
     public static $faq_schema = null;
 
     /**
+     * Question / answer pairs collected for the FAQPage graph.
+     *
+     * @var array
+     */
+    private static $faq_entities = array();
+
+    /**
      * Instance of this class
      *
      * @var null
@@ -58,11 +65,35 @@ class ATFaqSchema
     {
         $this->render_accordion_item_faq_schema();
 
-        if (!empty(self::$faq_schema)) {
-            // Schema markup is assembled from escaped values inside this class,
-            // so it is emitted verbatim as a JSON-LD <script> block.
-            echo self::$faq_schema; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        if (empty(self::$faq_schema) || empty(self::$faq_entities)) {
+            return;
         }
+
+        $graph = array(
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array_values(self::$faq_entities),
+        );
+
+        /**
+         * The graph used to be concatenated by hand: a quote, backslash or line
+         * break in an answer produced invalid JSON, and the answer markup was
+         * only passed through strip_tags(), which keeps an allowed tag (<a>,
+         * <p>...) with all of its attributes intact. wp_json_encode() with
+         * JSON_HEX_TAG writes every < and > as \u003C / \u003E, so nothing in an
+         * answer can close the <script> element, and the output is always valid
+         * JSON.
+         */
+        $json = wp_json_encode($graph, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if (false === $json) {
+            return;
+        }
+
+        printf(
+            '<script type="application/ld+json" class="%s">%s</script>' . "\n",
+            esc_attr(self::$faq_schema),
+            $json // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode() with JSON_HEX_TAG.
+        );
     }
 
     /**
@@ -70,17 +101,16 @@ class ATFaqSchema
      */
     public function render_accordion_item_faq_schema()
     {
+        if (!is_singular()) {
+            return;
+        }
 
-        if (function_exists('has_blocks') && has_blocks(get_the_ID())) {
+        $post = get_queried_object();
+        if (!($post instanceof WP_Post) || post_password_required($post)) {
+            return;
+        }
 
-            global $post;
-
-            if (!is_object($post)) {
-                return;
-            }
-            if (is_archive() || is_home()) {
-                return;
-            }
+        if (function_exists('has_blocks') && has_blocks($post)) {
 
             $blocks = $this->eb_parse_blocks($post->post_content);
 
@@ -99,9 +129,8 @@ class ATFaqSchema
 
                                 $unique_id = $attributes['blockId'];
                                 if (isset($attributes['faqSchema']) && $attributes['faqSchema']) {
-                                    $faq_script_id = 'eb-faq' . esc_attr($unique_id);
                                     if (is_null(self::$faq_schema)) {
-                                        self::$faq_schema = '<script type="application/ld+json" class="eb-faq-schema-graph eb-faq-schema-graph--' . $faq_script_id . '">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}</script>';
+                                        self::$faq_schema = 'eb-faq-schema-graph eb-faq-schema-graph--eb-faq' . sanitize_html_class($unique_id);
                                     }
                                 }
                             }
@@ -138,9 +167,8 @@ class ATFaqSchema
                         if (!empty($attributes['blockId'])) {
                             $unique_id = $attributes['blockId'];
                             if (isset($attributes['faqSchema']) && $attributes['faqSchema']) {
-                                $faq_script_id = 'eb-faq' . esc_attr($unique_id);
                                 if (is_null(self::$faq_schema)) {
-                                    self::$faq_schema = '<script type="application/ld+json" class="eb-faq-schema-graph eb-faq-schema-graph--' . $faq_script_id . '">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}</script>';
+                                    self::$faq_schema = 'eb-faq-schema-graph eb-faq-schema-graph--eb-faq' . sanitize_html_class($unique_id);
                                 }
                             }
                         }
@@ -221,19 +249,21 @@ class ATFaqSchema
                 // Cast before strip_tags(): passing null to a non-nullable
                 // internal string parameter is deprecated as of PHP 8.1, and
                 // the key is missing entirely on some parsed block shapes.
-                $raw_inner_html   = isset($block['innerHTML']) ? (string) $block['innerHTML'] : '';
-                $block_inner_html = trim(strip_tags($raw_inner_html));
-                $question = !empty($block_inner_html) ? $block_inner_html : '';
+                $raw_inner_html = isset($block['innerHTML']) ? (string) $block['innerHTML'] : '';
+                // Plain text for the question: tags removed, entities decoded so the
+                // structured data carries the text a reader sees ("Q&A", not "Q&amp;A").
+                $question = trim(html_entity_decode(wp_strip_all_tags($raw_inner_html), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
 
-
-                if (strpos(self::$faq_schema, '}]}</script>') !== false) {
-                    $schema = ',';
-                } else {
-                    $schema = '';
+                if ('' !== $question && '' !== trim($answer)) {
+                    self::$faq_entities[] = array(
+                        '@type'          => 'Question',
+                        'name'           => $question,
+                        'acceptedAnswer' => array(
+                            '@type' => 'Answer',
+                            'text'  => $answer,
+                        ),
+                    );
                 }
-                $schema .= '{"@type":"Question","name": "' . esc_attr($question) . '","acceptedAnswer":{"@type": "Answer","text": "' . str_replace('"', '&quot;', $answer) . '"}}';
-                $question_schema = (!empty($question) && !empty($answer) ? $schema . ']}</script>' : ']}</script>');
-                self::$faq_schema = str_replace("]}</script>", $question_schema, self::$faq_schema);
             }
         }
     }

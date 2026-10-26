@@ -1,10 +1,10 @@
 === Accordion Toggle ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, hztyfoon, fencermonir, rahatsheikhleon
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, rahatsheikhleon
 Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,7 +91,22 @@ Yes, it will work with any standard WordPress theme.
 == Screenshots ==
 
 
+== External services ==
+
+This plugin can load fonts from Google Fonts, a service provided by Google LLC.
+
+* **What and when:** when an Accordion block on a page uses a Google font (any Typography "Font Family" setting other than Default), the page requests that font's stylesheet from `https://fonts.googleapis.com`, and the fonts themselves from `https://fonts.gstatic.com`. Pages whose accordions keep the default fonts make no request.
+* **What is sent:** the visitor's browser sends its IP address, user agent and the page address (referrer) to Google, as with any embedded web font. The plugin sends no other data.
+* **Google Fonts terms:** https://developers.google.com/fonts/terms
+* **Google privacy policy:** https://policies.google.com/privacy
+
+To avoid the request, keep the accordion typography on Default or a font your theme already provides.
+
 == Changelog ==
+
+= 1.3.1 - 26/10/2026 =
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.3.0 - 30/08/2026 =
 * Fixed: PHP 8.0–8.5 compatibility issues
