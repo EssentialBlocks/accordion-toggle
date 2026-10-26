@@ -33,33 +33,45 @@ if (!function_exists('accordion_toggle_accordion_block_init')) {
 
         $frontend_asset = Accordion_Helper::get_asset_file('/dist/frontend/index.asset.php');
 
-        //  Frontend Script
+        /**
+         * Frontend script, under this plugin's own handle.
+         *
+         * 1.3.0 and earlier registered it as `essential-blocks-accordion-frontend`,
+         * the handle Essential Blocks uses for its own accordion script. Whichever
+         * plugin registered first won, and this plugin registers first, so with both
+         * active Essential Blocks' accordions ran this plugin's script and lost their
+         * Image and Horizontal behaviour, even on pages with no Accordion Toggle block.
+         * See EBAccordionToggle::avoid_double_accordion_script() for pages that hold
+         * both plugins' accordions.
+         */
         wp_register_script(
-            'essential-blocks-accordion-frontend',
+            'accordion-toggle-frontend',
             ACCORDION_BLOCK_ADMIN_URL . 'dist/frontend/index.js',
             array_merge($frontend_asset['dependencies'], ['essential-blocks-controls-frontend']),
             ACCORDION_BLOCK_VERSION,
             true
         );
 
-        if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/accordion')) {
-            register_block_type(
-                Accordion_Helper::get_block_register_path("accordion-toggle"),
-                array(
-                    'render_callback' => function ($attributes, $content) {
-                        if (!is_admin()) {
-                            wp_enqueue_style('dashicons');
-                            wp_enqueue_style('eb-accordion-toggle-frontend-style');
-                            wp_enqueue_style('essential-blocks-fontawesome');
-                            wp_enqueue_style('essential-blocks-animation');
-                            wp_enqueue_script('essential-blocks-accordion-frontend');
-                            wp_enqueue_script('essential-blocks-eb-animation');
-                        }
-                        return $content;
+        // Registered whether or not Essential Blocks is active: the block names
+        // (accordion-toggle/*) never collide with Essential Blocks' (essential-blocks/*),
+        // and skipping registration when Essential Blocks registered first left this
+        // plugin's blocks without their front-end assets.
+        register_block_type(
+            Accordion_Helper::get_block_register_path("accordion-toggle"),
+            array(
+                'render_callback' => function ($attributes, $content) {
+                    if (!is_admin()) {
+                        wp_enqueue_style('dashicons');
+                        wp_enqueue_style('eb-accordion-toggle-frontend-style');
+                        wp_enqueue_style('essential-blocks-fontawesome');
+                        wp_enqueue_style('essential-blocks-animation');
+                        wp_enqueue_script('accordion-toggle-frontend');
+                        wp_enqueue_script('essential-blocks-eb-animation');
                     }
-                )
-            );
-        }
+                    return $content;
+                }
+            )
+        );
     }
 
     add_action('init', 'accordion_toggle_accordion_block_init');

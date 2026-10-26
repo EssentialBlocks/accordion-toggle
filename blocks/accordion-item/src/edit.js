@@ -2,12 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InnerBlocks, MediaUpload, } from "@wordpress/block-editor";
+import { InnerBlocks, MediaUpload, RichText } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { useRef } from "@wordpress/element";
+import { useRef, useState, useEffect } from "@wordpress/element";
 import Inspector from "./inspector";
 import Style from "./style";
-const { EBDisplayIcon, getIconClass, DynamicInputValueHandler, BlockProps } = window.EBAccordionControls;
+const { EBDisplayIcon, getIconClass, BlockProps } = window.EBAccordionControls;
 
 export default function Edit(props) {
     const { attributes, setAttributes, isSelected, clientId } = props;
@@ -40,8 +40,25 @@ export default function Edit(props) {
     };
 
     const accordionTitle = useRef(null);
+
+    // Editor-only open state, mirrored as `eb-accordion-editor-collapsed` on the item
+    // so the parent's "Expanded Accordion" background / border preview on open items,
+    // as they do on the front end. Never saved. (`eb-accordion-hidden` cannot be used
+    // here: the editor stylesheet makes it fully transparent.)
+    const [isOpen, setIsOpen] = useState(true);
+    useEffect(() => {
+        const contentWrapper = accordionTitle.current?.nextElementSibling;
+        if (contentWrapper && contentWrapper.ownerDocument?.defaultView) {
+            setIsOpen(
+                contentWrapper.ownerDocument.defaultView.getComputedStyle(contentWrapper).display !== "none"
+            );
+        }
+    }, []);
+
     const handleSlidingOfAccordion = () => {
         let contentWrapper = accordionTitle.current.nextElementSibling;
+        // The branch below closes the item when it is showing as "block" and opens it otherwise.
+        setIsOpen(contentWrapper.style.display !== "block");
         let tabIcon = accordionTitle.current.getAttribute("data-tab-icon");
         let expandedIcon = accordionTitle.current.getAttribute("data-expanded-icon");
         let iconWrapper = accordionTitle.current.children[0].children[0];
@@ -79,7 +96,7 @@ export default function Edit(props) {
             {isSelected && <Inspector {...props} />}
             <BlockProps.Edit {...enhancedProps}>
                 <div
-                    className={`${blockId} eb-accordion-wrapper for_edit_page`}
+                    className={`${blockId} eb-accordion-wrapper eb-accordion-wrapper-${parentBlockId} for_edit_page${isOpen ? "" : " eb-accordion-editor-collapsed"}`}
                     data-clickable={clickable}
                 >
                     <div
@@ -99,7 +116,7 @@ export default function Edit(props) {
                             {titlePrefixType !== 'none' && (
                                 <>
                                     {titlePrefixType === 'text' && titlePrefixText && (
-                                        <DynamicInputValueHandler
+                                        <RichText
                                             value={titlePrefixText}
                                             tagName='span'
                                             className="eb-accordion-title-prefix-text"
@@ -151,7 +168,7 @@ export default function Edit(props) {
                                     ) : null}
                                 </>
                             )}
-                            <DynamicInputValueHandler
+                            <RichText
                                 value={title}
                                 tagName={inheritedTagName}
                                 className="eb-accordion-title"
@@ -172,7 +189,7 @@ export default function Edit(props) {
                             {titleSuffixType !== 'none' && (
                                 <>
                                     {titleSuffixType === 'text' && titleSuffixText && (
-                                        <DynamicInputValueHandler
+                                        <RichText
                                             value={titleSuffixText}
                                             tagName='span'
                                             className="eb-accordion-title-suffix-text"

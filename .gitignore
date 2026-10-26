@@ -31,3 +31,6 @@ index.js.map
 package-lock.json
 yarn.lock
 .DS_Store
+
+# Source maps are build output; never committed or shipped.
+*.map

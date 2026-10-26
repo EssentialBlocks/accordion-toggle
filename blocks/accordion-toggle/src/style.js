@@ -20,6 +20,12 @@ import {
     tabPaddingConst,
     conMarginConst,
     conPaddingConst,
+    accordionMargin,
+    accordionPadding,
+    titlePrefixPadding,
+    titleSuffixPadding,
+    titlePrefixMargin,
+    titleSuffixMargin,
 } from "./constants/dimensionsConstants";
 
 import {
@@ -27,6 +33,10 @@ import {
     iconBgConst,
     tabBgConst,
     conBgConst,
+    accordionBackground,
+    accordionExpandedBackground,
+    titlePrefixBG,
+    titleSuffixBG,
 } from "./constants/backgroundsConstants";
 
 import {
@@ -34,7 +44,13 @@ import {
     iconBdShadowConst,
     tabBdShadowConst,
     conBdShadowConst,
+    accordionBorder,
+    accordionExpandedBorder,
+    titlePrefixBorder,
+    titleSuffixBorder,
 } from "./constants/borderShadowConstants";
+
+import { isLatestDesign, cssRule } from "./helpers";
 
 const {
     softMinifyCssStrings,
@@ -69,6 +85,7 @@ export default function Style(props) {
         hoverTitleColor,
         activeBgColor,
         activeTitleColor,
+        activeIconColor,
         tagName,
         faqSchema,
 
@@ -444,6 +461,182 @@ export default function Style(props) {
     });
     // styles related to generateResponsiveRangeStyles end
 
+    // 1.3.1 styles (individual item box, expanded item box, prefix / suffix boxes) ⬇
+    const latestDesign = isLatestDesign(attributes);
+
+    const dimensions = (controlName, styleFor) => {
+        const {
+            dimensionStylesDesktop: desktop,
+            dimensionStylesTab: tab,
+            dimensionStylesMobile: mobile,
+        } = generateDimensionsControlStyles({ attributes, controlName, styleFor });
+        return { desktop, tab, mobile };
+    };
+
+    const background = (controlName) => {
+        const {
+            backgroundStylesDesktop: desktop,
+            hoverBackgroundStylesDesktop: hoverDesktop,
+            bgTransitionStyle: transition,
+        } = generateBackgroundControlStyles({
+            attributes,
+            controlName,
+            noOverlay: true,
+            noMainBgi: true,
+        });
+        return { desktop, hoverDesktop, transition };
+    };
+
+    const borderShadow = (controlName) => {
+        const {
+            styesDesktop: desktop,
+            styesTab: tab,
+            styesMobile: mobile,
+            stylesHoverDesktop: hoverDesktop,
+            stylesHoverTab: hoverTab,
+            stylesHoverMobile: hoverMobile,
+            transitionStyle: transition,
+        } = generateBorderShadowStyles({ controlName, attributes });
+        return { desktop, tab, mobile, hoverDesktop, hoverTab, hoverMobile, transition };
+    };
+
+    const itemMargin = dimensions(accordionMargin, "margin");
+    const itemPadding = dimensions(accordionPadding, "padding");
+    const itemBg = background(accordionBackground);
+    const itemExpandedBg = background(accordionExpandedBackground);
+    const itemBorder = borderShadow(accordionBorder);
+    const itemExpandedBorder = borderShadow(accordionExpandedBorder);
+
+    const prefixMargin = dimensions(titlePrefixMargin, "margin");
+    const prefixPadding = dimensions(titlePrefixPadding, "padding");
+    const suffixMargin = dimensions(titleSuffixMargin, "margin");
+    const suffixPadding = dimensions(titleSuffixPadding, "padding");
+    const prefixBg = background(titlePrefixBG);
+    const suffixBg = background(titleSuffixBG);
+    const prefixBorder = borderShadow(titlePrefixBorder);
+    const suffixBorder = borderShadow(titleSuffixBorder);
+
+    // Item selectors: the saved markup on the front end, and the item block's own
+    // wrapper inside the editor's block list (only the editor markup carries the
+    // `eb-accordion-wrapper-{parent id}` class). A closed item is
+    // `.eb-accordion-hidden` on the front end and `.eb-accordion-editor-collapsed`
+    // in the editor.
+    const itemSel = (suffix = "") =>
+        `.${blockId}.eb-accordion-container > .eb-accordion-inner > .eb-accordion-wrapper${suffix},
+        .${blockId}.eb-accordion-container .eb-accordion-wrapper-${blockId}.eb-accordion-wrapper${suffix.replace(
+            "eb-accordion-hidden",
+            "eb-accordion-editor-collapsed"
+        )}`;
+    const prefixSel = (hover = false) =>
+        `.${blockId}.eb-accordion-container ${hover ? ".eb-accordion-title-wrapper:hover " : ""}.title-content-${blockId} .eb-accordion-title-prefix-text,
+        .${blockId}.eb-accordion-container ${hover ? ".eb-accordion-title-wrapper:hover " : ""}.title-content-${blockId} .eb-accordion-title-prefix-icon`;
+    const suffixSel = (hover = false) =>
+        `.${blockId}.eb-accordion-container ${hover ? ".eb-accordion-title-wrapper:hover " : ""}.title-content-${blockId} .eb-accordion-title-suffix-text,
+        .${blockId}.eb-accordion-container ${hover ? ".eb-accordion-title-wrapper:hover " : ""}.title-content-${blockId} .eb-accordion-title-suffix-icon`;
+
+    const boxStylesDesktop = [
+        cssRule(
+            itemSel(),
+            [itemMargin.desktop, itemPadding.desktop, itemBorder.desktop, itemBg.desktop],
+            `${itemBg.transition}, ${itemBorder.transition}`
+        ),
+        cssRule(itemSel(":hover"), [itemBg.hoverDesktop, itemBorder.hoverDesktop]),
+        cssRule(
+            itemSel(":not(.eb-accordion-hidden)"),
+            [itemExpandedBg.desktop, itemExpandedBorder.desktop],
+            `${itemExpandedBg.transition}, ${itemExpandedBorder.transition}`
+        ),
+        cssRule(itemSel(":hover:not(.eb-accordion-hidden)"), [
+            itemExpandedBg.hoverDesktop,
+            itemExpandedBorder.hoverDesktop,
+        ]),
+        cssRule(
+            prefixSel(),
+            [prefixBg.desktop, prefixMargin.desktop, prefixPadding.desktop, prefixBorder.desktop],
+            `${prefixBg.transition}, ${prefixBorder.transition}`
+        ),
+        cssRule(prefixSel(true), [prefixBg.hoverDesktop, prefixBorder.hoverDesktop]),
+        cssRule(
+            suffixSel(),
+            [suffixBg.desktop, suffixMargin.desktop, suffixPadding.desktop, suffixBorder.desktop],
+            `${suffixBg.transition}, ${suffixBorder.transition}`
+        ),
+        cssRule(suffixSel(true), [suffixBg.hoverDesktop, suffixBorder.hoverDesktop]),
+        activeIconColor
+            ? `.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) .eb-accordion-title-wrapper-${blockId} .eb-accordion-icon {
+                color: ${activeIconColor} !important;
+            }`
+            : "",
+    ].join("\n");
+
+    const boxStylesFor = (device) =>
+        [
+            cssRule(itemSel(), [itemMargin[device], itemPadding[device], itemBorder[device]]),
+            cssRule(itemSel(":hover"), [itemBorder[`hover${device === "tab" ? "Tab" : "Mobile"}`]]),
+            cssRule(itemSel(":not(.eb-accordion-hidden)"), [itemExpandedBorder[device]]),
+            cssRule(itemSel(":hover:not(.eb-accordion-hidden)"), [
+                itemExpandedBorder[`hover${device === "tab" ? "Tab" : "Mobile"}`],
+            ]),
+            cssRule(prefixSel(), [prefixMargin[device], prefixPadding[device], prefixBorder[device]]),
+            cssRule(suffixSel(), [suffixMargin[device], suffixPadding[device], suffixBorder[device]]),
+        ].join("\n");
+
+    const boxStylesTab = boxStylesFor("tab");
+    const boxStylesMobile = boxStylesFor("mobile");
+
+    /**
+     * Fixes from the Essential Blocks accordion that change how an existing design
+     * looks, applied to latest-design blocks only (see `designVersion`):
+     * - Expanded Title Colour applied to every title tag, not only H3.
+     * - Accordions Gap scoped to this accordion's own items, so it no longer leaks
+     *   into a nested accordion.
+     * - A visible keyboard focus ring on the item title.
+     */
+    const latestDesignStyles = (gapStyles, desktop = false) =>
+        latestDesign
+            ? `
+        ${desktop && activeTitleColor
+                ? `.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) .eb-accordion-title-wrapper-${blockId} .eb-accordion-title{
+                color: ${activeTitleColor} !important;
+            }`
+                : ""}
+        ${gapStyles.trim()
+                ? `.${blockId}.eb-accordion-container > .eb-accordion-inner > .eb-accordion-wrapper + .eb-accordion-wrapper{
+                ${gapStyles}
+            }`
+                : ""}
+        ${desktop
+                ? `.${blockId}.eb-accordion-container .eb-accordion-title-wrapper-${blockId}{
+            outline: unset;
+        }
+        .${blockId}.eb-accordion-container .eb-accordion-title-wrapper-${blockId}:focus-visible{
+            outline: 2px solid #5b4cff;
+            outline-offset: 2px;
+        }`
+                : ""}`
+            : "";
+
+    // Legacy gap rule: a descendant selector, so it also reaches nested accordions.
+    // Kept byte-for-byte for blocks saved before 1.3.1.
+    const legacyGapRule = (gapStyles) =>
+        latestDesign
+            ? ""
+            : `.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
+		${gapStyles}
+	}`;
+
+    // Legacy expanded-title rule targets h3 only. Kept for blocks saved before 1.3.1.
+    const legacyActiveTitleRule = latestDesign
+        ? ""
+        : activeTitleColor
+            ? `
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) h3.eb-accordion-title,
+	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab h3.eb-accordion-title{
+		${activeTitleColor ? `color: ${activeTitleColor} !important;` : ""}
+	}
+	`
+            : "";
+
     const wrapperStylesDesktop = `
 
 	.eb-accordion-item.is-selected .eb-accordion-content-wrapper-${blockId} {
@@ -478,9 +671,9 @@ export default function Style(props) {
 	}
 
 
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
-		${accGapDesktop}
-	}
+	${legacyGapRule(accGapDesktop)}
+	${latestDesignStyles(accGapDesktop, true)}
+	${boxStylesDesktop}
 
 
 	.${blockId}.eb-accordion-container{
@@ -590,15 +783,7 @@ ${displayIcon
 		${titleSuffixImgWidthDesktop}
 	}
 
-${activeTitleColor
-            ? `
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper:not(.eb-accordion-hidden,.for_edit_page) h3.eb-accordion-title,
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper.expanded_tab h3.eb-accordion-title{
-		${activeTitleColor ? `color: ${activeTitleColor} !important;` : ""}
-	}
-	`
-            : ""
-        }
+${legacyActiveTitleRule}
 
 ${activeBgColor
             ? `
@@ -642,9 +827,9 @@ ${activeBgColor
 
     const wrapperStylesTab = `
 
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
-		${accGapTab}
-	}
+	${legacyGapRule(accGapTab)}
+	${latestDesignStyles(accGapTab)}
+	${boxStylesTab}
 
 
 	.${blockId}.eb-accordion-container{
@@ -753,9 +938,9 @@ ${displayIcon
 
     const wrapperStylesMobile = `
 
-	.${blockId}.eb-accordion-container .eb-accordion-wrapper + .eb-accordion-wrapper{
-		${accGapMobile}
-	}
+	${legacyGapRule(accGapMobile)}
+	${latestDesignStyles(accGapMobile)}
+	${boxStylesMobile}
 
 	.${blockId}.eb-accordion-container{
 		${wrpMarginMobile}

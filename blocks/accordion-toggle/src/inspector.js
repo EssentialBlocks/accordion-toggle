@@ -14,6 +14,7 @@ import {
     ToggleControl,
     RangeControl,
     TabPanel,
+    PanelRow,
     __experimentalDivider as Divider,
 } from "@wordpress/components";
 
@@ -64,6 +65,12 @@ import {
     tabPaddingConst,
     conMarginConst,
     conPaddingConst,
+    accordionMargin,
+    accordionPadding,
+    titlePrefixPadding,
+    titleSuffixPadding,
+    titlePrefixMargin,
+    titleSuffixMargin,
 } from "./constants/dimensionsConstants";
 
 import {
@@ -71,6 +78,10 @@ import {
     iconBgConst,
     tabBgConst,
     conBgConst,
+    accordionBackground,
+    accordionExpandedBackground,
+    titlePrefixBG,
+    titleSuffixBG,
 } from "./constants/backgroundsConstants";
 
 import {
@@ -78,7 +89,13 @@ import {
     iconBdShadowConst,
     tabBdShadowConst,
     conBdShadowConst,
+    accordionBorder,
+    accordionExpandedBorder,
+    titlePrefixBorder,
+    titleSuffixBorder,
 } from "./constants/borderShadowConstants";
+
+import { isLatestDesign, LATEST_DESIGN_VERSION } from "./helpers";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
@@ -97,11 +114,55 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         hoverTitleColor,
         activeBgColor,
         activeTitleColor,
+        activeIconColor,
         tagName,
         faqSchema,
         titlePrefixColor,
         titleSuffixColor
     } = attributes;
+
+    const latestDesign = isLatestDesign(attributes);
+
+    // Background / spacing / border sub-panels shared by the title prefix and suffix.
+    const boxPanels = (bgControl, marginControl, paddingControl, borderControl) => (
+        <>
+            <PanelBody
+                title={__("Background ", "essential-blocks")}
+                initialOpen={false}
+            >
+                <BackgroundControl
+                    controlName={bgControl}
+                    resRequiredProps={resRequiredProps}
+                    noOverlay
+                    noMainBgi
+                />
+            </PanelBody>
+            <PanelBody
+                title={__("Margin & Padding", "essential-blocks")}
+                initialOpen={false}
+            >
+                <ResponsiveDimensionsControl
+                    resRequiredProps={resRequiredProps}
+                    controlName={marginControl}
+                    baseLabel={__("Margin", "essential-blocks")}
+                />
+                <ResponsiveDimensionsControl
+                    resRequiredProps={resRequiredProps}
+                    controlName={paddingControl}
+                    baseLabel={__("Padding", "essential-blocks")}
+                />
+            </PanelBody>
+            <PanelBody
+                title={__("Border & Shadow", "essential-blocks")}
+                initialOpen={false}
+            >
+                <BorderShadowControl
+                    controlName={borderControl}
+                    resRequiredProps={resRequiredProps}
+                />
+            </PanelBody>
+        </>
+    );
 
     const resRequiredProps = {
         setAttributes,
@@ -264,7 +325,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             )}
                                             controlName={accGapRange}
                                             resRequiredProps={resRequiredProps}
-                                            min={1}
+                                            min={0}
                                             max={100}
                                             step={1}
                                         />
@@ -373,7 +434,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                     resRequiredProps={
                                                         resRequiredProps
                                                     }
-                                                    min={1}
+                                                    min={0}
                                                     max={200}
                                                     step={1}
                                                 />
@@ -609,6 +670,12 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 max={500}
                                                 step={1}
                                             />
+                                            {boxPanels(
+                                                titlePrefixBG,
+                                                titlePrefixMargin,
+                                                titlePrefixPadding,
+                                                titlePrefixBorder
+                                            )}
                                         </PanelBody>
                                         <PanelBody
                                             title={__("Title Suffix", "essential-blocks")}
@@ -671,6 +738,12 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 max={500}
                                                 step={1}
                                             />
+                                            {boxPanels(
+                                                titleSuffixBG,
+                                                titleSuffixMargin,
+                                                titleSuffixPadding,
+                                                titleSuffixBorder
+                                            )}
                                         </PanelBody>
 
                                         <PanelBody
@@ -739,6 +812,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 onChange={(activeTitleColor) =>
                                                     setAttributes({
                                                         activeTitleColor,
+                                                    })
+                                                }
+                                            />
+                                            <ColorControl
+                                                label={__(
+                                                    "Icon Color",
+                                                    "essential-blocks"
+                                                )}
+                                                color={activeIconColor}
+                                                onChange={(activeIconColor) =>
+                                                    setAttributes({
+                                                        activeIconColor,
                                                     })
                                                 }
                                             />
@@ -878,6 +963,72 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             />
                                         </PanelBody>
                                     </PanelBody>
+
+                                    <PanelBody
+                                        title={__(
+                                            "Individual Accordion Item",
+                                            "essential-blocks"
+                                        )}
+                                        initialOpen={false}
+                                    >
+                                        <PanelBody
+                                            title={__("Margin & Padding", "essential-blocks")}
+                                        >
+                                            <ResponsiveDimensionsControl
+                                                resRequiredProps={resRequiredProps}
+                                                controlName={accordionMargin}
+                                                baseLabel={__("Margin", "essential-blocks")}
+                                            />
+                                            <ResponsiveDimensionsControl
+                                                resRequiredProps={resRequiredProps}
+                                                controlName={accordionPadding}
+                                                baseLabel={__("Padding", "essential-blocks")}
+                                            />
+                                        </PanelBody>
+                                        <PanelBody
+                                            title={__("Background ", "essential-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <BackgroundControl
+                                                controlName={accordionBackground}
+                                                resRequiredProps={resRequiredProps}
+                                                noOverlay
+                                                noMainBgi
+                                            />
+                                        </PanelBody>
+                                        <PanelBody
+                                            title={__("Border & Shadow", "essential-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <BorderShadowControl
+                                                controlName={accordionBorder}
+                                                resRequiredProps={resRequiredProps}
+                                            />
+                                        </PanelBody>
+                                        <PanelRow>
+                                            {__("Expanded Accordion", "essential-blocks")}
+                                        </PanelRow>
+                                        <PanelBody
+                                            title={__("Background ", "essential-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <BackgroundControl
+                                                controlName={accordionExpandedBackground}
+                                                resRequiredProps={resRequiredProps}
+                                                noOverlay
+                                                noMainBgi
+                                            />
+                                        </PanelBody>
+                                        <PanelBody
+                                            title={__("Border & Shadow", "essential-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <BorderShadowControl
+                                                controlName={accordionExpandedBorder}
+                                                resRequiredProps={resRequiredProps}
+                                            />
+                                        </PanelBody>
+                                    </PanelBody>
                                 </>
                             )}
                             {tab.name === "advance" && (
@@ -923,6 +1074,33 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             resRequiredProps={resRequiredProps}
                                         // noShadow
                                         // noBorder
+                                        />
+                                    </PanelBody>
+
+                                    <PanelBody
+                                        title={__(
+                                            "Latest Accordion Behaviour",
+                                            "accordion-toggle"
+                                        )}
+                                        initialOpen={false}
+                                    >
+                                        <ToggleControl
+                                            label={__(
+                                                "Use latest fixes",
+                                                "accordion-toggle"
+                                            )}
+                                            help={__(
+                                                "Applies the expanded title colour to every title tag, keeps the gap out of nested accordions, adds a keyboard focus ring and scrolls a tall opened item into view. New accordions use this by default. Turning it on may change how this accordion looks.",
+                                                "accordion-toggle"
+                                            )}
+                                            checked={latestDesign}
+                                            onChange={(checked) =>
+                                                setAttributes({
+                                                    designVersion: checked
+                                                        ? LATEST_DESIGN_VERSION
+                                                        : undefined,
+                                                })
+                                            }
                                         />
                                     </PanelBody>
 
