@@ -101,17 +101,16 @@ class ATFaqSchema
      */
     public function render_accordion_item_faq_schema()
     {
+        if (!is_singular()) {
+            return;
+        }
 
-        if (function_exists('has_blocks') && has_blocks(get_the_ID())) {
+        $post = get_queried_object();
+        if (!($post instanceof WP_Post) || post_password_required($post)) {
+            return;
+        }
 
-            global $post;
-
-            if (!is_object($post)) {
-                return;
-            }
-            if (is_archive() || is_home()) {
-                return;
-            }
+        if (function_exists('has_blocks') && has_blocks($post)) {
 
             $blocks = $this->eb_parse_blocks($post->post_content);
 
