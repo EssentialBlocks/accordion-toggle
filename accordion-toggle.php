@@ -201,6 +201,25 @@ class EBAccordionToggle {
             ACCORDION_BLOCK_VERSION,
             'all'
         );
+
+        /**
+         * Animation keyframes for the canvas.
+         *
+         * frontend_backend_assets() enqueues animate.min.css on
+         * `enqueue_block_editor_assets`, so it only reached the outer admin document.
+         * eb-animation-load.js swaps `eb___*` to `eb__*` on the blocks inside the
+         * canvas, and without these rules there the swapped classes had no
+         * animation-name, so picking an animation in the inspector showed nothing.
+         *
+         * Enqueued with $src for the same reason as the stylesheets above.
+         */
+        wp_enqueue_style(
+            'essential-blocks-animation',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/animate.min.css',
+            [],
+            ACCORDION_BLOCK_VERSION,
+            'all'
+        );
     }
 
     public function frontend_backend_assets() {
