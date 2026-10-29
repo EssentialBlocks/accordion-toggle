@@ -49,6 +49,7 @@ class EBAccordionToggle {
         // enqueue script and
         add_action( 'enqueue_block_editor_assets', [$this, 'enqueue_block_assets'], 100 );
         add_action( 'enqueue_block_editor_assets', [$this, 'frontend_backend_assets'], 100 );
+        add_action( 'enqueue_block_editor_assets', [$this, 'block_icon_selected_style'] );
         add_action( 'wp_enqueue_scripts', [$this, 'frontend_backend_assets'], 100 );
         add_action( 'enqueue_block_assets', [$this, 'block_canvas_assets'] );
         // Before wp_print_footer_scripts (wp_footer, priority 20).
@@ -126,6 +127,21 @@ class EBAccordionToggle {
     }
 
     /**
+     * Block icons are filled #6C3BFF, which almost disappears on the highlighted row of
+     * the "/" inserter, a selected List View row and the drag chip. Recolour them there,
+     * as Essential Blocks does. The handle is shared, so the stylesheet prints once when
+     * several of these plugins are active.
+     */
+    public function block_icon_selected_style() {
+        wp_enqueue_style(
+            'eb-block-icon-selected',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/block-icon-selected.css',
+            [],
+            '1.0.0'
+        );
+    }
+
+    /**
      * Assets for the block editor canvas.
      *
      * Since WP 6.3 the post editor renders block content inside an iframe.
@@ -197,6 +213,25 @@ class EBAccordionToggle {
         wp_enqueue_style(
             'essential-blocks-iconpicker-css',
             ACCORDION_BLOCK_ADMIN_URL . 'dist/style-modules.css',
+            [],
+            ACCORDION_BLOCK_VERSION,
+            'all'
+        );
+
+        /**
+         * Animation keyframes for the canvas.
+         *
+         * frontend_backend_assets() enqueues animate.min.css on
+         * `enqueue_block_editor_assets`, so it only reached the outer admin document.
+         * eb-animation-load.js swaps `eb___*` to `eb__*` on the blocks inside the
+         * canvas, and without these rules there the swapped classes had no
+         * animation-name, so picking an animation in the inspector showed nothing.
+         *
+         * Enqueued with $src for the same reason as the stylesheets above.
+         */
+        wp_enqueue_style(
+            'essential-blocks-animation',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/animate.min.css',
             [],
             ACCORDION_BLOCK_VERSION,
             'all'
