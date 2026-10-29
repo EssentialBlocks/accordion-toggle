@@ -49,6 +49,7 @@ class EBAccordionToggle {
         // enqueue script and
         add_action( 'enqueue_block_editor_assets', [$this, 'enqueue_block_assets'], 100 );
         add_action( 'enqueue_block_editor_assets', [$this, 'frontend_backend_assets'], 100 );
+        add_action( 'enqueue_block_editor_assets', [$this, 'block_icon_selected_style'] );
         add_action( 'wp_enqueue_scripts', [$this, 'frontend_backend_assets'], 100 );
         add_action( 'enqueue_block_assets', [$this, 'block_canvas_assets'] );
         // Before wp_print_footer_scripts (wp_footer, priority 20).
@@ -122,6 +123,21 @@ class EBAccordionToggle {
             $all_dependencies,
             ACCORDION_BLOCK_VERSION,
             true
+        );
+    }
+
+    /**
+     * Block icons are filled #6C3BFF, which almost disappears on the highlighted row of
+     * the "/" inserter, a selected List View row and the drag chip. Recolour them there,
+     * as Essential Blocks does. The handle is shared, so the stylesheet prints once when
+     * several of these plugins are active.
+     */
+    public function block_icon_selected_style() {
+        wp_enqueue_style(
+            'eb-block-icon-selected',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/block-icon-selected.css',
+            [],
+            '1.0.0'
         );
     }
 
