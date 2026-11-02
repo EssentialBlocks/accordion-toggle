@@ -137,7 +137,7 @@ class EBAccordionToggle {
             'eb-block-icon-selected',
             ACCORDION_BLOCK_ADMIN_URL . 'assets/css/block-icon-selected.css',
             [],
-            '1.0.0'
+            ACCORDION_BLOCK_VERSION
         );
     }
 
@@ -391,3 +391,19 @@ class EBAccordionToggle {
     }
 }
 EBAccordionToggle::get_instance();
+
+/**
+ * Let Essential Blocks' animation assets win on the front end when it is active.
+ *
+ * Both plugins register these handles and the first registration wins. This
+ * plugin's loader doesn't set `window.ebAnimationLoaded`, so Essential Blocks'
+ * failsafe would reveal every animated block without playing it. Essential Blocks
+ * registers its own at priority 20 and handles the same `.eb___animated` classes.
+ */
+function accordion_toggle_use_essential_blocks_animation() {
+    if ( defined( 'ESSENTIAL_BLOCKS_VERSION' ) ) {
+        wp_deregister_script( 'essential-blocks-eb-animation' );
+        wp_deregister_style( 'essential-blocks-animation' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'accordion_toggle_use_essential_blocks_animation', 19 );
