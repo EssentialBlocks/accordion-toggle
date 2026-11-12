@@ -4,7 +4,7 @@ Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenbe
 Requires at least: 5.6
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,12 +104,11 @@ To avoid the request, keep the accordion typography on Default or a font your th
 
 == Changelog ==
 
-= 1.3.2 - 02/11/2026 =
+= 1.3.2 - 12/11/2026 =
+* Fixed: Animation issue with Essential Blocks
+* Fixed: Animation preview in editor
 * Improved: Security enhancements
-* Fixed: Entrance animations not previewing in the block editor
-* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
-* Fixed: Block icon hard to see when highlighted in the inserter and List View
-* Fixed: Chrome console warning about a deprecated DOM event
+* Few minor bug fixes & improvements
 
 = 1.3.1 - 26/10/2026 =
 * Improved: Security enhancements
