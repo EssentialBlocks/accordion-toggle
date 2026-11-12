@@ -4,7 +4,7 @@
  * Plugin Name:     Accordion Toggle
  * Plugin URI:         https://essential-blocks.com
  * Description:     Display Your FAQs & Improve User Experience with Accordion/Toggle block.
- * Version:         1.3.1
+ * Version:         1.3.2
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ACCORDION_BLOCK_VERSION', "1.3.1" );
+define( 'ACCORDION_BLOCK_VERSION', "1.3.2" );
 define( 'ACCORDION_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'ACCORDION_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -49,6 +49,7 @@ class EBAccordionToggle {
         // enqueue script and
         add_action( 'enqueue_block_editor_assets', [$this, 'enqueue_block_assets'], 100 );
         add_action( 'enqueue_block_editor_assets', [$this, 'frontend_backend_assets'], 100 );
+        add_action( 'enqueue_block_editor_assets', [$this, 'block_icon_selected_style'] );
         add_action( 'wp_enqueue_scripts', [$this, 'frontend_backend_assets'], 100 );
         add_action( 'enqueue_block_assets', [$this, 'block_canvas_assets'] );
         // Before wp_print_footer_scripts (wp_footer, priority 20).
@@ -126,6 +127,21 @@ class EBAccordionToggle {
     }
 
     /**
+     * Block icons are filled #6C3BFF, which almost disappears on the highlighted row of
+     * the "/" inserter, a selected List View row and the drag chip. Recolour them there,
+     * as Essential Blocks does. The handle is shared, so the stylesheet prints once when
+     * several of these plugins are active.
+     */
+    public function block_icon_selected_style() {
+        wp_enqueue_style(
+            'eb-block-icon-selected',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/block-icon-selected.css',
+            [],
+            ACCORDION_BLOCK_VERSION
+        );
+    }
+
+    /**
      * Assets for the block editor canvas.
      *
      * Since WP 6.3 the post editor renders block content inside an iframe.
@@ -197,6 +213,25 @@ class EBAccordionToggle {
         wp_enqueue_style(
             'essential-blocks-iconpicker-css',
             ACCORDION_BLOCK_ADMIN_URL . 'dist/style-modules.css',
+            [],
+            ACCORDION_BLOCK_VERSION,
+            'all'
+        );
+
+        /**
+         * Animation keyframes for the canvas.
+         *
+         * frontend_backend_assets() enqueues animate.min.css on
+         * `enqueue_block_editor_assets`, so it only reached the outer admin document.
+         * eb-animation-load.js swaps `eb___*` to `eb__*` on the blocks inside the
+         * canvas, and without these rules there the swapped classes had no
+         * animation-name, so picking an animation in the inspector showed nothing.
+         *
+         * Enqueued with $src for the same reason as the stylesheets above.
+         */
+        wp_enqueue_style(
+            'essential-blocks-animation',
+            ACCORDION_BLOCK_ADMIN_URL . 'assets/css/animate.min.css',
             [],
             ACCORDION_BLOCK_VERSION,
             'all'
@@ -356,3 +391,19 @@ class EBAccordionToggle {
     }
 }
 EBAccordionToggle::get_instance();
+
+/**
+ * Let Essential Blocks' animation assets win on the front end when it is active.
+ *
+ * Both plugins register these handles and the first registration wins. This
+ * plugin's loader doesn't set `window.ebAnimationLoaded`, so Essential Blocks'
+ * failsafe would reveal every animated block without playing it. Essential Blocks
+ * registers its own at priority 20 and handles the same `.eb___animated` classes.
+ */
+function accordion_toggle_use_essential_blocks_animation() {
+    if ( defined( 'ESSENTIAL_BLOCKS_VERSION' ) ) {
+        wp_deregister_script( 'essential-blocks-eb-animation' );
+        wp_deregister_style( 'essential-blocks-animation' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'accordion_toggle_use_essential_blocks_animation', 19 );
