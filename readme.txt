@@ -4,7 +4,7 @@ Tags: block, blocks, accordion, accordions, toggle, collapse, faq, faqs, gutenbe
 Requires at least: 5.6
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -103,6 +103,12 @@ This plugin can load fonts from Google Fonts, a service provided by Google LLC.
 To avoid the request, keep the accordion typography on Default or a font your theme already provides.
 
 == Changelog ==
+
+= 1.3.3 - 15/11/2026 =
+* Fixed: Unsaved changes issue in editor
+* Fixed: Compatibility issue with older WordPress versions
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.3.2 - 12/11/2026 =
 * Fixed: Animation issue with Essential Blocks
