@@ -104,11 +104,12 @@ To avoid the request, keep the accordion typography on Default or a font your th
 
 == Changelog ==
 
-= 1.3.2 - 12/11/2026 =
-* Fixed: Animation issue with Essential Blocks
-* Fixed: Animation preview in editor
+= 1.3.2 - 02/11/2026 =
 * Improved: Security enhancements
-* Few minor bug fixes & improvements
+* Fixed: Entrance animations not previewing in the block editor
+* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
+* Fixed: Block icon hard to see when highlighted in the inserter and List View
+* Fixed: Chrome console warning about a deprecated DOM event
 
 = 1.3.1 - 26/10/2026 =
 * Improved: Security enhancements
