@@ -54,7 +54,7 @@ const Edit = (props) => {
         let count = innerBlocks ? innerBlocks.length : 3;
 
         const newBlock = createBlock("accordion-toggle/accordion-item", {
-            itemId: count + 1,
+            itemId: String(count + 1),
             title: __(`Accordion title ${count + 1}`, "essential-blocks"),
             inheritedAccordionType: accordionType,
             inheritedTagName: tagName,
@@ -89,7 +89,7 @@ const Edit = (props) => {
         if (innerBlocks) {
             times(innerBlocks.length, (n) => {
                 updateBlockAttributes(innerBlocks[n].clientId, {
-                    itemId: n + 1,
+                    itemId: String(n + 1),
                     inheritedAccordionType: accordionType,
                     inheritedDisplayIcon: displayIcon,
                     inheritedTabIcon: tabIcon,
@@ -106,7 +106,7 @@ const Edit = (props) => {
         return times(accordionChildCount, (n) => [
             "accordion-toggle/accordion-item",
             {
-                itemId: n + 1,
+                itemId: String(n + 1),
                 title: __(`Accordion title ${n + 1}`, "essential-blocks"),
                 inheritedAccordionType: accordionType,
                 inheritedDisplayIcon: displayIcon,
